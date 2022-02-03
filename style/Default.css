@@ -1,0 +1,167 @@
+@font-face {
+    font-family: 'Scope';
+    src: url('/fonts/Scope.eot');
+    src: local('Scope'),
+        url('/fonts/Scope.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/Scope.woff2') format('woff2'),
+        url('/fonts/Scope.woff') format('woff'),
+        url('/fonts/Scope.ttf') format('truetype'),
+        url('/fonts/Scope.svg#Scope') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Peste';
+    src: url('/fonts/PesteTRIAL-Regular.eot');
+    src: local('Peste TRIAL Regular'), local('PesteTRIAL-Regular'),
+        url('/fonts/PesteTRIAL-Regular.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/PesteTRIAL-Regular.woff2') format('woff2'),
+        url('/fonts/PesteTRIAL-Regular.woff') format('woff'),
+        url('/fonts/PesteTRIAL-Regular.ttf') format('truetype'),
+        url('/fonts/PesteTRIAL-Regular.svg#PesteTRIAL-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Monument';
+    src: url('/fonts/MonumentExtended-Ultralight.eot');
+    src: local('Monument Extended Ultralight'), local('MonumentExtended-Ultralight'),
+        url('/fonts/MonumentExtended-Ultralight.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/MonumentExtended-Ultralight.woff2') format('woff2'),
+        url('/fonts/MonumentExtended-Ultralight.woff') format('woff'),
+        url('/fonts/MonumentExtended-Ultralight.ttf') format('truetype'),
+        url('/fonts/MonumentExtended-Ultralight.svg#MonumentExtended-Ultralight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Chicago';
+    src: url('/fonts/pixChicago.eot');
+    src: local('pix Chicago'), local('pixChicago'),
+        url('/fonts/pixChicago.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/pixChicago.woff2') format('woff2'),
+        url('/fonts/pixChicago.woff') format('woff'),
+        url('/fonts/pixChicago.ttf') format('truetype'),
+        url('/fonts/pixChicago.svg#pixChicago') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'New Spirit Bold Condensed';
+    src: url('/fonts/NewSpirit-BoldCondensed.eot');
+    src: local('New Spirit Bold Condensed'), local('NewSpirit-BoldCondensed'),
+        url('/fonts/NewSpirit-BoldCondensed.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/NewSpirit-BoldCondensed.woff2') format('woff2'),
+        url('/fonts/NewSpirit-BoldCondensed.woff') format('woff'),
+        url('/fonts/NewSpirit-BoldCondensed.ttf') format('truetype'),
+        url('/fonts/NewSpirit-BoldCondensed.svg#NewSpirit-BoldCondensed') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+	scroll-behavior: smooth;
+}
+
+html {
+	background: #000000;
+	margin-left: calc(100vw - 100%);
+}
+
+#__next {
+	width: 100%;
+	height: 100%
+}
+
+::placeholder {
+	color: #C5C6C7 !important;
+}
+:-ms-input-placeholder,
+::-ms-input-placeholder {
+	color: #C5C6C7 !important;
+}
+
+/******************************************************************************
+**	Styled button style
+******************************************************************************/
+.button {
+	will-change: transform, opacity;
+	contain: content;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	transition: 0.1s;
+	outline: none;
+	cursor: pointer;
+	font-weight: 600;
+	border-radius: 4px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+/******************************************************************************
+**	TAILWIND CSS ++
+******************************************************************************/
+*, ::before, ::after {
+    --tw-ring-color: transparent !important;
+}
+
+.image-wrapper > span {
+	vertical-align: middle;
+}
+.image-wrapper-full-height > span {
+    height: 100% !important;
+}
+
+.text-shadow {
+    cursor: pointer;
+    text-shadow: 0 0 1px #a898ce
+}
+.text-shadow:hover {
+    text-shadow: 0 0 2px #d9d2ea
+}
+video {}
+
+
+.glow {
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.3);
+}
+
+.glow::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 9999px;
+  box-shadow: 0px 0 10px 10px rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 500ms;
+}
+.glow-wrapper:hover .glow::before {
+  opacity: 1;
+}
+
+.button-glowing {
+    @apply
+        px-8
+        py-2
+        rounded-full
+        text-lg md:text-xl lg:text-2xl xl:text-3xl
+        cursor-pointer
+        relative
+        glow-wrapper
+}
