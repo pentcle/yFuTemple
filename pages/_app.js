@@ -1,8 +1,8 @@
 import	React						from	'react';
 import	Head						from	'next/head';
-import	Image						from	'next/image';
 import	{DefaultSeo}				from	'next-seo';
 import	{UIContextApp}				from	'contexts/useUI';
+import	{AudioContextApp}			from	'contexts/useAudio';
 import	Header						from	'components/Header';
 
 import	'style/Default.css';
@@ -11,26 +11,37 @@ import	'tailwindcss/tailwind.css';
 const WithSplash = React.memo(function WithSplash({children}) {
 	const	[opacity, set_opacity] = React.useState(true);
 	const	[display, set_display] = React.useState(true);
+	const	[videoDisplay, set_videoDisplay] = React.useState(true);
+
+	React.useEffect(() => {
+		setTimeout(() => {
+			set_videoDisplay(false);
+		}, 5200);
+	}, []);
 
 	return (
 		<>
 			<div className={`absolute inset-0 flex flex-col justify-center items-center z-50 transition-opacity duration-1000 ${opacity ? 'opacity-100' : 'opacity-0'} ${!display ? 'hidden' : ''}`}>
-				<Image
-					width={640}
-					height={360}
-					loading={'eager'}
-					src={'/splash.gif'} />
-				<div className={'mt-4'}>
-					<button
-						onClick={() => {
-							set_opacity(false);
-							setTimeout(() => set_display(false), 1000);
-						}}
-						className={'font-scope bg-beige button-glowing'}>
-						{'ENTER'}
-						<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
-						<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
-					</button>
+				<div className={'flex relative justify-center items-center mx-auto w-full h-full'}>
+					<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${videoDisplay ? 'opacity-100' : 'opacity-0'}`}>
+						<video playsInline autoPlay muted poster={'/splash.gif'} style={{width: 640, height: 360}}>
+							<source src={'/splash.webm'} type={'video/webm'} />
+						</video>
+					</div>
+					<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${!videoDisplay ? 'opacity-100' : 'opacity-0'}`}>
+						<div className={'mt-4'}>
+							<button
+								onClick={() => {
+									set_opacity(false);
+									setTimeout(() => set_display(false), 1000);
+								}}
+								className={'font-scope bg-beige button-glowing'}>
+								{'ENTER'}
+								<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
+								<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div className={`transition-opacity duration-1000 ${opacity ? 'opacity-0 h-screen overflow-hidden pointer-events-none' : 'opacity-100'}`}>
@@ -116,11 +127,13 @@ function	MyApp(props) {
 	
 	return (
 		<UIContextApp>
-			<AppWrapper
-				Component={Component}
-				pageProps={pageProps}
-				element={props.element}
-				router={props.router} />
+			<AudioContextApp>
+				<AppWrapper
+					Component={Component}
+					pageProps={pageProps}
+					element={props.element}
+					router={props.router} />
+			</AudioContextApp>
 		</UIContextApp>
 	);
 }

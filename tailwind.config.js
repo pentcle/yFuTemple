@@ -5,12 +5,10 @@ module.exports = {
 		ringColor: false,
 	},
 	darkMode: 'class',
-	purge: {
-		content: [
-			'./pages/**/*.js',
-			'./components/**/*.js'
-		],
-	},
+	content: [
+		'./pages/**/*.js',
+		'./components/**/*.js'
+	],
 	theme: {
 		colors: {
 			red: colors.red,
@@ -25,6 +23,14 @@ module.exports = {
 			},
 		},
 		extend: {
+			width: {
+				68: '17rem',
+				'250%': '250%',
+			},
+			minWidth: {
+				68: '17rem',
+				80: '20rem',
+			},
 			fontFamily: {
 				scope: ['Scope', 'Roboto', 'serif'],
 				monument: ['Monument', 'sans-serif'],

@@ -4,7 +4,7 @@ function	Icon({className, width = 233, height = 115}) {
 	return (
 		<svg id={'Groupe_42'} data-name={'Groupe 42'} xmlns={'http://www.w3.org/2000/svg'} width={width} height={height} className={className} viewBox={'0 0 233.283 115.409'}>
 			<defs>
-				<clipPath id={'clip-path'}>
+				<clipPath id={'title'}>
 					<rect id={'Rectangle_36'} data-name={'Rectangle 36'} width={'233.283'} height={'115.409'} fill={'none'}/>
 				</clipPath>
 			</defs>
@@ -12,7 +12,7 @@ function	Icon({className, width = 233, height = 115}) {
 			<path id={'Tracé_71'} data-name={'Tracé 71'} d={'M295.546,553.835v16.049h11.4V568.05h-9.775v-5.732h8.757v-1.834h-8.757V555.67h9.775v-1.834Z'} transform={'translate(-242.536 -454.499)'} fill={'#fff'}/>
 			<path id={'Tracé_72'} data-name={'Tracé 72'} d={'M518.957,553.835l-4.7,6.213h-.2l-4.684-6.213h-2.627v16.026h1.629V555.67h.265l4.806,6.4h1.426l4.827-6.4h.265v14.238h1.629V553.835Z'} transform={'translate(-415.849 -454.499)'} fill={'#fff'}/>
 			<g id={'Groupe_41'} data-name={'Groupe 41'}>
-				<g id={'Groupe_40'} data-name={'Groupe 40'} clipPath={'url(#clip-path)'}>
+				<g id={'Groupe_40'} data-name={'Groupe 40'} clipPath={'url(#title)'}>
 					<path id={'Tracé_73'} data-name={'Tracé 73'} d={'M740.525,553.836h7.026a4.955,4.955,0,0,1,3.574,1.169,5.421,5.421,0,0,1,0,6.832,4.954,4.954,0,0,1-3.574,1.169h-5.4v6.878h-1.629Zm7.026,7.337a3.481,3.481,0,0,0,2.362-.7,3.048,3.048,0,0,0,0-4.1,3.482,3.482,0,0,0-2.362-.7h-5.4v5.5Z'} transform={'translate(-607.703 -454.499)'} fill={'#fff'}/>
 					<path id={'Tracé_74'} data-name={'Tracé 74'} d={'M950.582,553.836h1.629V568.05h8.961v1.834h-10.59Z'} transform={'translate(-780.084 -454.499)'} fill={'#fff'}/>
 					<path id={'Tracé_75'} data-name={'Tracé 75'} d={'M1152.689,553.836h11.4v1.834h-9.776v4.814h8.757v1.834h-8.757v5.732h9.776v1.834h-11.4Z'} transform={'translate(-945.941 -454.499)'} fill={'#fff'}/>
