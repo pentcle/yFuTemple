@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
     font-family: 'Scope';
     src: url('/fonts/Scope.eot');
@@ -131,7 +135,6 @@ html {
 .text-shadow:hover {
     text-shadow: 0 0 2px #d9d2ea
 }
-video {}
 
 
 .glow {
@@ -164,4 +167,29 @@ video {}
         cursor-pointer
         relative
         glow-wrapper
+}
+
+.button-glowing-small {
+  @apply
+      px-6
+      py-1
+      rounded-full
+      text-base
+      cursor-pointer
+      relative
+      glow-wrapper
+}
+
+.no-slide-content {
+  pointer-events: none;
+}
+.no-slide-content .slide-content {
+  opacity: 0;
+}
+.coverflow__container__1P-xE {
+  background-color: transparent !important;
+}
+.coverflow__figure__3bk_C {
+  box-shadow: none !important;
+  -webkit-box-reflect: unset !important;
 }

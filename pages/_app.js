@@ -5,8 +5,7 @@ import	{UIContextApp}				from	'contexts/useUI';
 import	{AudioContextApp}			from	'contexts/useAudio';
 import	Header						from	'components/Header';
 
-import	'style/Default.css';
-import	'tailwindcss/tailwind.css';
+import	'style/Default.scss';
 
 const WithSplash = React.memo(function WithSplash({children}) {
 	const	[opacity, set_opacity] = React.useState(true);
@@ -15,7 +14,7 @@ const WithSplash = React.memo(function WithSplash({children}) {
 
 	React.useEffect(() => {
 		setTimeout(() => {
-			set_videoDisplay(false);
+			// set_videoDisplay(false);
 		}, 5200);
 	}, []);
 
@@ -28,8 +27,8 @@ const WithSplash = React.memo(function WithSplash({children}) {
 							<source src={'/splash.webm'} type={'video/webm'} />
 						</video>
 					</div>
-					<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${!videoDisplay ? 'opacity-100' : 'opacity-0'}`}>
-						<div className={'mt-4'}>
+					<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${!videoDisplay ? 'opacity-100' : 'opacity-100'}`}>
+						<div className={'mt-[360px]'}>
 							<button
 								onClick={() => {
 									set_opacity(false);
@@ -105,7 +104,7 @@ function	AppWrapper(props) {
 				}} />
 			<WithSplash>
 				<Header />
-				<div className={'z-50'}>
+				<div className={'overflow-x-hidden z-10 pt-24 md:pt-16'}>
 					<Component
 						key={router.route}
 						element={props.element}

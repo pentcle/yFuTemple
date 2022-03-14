@@ -3,11 +3,11 @@ import	React							from	'react';
 function	Footer({visitors}) {
 	const	visitorsAsArr = visitors.toString().split('');
 	return (
-		<footer className={'flex z-20 flex-col items-center pb-5 mt-12 border-t border-white md:pb-12 md:mt-20'}>
+		<footer className={'flex z-20 flex-col items-center pb-5 mt-12 border-t-2 border-white md:pb-12 md:mt-20'}>
 			<div className={'my-8 md:my-12'}>
 				<div className={'flex flex-row justify-center items-center space-x-1'}>
 					{visitorsAsArr.map((e, index) => (
-						<div key={index} className={'flex justify-center items-center w-9 h-12 font-chicago tabular-nums text-white bg-black border border-white'}>
+						<div key={index} className={'flex justify-center items-center w-9 h-12 font-chicago tabular-nums text-white bg-black border-2 border-white'}>
 							{e}
 						</div>
 					))}
