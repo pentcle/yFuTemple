@@ -157,7 +157,7 @@ function	Index({visitors}) {
 						</div>
 						<Community />
 						<div className={'flex justify-center items-center my-9'}>
-							<Image src={'/divider-4.png'} width={112} height={112} />
+							<Image src={'/yfiTree2.png'} width={112} height={112} />
 						</div>
 						<Tree />
 					</section>
