@@ -3,16 +3,18 @@ import	Draggable		from	'react-draggable';
 
 function	DraggableInfo({hasInfo, set_hasInfo}) {
 	return (
-		<div className={`fixed z-50 ${hasInfo ? '' : 'hidden'}`} style={{zIndex: 10000}}>
-			<Draggable
-				handle={'.cursor-grab'}
-				defaultPosition={{x: 200, y: 200}}>
-				<div className={'flex relative z-50 flex-col pb-2 w-96 bg-black border-2 border-white'}>
-					<div className={'flex flex-row justify-between px-2 w-full h-7 font-scope text-lg text-left text-white border-b-2 border-white cursor-grab'}>
-						<div className={'w-full'}>{'INFO'}</div>
+		<div className={`fixed inset-0 justify-center items-center z-50 ${hasInfo ? 'flex' : 'hidden'}`} style={{zIndex: 10000}}>
+			<Draggable handle={'.cursor-grab'}>
+				<div className={'flex relative z-50 flex-col pb-2 w-80 bg-black border-2 border-white md:w-96'}>
+					<div className={'flex flex-row justify-between w-full h-7 font-scope text-lg text-left text-white border-b-2 border-white'}>
+						<div className={'pl-2 mr-2 w-full cursor-grab'}>{'INFO'}</div>
 						<div
-							className={'p-1 -m-1 cursor-pointer select-none'}
-							onClick={() => set_hasInfo(false)}>
+							className={'z-50 p-1 pr-3 -m-1 cursor-pointer'}
+							onClick={(e) => {
+								console.log('hello');
+								e.stopPropagation();
+								set_hasInfo(false);
+							}}>
 							{'X'}
 						</div>
 					</div>

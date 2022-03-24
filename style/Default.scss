@@ -82,6 +82,14 @@ html {
 	height: 100%
 }
 
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-none {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 ::placeholder {
 	color: #C5C6C7 !important;
 }
@@ -186,10 +194,52 @@ html {
 .no-slide-content .slide-content {
   opacity: 0;
 }
-.coverflow__container__1P-xE {
-  background-color: transparent !important;
+
+
+.horizontal-snap {
+    margin: 0 auto;
+    display: grid;
+    grid-auto-flow: column;
+    width: 100%;
+    overflow-y: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x;
 }
-.coverflow__figure__3bk_C {
-  box-shadow: none !important;
-  -webkit-box-reflect: unset !important;
+
+.horizontal-snap > div {
+    scroll-snap-align: center;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+
+.horizontal-snap-center {
+    z-index: 10;
+    & > div {
+        transform: rotateY(0) scale(1);
+    }
+}
+.horizontal-snap-on-left {
+    z-index: 0;
+    & > div {
+        transform: rotateY(40deg) scale(0.6);
+    }
+}
+.horizontal-snap-on-right {
+    z-index:0;
+    & > div {
+        transform: rotateY(-40deg) scale(0.6);
+    }
+}
+
+.figure {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+    cursor: pointer;
+    transition: transform 600ms ease;
+    backface-visibility: hidden;
+    z-index: 9;
+    align-self: center;
 }

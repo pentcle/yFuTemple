@@ -76,9 +76,14 @@ export default function TributesWrapper({open, set_open, title, id}) {
 									{title}
 								</Dialog.Title>
 								<div className={'mx-auto mt-2 w-full h-full md:mt-10'}>
-									<TributeSlider id={id} hasInfo={hasInfo} set_hasInfo={set_hasInfo} />
+									<TributeSlider
+										id={id}
+										hasInfo={hasInfo}
+										set_hasInfo={set_hasInfo} />
 								</div>
-								<DraggableInfo hasInfo={hasInfo} set_hasInfo={set_hasInfo} />
+								<DraggableInfo
+									hasInfo={hasInfo}
+									set_hasInfo={set_hasInfo} />
 							</div>
 						</Transition.Child>
 					</div>

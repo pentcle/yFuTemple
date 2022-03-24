@@ -10,7 +10,7 @@ import	'style/Default.scss';
 const WithSplash = React.memo(function WithSplash({children}) {
 	const	[opacity, set_opacity] = React.useState(true);
 	const	[display, set_display] = React.useState(true);
-	const	[videoDisplay, set_videoDisplay] = React.useState(true);
+	const	[videoDisplay] = React.useState(true);
 
 	React.useEffect(() => {
 		setTimeout(() => {
