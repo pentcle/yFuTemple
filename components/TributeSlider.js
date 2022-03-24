@@ -40,7 +40,6 @@ export default function TributeSlider({id, hasInfo, set_hasInfo}) {
 		const	viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 		const	vw = viewport / 100;
 		if (viewport > 768) {
-			console.log(e.target.scrollLeft);
 			const slide = Math.floor((e.target.scrollLeft) / (20 * vw));
 			if (slide !== currentSlide)
 				set_currentSlide(slide);
@@ -51,13 +50,14 @@ export default function TributeSlider({id, hasInfo, set_hasInfo}) {
 		}
 	}
 
+	const	tributeList = TRIBUTES.filter(t => t.category === id);
 	return (
 		<div
 			id={'tribute-slider'}
-			className={'gap-0 px-20 md:px-[40vw] horizontal-snap scrollbar-none'}
+			className={'gap-0 px-20 w-screen scroll-smooth md:px-[40vw] horizontal-snap scrollbar-none'}
 			onScroll={handleScroll}>
 			{
-				TRIBUTES.filter(t => t.category === id).map((tribute, index) => (
+				tributeList.map((tribute, index) => (
 					<TributeElement
 						key={index}
 						className={currentSlide > index ? 'horizontal-snap-on-left' : currentSlide < index ? 'horizontal-snap-on-right' : 'horizontal-snap-center'}
@@ -97,6 +97,11 @@ export default function TributeSlider({id, hasInfo, set_hasInfo}) {
 						isMobile />
 				))
 			}
+			{tributeList.length < 1 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{tributeList.length < 2 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{tributeList.length < 3 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{tributeList.length < 4 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{tributeList.length < 5 ? <div className={'hidden w-[50vw] md:block md:w-[20vw]'} /> : null}
 		</div>
 	);
 }

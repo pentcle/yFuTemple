@@ -72,7 +72,7 @@ export default function TributesWrapper({open, set_open, title, id}) {
 										<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
 									</button>
 								</div>
-								<Dialog.Title as={'h3'} className={'px-3 pb-3 mx-auto mt-10 w-fit font-peste text-3xl font-medium text-white uppercase whitespace-pre-wrap break-words border-b-2 border-b-white md:px-0 md:mt-0 md:text-5xl'}>
+								<Dialog.Title as={'h3'} className={'px-3 pb-3 mx-auto mt-4 w-fit font-peste text-2xl font-medium text-white uppercase whitespace-pre-wrap break-words border-b-2 border-b-white md:px-0 md:mt-0 md:text-5xl'}>
 									{title}
 								</Dialog.Title>
 								<div className={'mx-auto mt-2 w-full h-full md:mt-10'}>

@@ -202,12 +202,14 @@ html {
     grid-auto-flow: column;
     width: 100%;
     overflow-y: auto;
-    overscroll-behavior-x: contain;
+    // overscroll-behavior-x: contain;
     scroll-snap-type: x;
+    -webkit-scroll-snap-type: x mandatory;
 }
 
 .horizontal-snap > div {
     scroll-snap-align: center;
+    -webkit-scroll-snap-align: center;
     transform-style: preserve-3d;
     perspective: 500px;
 }
