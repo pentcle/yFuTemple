@@ -70,7 +70,6 @@ export default function Index({medias}) {
 	);
 }
 
-
 export async function getServerSideProps(req) {
 	const medias = (await getPostsByID(req.query.id)) ?? [];
 	return {props: {medias: medias[0]}};
