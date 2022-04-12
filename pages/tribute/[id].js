@@ -1,7 +1,7 @@
 import	React, {Fragment}		from	'react';
 import	{useRouter}				from	'next/router';
 import	{Transition}			from	'@headlessui/react';
-import	{getPostsByID}			from	'lib/api';
+import	{getPostsByID, getAllPaths}	from	'lib/api';
 import	TributeSlider			from	'components/TributeSlider';
 import	DraggableInfo			from	'components/DraggableInfo';
 
@@ -70,7 +70,12 @@ export default function Index({medias}) {
 	);
 }
 
-export async function getServerSideProps(req) {
-	const medias = (await getPostsByID(req.query.id)) ?? [];
+export async function getStaticPaths() {
+	const paths = ((await getAllPaths()).map(p => ({params: {id: p.id}})));
+	return {paths: paths, fallback: false};
+}
+
+export async function getStaticProps({params}) {
+	const medias = (await getPostsByID(params.id)) ?? [];
 	return {props: {medias: medias[0]}};
 }

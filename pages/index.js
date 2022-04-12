@@ -5,6 +5,7 @@ import	Redis					from	'ioredis';
 import	Title					from	'components/Title';
 import	Footer					from	'components/Footer';
 import	{getAllPostsForHome}	from	'lib/api';
+import axios from 'axios';
 
 const	redis = new Redis(process.env.REDIS_URL);
 
@@ -77,6 +78,12 @@ function	Tree() {
 }
 
 function	Index({visitors, allGoddess}) {
+	const	[visitorsUpdated, set_visitorsUpdated] = React.useState(visitors);
+
+	React.useEffect(() => {
+		axios.get('/api/visitors').then(v => set_visitorsUpdated(v.data));
+	}, []);
+
 	return (
 		<>
 			<main id={'app'} className={'relative mx-auto max-w-screen-xl'} style={{minHeight: '100vh'}}>
@@ -107,16 +114,15 @@ function	Index({visitors, allGoddess}) {
 					</section>
 				</div>
 			</main>
-			<Footer visitors={visitors} />
+			<Footer visitors={visitorsUpdated} />
 		</>
 	);
 }
 
 export default Index;
 
-export async function getServerSideProps() {
-	// const visitors = await redis.set('counter', 1435600);
-	const allGoddess = (await getAllPostsForHome()) ?? [];
+export async function getStaticProps() {
 	const visitors = await redis.incr('counter');
+	const allGoddess = (await getAllPostsForHome()) ?? [];
 	return {props: {visitors, allGoddess}};
 }
