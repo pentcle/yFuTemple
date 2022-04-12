@@ -35,11 +35,11 @@ function	Header() {
 	return (
 		<>
 			<header className={'grid fixed top-0 z-20 flex-col grid-cols-2 items-center w-full h-24 md:flex md:flex-row md:h-16'}>
-				<div className={'flex relative col-span-1 items-center w-full h-12 bg-white border-b-2 border-white md:w-68 md:min-w-68 md:h-full'}>
+				<div className={'flex relative col-span-1 items-center w-full h-12 bg-black border-b-2 border-white md:w-68 md:min-w-68 md:h-full'}>
 					<div
 						className={'flex justify-between items-center px-4 w-full cursor-pointer'}
 						onClick={() => set_hasModal(!hasModal)}>
-						<p className={'font-scope text-xl text-black select-none md:text-2xl'}>{'INFO'}</p>
+						<p className={'font-scope text-xl text-white select-none md:text-2xl'}>{'INFO'}</p>
 					</div>
 					<div className={`absolute top-full w-250% md:w-full bg-black border-white border-0 border-b-2 md:border-2 left-0 z-50 p-4 px-4 ${hasModal ? '' : 'opacity-0 pointer-events-none'}`}>
 						<div
@@ -69,33 +69,33 @@ function	Header() {
 
 					</div>
 				</div>
-				<div className={'flex relative col-span-1 min-w-0 h-12 bg-white border-b-2 border-l-2 border-white border-l-black md:w-[300px] md:min-w-[300px] md:h-16'}>
+				<div className={'flex relative col-span-1 min-w-0 h-12 bg-black border-b-2 border-l-2 border-white border-l-white md:w-[300px] md:min-w-[300px] md:h-16'}>
 					<div className={'flex justify-between items-center px-2 w-max cursor-pointer md:px-4'}>
 						<div className={'flex flex-row justify-center items-center font-scope'}>
 							<IconPrev
 								onClick={() => audio.currentTime = 0}
-								className={'w-3 h-3 cursor-pointer md:w-4 md:h-4'} />
+								className={'w-3 h-3 text-white cursor-pointer md:w-4 md:h-4'} />
 							{isPlaying ? (
 								<IconPause
 									onClick={() => {
 										set_isPlaying(false);
 										audio.pause();
 									}}
-									className={'mx-0.5 w-3 h-3 cursor-pointer md:mx-1 md:w-4 md:h-4'}/>
+									className={'mx-0.5 w-3 h-3 text-white cursor-pointer md:mx-1 md:w-4 md:h-4'}/>
 							) : (
 								<IconPlay
 									onClick={() => {
 										set_isPlaying(true);
 										audio.play();
 									}}
-									className={'mx-0.5 w-3 h-3 cursor-pointer md:mx-1 md:w-4 md:h-4'}/>
+									className={'mx-0.5 w-3 h-3 text-white cursor-pointer md:mx-1 md:w-4 md:h-4'}/>
 							)}
 							<IconPrev
 								onClick={() => set_selected(selected === 4 ? 0 : selected + 1)}
-								className={'w-3 h-3 rotate-180 cursor-pointer md:w-4 md:h-4'}/>
+								className={'w-3 h-3 text-white rotate-180 cursor-pointer md:w-4 md:h-4'}/>
 						</div>
-						<div className={'flex mx-2 mb-0.5 font-scope text-xs md:mx-3 md:text-base'}>{AUDIO_LIST[selected][0]}</div>
-						<div className={'mr-0 mb-0.5 font-scope text-xs tabular-nums text-black md:mr-3 md:text-base'}>
+						<div className={'flex mx-2 mb-0.5 font-scope text-xs text-white md:mx-3 md:text-base'}>{AUDIO_LIST[selected][0]}</div>
+						<div className={'mr-0 mb-0.5 font-scope text-xs tabular-nums text-white md:mr-3 md:text-base'}>
 							{renderTimer()}
 						</div>
 						<IconExpand
