@@ -2,7 +2,6 @@ import	React						from	'react';
 import	Head						from	'next/head';
 import	{DefaultSeo}				from	'next-seo';
 import	{Dialog, Transition}		from	'@headlessui/react';
-import	{UIContextApp}				from	'contexts/useUI';
 import	{AudioContextApp}			from	'contexts/useAudio';
 import	Header						from	'components/Header';
 
@@ -133,15 +132,13 @@ function	MyApp(props) {
 	const	{Component, pageProps} = props;
 	
 	return (
-		<UIContextApp>
-			<AudioContextApp>
-				<AppWrapper
-					Component={Component}
-					pageProps={pageProps}
-					element={props.element}
-					router={props.router} />
-			</AudioContextApp>
-		</UIContextApp>
+		<AudioContextApp>
+			<AppWrapper
+				Component={Component}
+				pageProps={pageProps}
+				element={props.element}
+				router={props.router} />
+		</AudioContextApp>
 	);
 }
 
