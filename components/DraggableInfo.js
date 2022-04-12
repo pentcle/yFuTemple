@@ -1,5 +1,6 @@
 import	React			from	'react';
 import	Draggable		from	'react-draggable';
+import	{parseMarkdown}	from	'utils/parseMarkdown';
 
 function	DraggableInfo({hasInfo, set_hasInfo}) {
 	return (
@@ -19,7 +20,7 @@ function	DraggableInfo({hasInfo, set_hasInfo}) {
 						</div>
 					</div>
 					<div className={'flex overflow-scroll p-2 w-full h-96 font-scope text-lg text-left text-white border-white'}>
-						{hasInfo.description}
+						<p dangerouslySetInnerHTML={{__html: parseMarkdown(hasInfo?.description || '')}} />
 					</div>
 				</div>
 			</Draggable>

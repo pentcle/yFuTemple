@@ -1,6 +1,7 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import	React					from	'react';
 import	Image					from	'next/image';
+import	{parseMarkdown}			from	'utils/parseMarkdown';
 
 function	TributeElement({tribute, className, hasInfo, set_hasInfo, onClick, onImageClick}) {
 	return (
@@ -18,7 +19,9 @@ function	TributeElement({tribute, className, hasInfo, set_hasInfo, onClick, onIm
 						width={500}
 						height={761} />
 					<div className={'mx-auto text-left text-white slide-content'}>
-						<h2 className={'select-text'}>{tribute.title}</h2>
+						<h2
+							className={'select-text'}
+							dangerouslySetInnerHTML={{__html: parseMarkdown(tribute?.title || '')}} />
 						<p
 							onClick={() => set_hasInfo(i => i?.title === tribute.title ? false : tribute)}
 							className={'font-scope cursor-pointer'}>
