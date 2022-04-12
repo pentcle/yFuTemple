@@ -93,9 +93,8 @@ function	Index({visitors, allGoddess}) {
 					</div>
 					<section className={'px-4 w-full md:px-0'}>
 						{allGoddess.map((goddess, index) => (
-							<>
+							<div key={goddess.id}>
 								<Goddess
-									key={goddess.title}
 									id={goddess.id}
 									title={goddess.title}
 									characterSrc={goddess.mainIllustration.url}
@@ -105,7 +104,7 @@ function	Index({visitors, allGoddess}) {
 								<div className={`flex justify-center items-center my-0 ${index + 1 === allGoddess.length ? 'hidden' : ''}`}>
 									<Image src={`/divider-${index + 1}.gif`} width={200} height={200} />
 								</div>
-							</>
+							</div>
 						))}
 						<div className={'flex justify-center items-center my-9'}>
 							<Image src={'/yfiTree2.png'} width={112} height={112} />
@@ -123,6 +122,6 @@ export default Index;
 
 export async function getStaticProps() {
 	const visitors = await redis.incr('counter');
-	const allGoddess = (await getAllPostsForHome()) ?? [];
+	const allGoddess = await getAllPostsForHome();
 	return {props: {visitors, allGoddess}};
 }
