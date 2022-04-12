@@ -34,7 +34,7 @@ function	Header() {
 
 	return (
 		<>
-			<header className={'grid fixed top-0 z-20 flex-col grid-cols-2 items-center h-24 md:flex md:flex-row md:h-16'}>
+			<header className={'grid fixed top-0 z-20 flex-col grid-cols-2 items-center w-full h-24 md:flex md:flex-row md:h-16'}>
 				<div className={'flex relative col-span-1 items-center w-full h-12 bg-white border-b-2 border-white md:w-68 md:min-w-68 md:h-full'}>
 					<div
 						className={'flex justify-between items-center px-4 w-full cursor-pointer'}
