@@ -19,11 +19,7 @@ function	DraggableInfo({hasInfo, set_hasInfo}) {
 						</div>
 					</div>
 					<div className={'flex overflow-scroll p-2 w-full h-96 font-scope text-lg text-left text-white border-white'}>
-						{'Modi facilis aliquam quis id beatae quo voluptas. Exercitationem deserunt exercitationem et quasi iure. Eos aliquam laborum occaecati et odio. Voluptates sit nemo qui natus.'}
-						{'Et vero quia fuga est. Quis dolores pariatur voluptatem in modi aliquam praesentium perspiciatis. Aut reiciendis doloribus quia dolor qui. Quo cum vitae sunt iusto vero. Enim vel voluptatem tempora consequatur nemo qui possimus sit.'}
-						{'Fuga nobis dolorem nesciunt autem. Quod quisquam ipsa ex corporis vitae. Placeat voluptas sed officia odit enim.'}
-						{'Libero dolorem eos excepturi labore itaque libero. Culpa sit dolor beatae. Dolor similique qui aut dolorem ipsum quos. Aut non aut ea ut quaerat. Nobis atque repellat amet sed repellat. Neque reiciendis iure magni ipsum.'}
-						{'Fugiat esse cum aut nisi distinctio. Voluptatibus recusandae quos est. Et delectus ipsum ut. Dignissimos id a provident et sint velit suscipit. Nobis voluptatem inventore velit. Reiciendis dolorem atque consequatur velit.'}
+						{hasInfo.description}
 					</div>
 				</div>
 			</Draggable>

@@ -4,7 +4,8 @@ module.exports = ({
 	plugins: [new Dotenv()],
 	images: {
 		domains: [
-			'rawcdn.githack.com'
+			'rawcdn.githack.com',
+			'images.ctfassets.net'
 		],
 	},
 	env: {

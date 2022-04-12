@@ -1,7 +1,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import	React					from	'react';
 import	Image					from	'next/image';
-import	TRIBUTES				from	'utils/tributes.json';
 
 function	TributeElement({tribute, className, hasInfo, set_hasInfo, onClick, onImageClick}) {
 	return (
@@ -14,16 +13,16 @@ function	TributeElement({tribute, className, hasInfo, set_hasInfo, onClick, onIm
 						onClick={onImageClick}
 						className={'cursor-pointer'}
 						objectFit={'contain'}
-						src={tribute.src}
+						src={tribute.url}
 						loading={'eager'}
 						width={500}
 						height={761} />
 					<div className={'mx-auto text-left text-white slide-content'}>
 						<h2 className={'select-text'}>{tribute.title}</h2>
 						<p
-							onClick={() => set_hasInfo(i => i?.id === tribute.id ? false : tribute)}
+							onClick={() => set_hasInfo(i => i?.title === tribute.title ? false : tribute)}
 							className={'font-scope cursor-pointer'}>
-							{hasInfo?.id === tribute.id ? 'CLOSE' : 'INFO +'}
+							{hasInfo?.title === tribute.title ? 'CLOSE' : 'INFO +'}
 						</p>
 					</div>
 				</div>
@@ -32,9 +31,8 @@ function	TributeElement({tribute, className, hasInfo, set_hasInfo, onClick, onIm
 	);
 }
 
-export default function TributeSlider({id, hasInfo, set_hasInfo}) {
+export default function TributeSlider({medias, hasInfo, set_hasInfo}) {
 	const	[currentSlide, set_currentSlide] = React.useState(0);
-
 
 	function	handleScroll(e) {
 		const	viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -50,20 +48,19 @@ export default function TributeSlider({id, hasInfo, set_hasInfo}) {
 		}
 	}
 
-	const	tributeList = TRIBUTES.filter(t => t.category === id);
 	return (
 		<div
 			id={'tribute-slider'}
 			className={'gap-0 px-20 w-screen scroll-smooth md:px-[40vw] horizontal-snap scrollbar-none'}
 			onScroll={handleScroll}>
 			{
-				tributeList.map((tribute, index) => (
+				medias.map((tribute, index) => (
 					<TributeElement
 						key={index}
 						className={currentSlide > index ? 'horizontal-snap-on-left' : currentSlide < index ? 'horizontal-snap-on-right' : 'horizontal-snap-center'}
 						onImageClick={() => {
 							if (currentSlide === index) {
-								window.open(tribute.src, '_blank');
+								window.open(tribute.url, '_blank');
 							} else {
 								set_currentSlide(index);
 								const	viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -90,18 +87,18 @@ export default function TributeSlider({id, hasInfo, set_hasInfo}) {
 								}
 							}
 						}}
-						data-action={tribute.src}
+						data-action={tribute.url}
 						hasInfo={hasInfo}
 						set_hasInfo={set_hasInfo}
 						tribute={tribute}
 						isMobile />
 				))
 			}
-			{tributeList.length < 1 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
-			{tributeList.length < 2 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
-			{tributeList.length < 3 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
-			{tributeList.length < 4 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
-			{tributeList.length < 5 ? <div className={'hidden w-[50vw] md:block md:w-[20vw]'} /> : null}
+			{medias.length < 1 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{medias.length < 2 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{medias.length < 3 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{medias.length < 4 ? <div className={'w-[50vw] md:w-[20vw]'} /> : null}
+			{medias.length < 5 ? <div className={'hidden w-[50vw] md:block md:w-[20vw]'} /> : null}
 		</div>
 	);
 }
