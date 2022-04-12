@@ -71,7 +71,8 @@ export default function Index({medias}) {
 }
 
 export async function getStaticPaths() {
-	const paths = ((await getAllPaths()).map(p => ({params: {id: p.id}})));
+	const	allPaths = await getAllPaths() || [];
+	const paths = allPaths.map(p => ({params: {id: p.id}}));
 	return {paths: paths, fallback: false};
 }
 
