@@ -1,6 +1,7 @@
 import	React						from	'react';
 import	Head						from	'next/head';
 import	{DefaultSeo}				from	'next-seo';
+import	{Dialog, Transition}		from	'@headlessui/react';
 import	{UIContextApp}				from	'contexts/useUI';
 import	{AudioContextApp}			from	'contexts/useAudio';
 import	Header						from	'components/Header';
@@ -20,29 +21,36 @@ const WithSplash = React.memo(function WithSplash({children}) {
 
 	return (
 		<>
-			<div className={`absolute inset-0 flex flex-col justify-center items-center z-50 transition-opacity duration-1000 ${opacity ? 'opacity-100' : 'opacity-0'} ${!display ? 'hidden' : ''}`}>
-				<div className={'flex relative justify-center items-center mx-auto w-full h-full'}>
-					<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${videoDisplay ? 'opacity-100' : 'opacity-0'}`}>
-						<video playsInline autoPlay muted poster={'/splash.gif'} style={{width: 640, height: 360}}>
-							<source src={'/splash.webm'} type={'video/webm'} />
-						</video>
-					</div>
-					<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${!videoDisplay ? 'opacity-100' : 'opacity-100'}`}>
-						<div className={'mt-[360px]'}>
-							<button
-								onClick={() => {
-									set_opacity(false);
-									setTimeout(() => set_display(false), 1000);
-								}}
-								className={'font-scope bg-beige button-glowing'}>
-								{'ENTER'}
-								<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
-								<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
-							</button>
+			<Transition appear show={display} as={React.Fragment}>
+				<Dialog
+					as={'div'}
+					className={'fixed inset-0 z-20'}
+					onClose={() => set_display(false)}>
+					<div className={`absolute inset-0 flex flex-col justify-center items-center z-50 transition-opacity duration-1000 ${opacity ? 'opacity-100' : 'opacity-0'} ${!display ? 'hidden' : ''}`}>
+						<div className={'flex relative justify-center items-center mx-auto w-full h-full'}>
+							<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${videoDisplay ? 'opacity-100' : 'opacity-0'}`}>
+								<video playsInline autoPlay muted poster={'/splash.gif'} style={{width: 640, height: 360}}>
+									<source src={'/splash.webm'} type={'video/webm'} />
+								</video>
+							</div>
+							<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${!videoDisplay ? 'opacity-100' : 'opacity-100'}`}>
+								<div className={'mt-[360px]'}>
+									<button
+										onClick={() => {
+											set_opacity(false);
+											setTimeout(() => set_display(false), 1000);
+										}}
+										className={'font-scope bg-beige button-glowing'}>
+										{'ENTER'}
+										<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
+										<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+				</Dialog>
+			</Transition>
 			<div className={`transition-opacity duration-1000 ${opacity ? 'opacity-0 h-screen overflow-hidden pointer-events-none' : 'opacity-100'}`}>
 				{children}
 			</div>
