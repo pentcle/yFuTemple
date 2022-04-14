@@ -29,10 +29,14 @@ export default function Index({medias}) {
 								<p className={'mr-1 font-scope text-xl text-white'}>{'<'}</p>
 								<p className={'mt-1 font-scope text-xl text-white'}>{'BACK'}</p>
 							</div>
-							<div
-								onClick={() => router.back()}
-								className={'flex flex-row items-center cursor-pointer'}>
-								<p className={'font-scope text-xl text-white'}>{'SUBMIT'}</p>
+							<div className={'flex flex-row items-center cursor-pointer'}>
+								<a
+									href={'https://discord.gg/UyNbrABFYA'}
+									target={'_blank'}
+									rel={'noreferrer'}
+									className={'font-scope text-xl text-white'}>
+									{'SUBMIT'}
+								</a>
 							</div>
 						</div>
 
