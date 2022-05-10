@@ -50,7 +50,9 @@ const WithSplash = React.memo(function WithSplash({children}) {
 					</div>
 				</Dialog>
 			</Transition>
-			<div className={`transition-opacity duration-1000 ${opacity ? 'opacity-0 h-screen overflow-hidden pointer-events-none' : 'opacity-100'}`}>
+			<div
+				className={`transition-opacity duration-1000 ${opacity ? 'h-screen overflow-hidden pointer-events-none' : ''}`}
+				style={{opacity: opacity ? 0 : 1}}>
 				{children}
 			</div>
 		</>

@@ -1,11 +1,11 @@
 import	React					from	'react';
 import	Image					from	'next/image';
 import	{useRouter}				from	'next/router';
+import	axios					from	'axios';
 import	Redis					from	'ioredis';
 import	Title					from	'components/Title';
 import	Footer					from	'components/Footer';
 import	{getAllPostsForHome}	from	'lib/api';
-import axios from 'axios';
 
 const	redis = new Redis(process.env.REDIS_URL);
 
@@ -92,7 +92,7 @@ function	Index({visitors, allGoddess}) {
 						<Title />
 					</div>
 					<section className={'px-4 w-full md:px-0'}>
-						{allGoddess.map((goddess, index) => (
+						{allGoddess.sort((a, b) => a.order - b.order).map((goddess, index) => (
 							<div key={goddess.id}>
 								<Goddess
 									id={goddess.id}
