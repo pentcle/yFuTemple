@@ -21,6 +21,11 @@ export const AudioContextApp = ({children}) => {
 			AUDIO_LIST
 		}}>
 			{children}
+			<audio controls preload={'auto'}>
+				{AUDIO_LIST.map((track) => (
+					<source key={`audio-preload-track-${track[0]}`} src={track[1]} type={'audio/wav'} />	
+				))}
+			</audio>
 		</Audio.Provider>
 	);
 };

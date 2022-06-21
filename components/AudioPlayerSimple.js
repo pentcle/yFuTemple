@@ -4,11 +4,10 @@ import	IconPause				from	'components/icons/IconPause';
 import	IconPlay				from	'components/icons/IconPlay';
 import	IconPrev				from	'components/icons/IconPrev';
 
-function	AudioPlayer({name, src, isSelected, setIsSelected, onSelectNext}) {
+function	AudioPlayerSimple({name, src, isSelected, setIsSelected, onSelectNext}) {
 	const	{set_audio, isPlaying, set_isPlaying} = useAudio();
 	const	ref = React.useRef();
 	const	progress = React.useRef();
-	// const	readInterval = React.useRef();
 	const	[isInitialLoad, set_isInitialLoad] = React.useState(true);
 
 	React.useEffect(() => {
@@ -21,15 +20,6 @@ function	AudioPlayer({name, src, isSelected, setIsSelected, onSelectNext}) {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [progress.current, ref.current]);
-
-	// React.useEffect(() => {
-	// 	readInterval.current = setInterval(() => {
-	// 		if (ref.current) {
-	// 			set_currentTime(ref.current.currentTime);
-	// 		}
-	// 	} , 300);
-	// 	return () => clearInterval(readInterval.current);
-	// }, []);
 
 	React.useEffect(() => {
 		if (ref.current && !isSelected) {
@@ -130,4 +120,4 @@ function	AudioPlayer({name, src, isSelected, setIsSelected, onSelectNext}) {
 	);
 }
 
-export default AudioPlayer;
+export default AudioPlayerSimple;
