@@ -5,7 +5,7 @@ import	axios					from	'axios';
 import	Redis					from	'ioredis';
 import	Title					from	'components/Title';
 import	Footer					from	'components/Footer';
-import	{getAllPostsForHome}	from	'lib/api';
+import	YFU_DATA				from	'utils/data';
 
 const	redis = new Redis(process.env.REDIS_URL);
 
@@ -77,8 +77,9 @@ function	Tree() {
 	);
 }
 
-function	Index({visitors, allGoddess}) {
+function	Index({visitors}) {
 	const	[visitorsUpdated, set_visitorsUpdated] = React.useState(visitors);
+	const	allData = YFU_DATA;
 
 	React.useEffect(() => {
 		axios.get('/api/visitors').then(v => set_visitorsUpdated(v.data));
@@ -92,16 +93,16 @@ function	Index({visitors, allGoddess}) {
 						<Title />
 					</div>
 					<section className={'px-4 w-full md:px-0'}>
-						{allGoddess.sort((a, b) => a.order - b.order).map((goddess, index) => (
+						{allData.sort((a, b) => a.order - b.order).map((goddess, index) => (
 							<div key={goddess.id}>
 								<Goddess
 									id={goddess.id}
 									title={goddess.title}
-									characterSrc={goddess.mainIllustration.url}
-									typoSrc={goddess.watermark.url}>
+									characterSrc={goddess.mainIllustration}
+									typoSrc={goddess.watermark}>
 									<p>{goddess.description}</p>
 								</Goddess>
-								<div className={`flex justify-center items-center my-0 ${index + 1 === allGoddess.length ? 'hidden' : ''}`}>
+								<div className={`flex justify-center items-center my-0 ${index + 1 === allData.length ? 'hidden' : ''}`}>
 									<Image src={`/divider-${index + 1}.gif`} width={200} height={200} />
 								</div>
 							</div>
@@ -122,6 +123,5 @@ export default Index;
 
 export async function getStaticProps() {
 	const visitors = await redis.incr('counter');
-	const allGoddess = await getAllPostsForHome();
-	return {props: {visitors, allGoddess}};
+	return {props: {visitors}};
 }

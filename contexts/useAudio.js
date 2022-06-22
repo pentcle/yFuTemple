@@ -1,11 +1,11 @@
 import	React, {useContext, createContext}	from	'react';
 
 const	AUDIO_LIST = [
-	['YEARNING TREE', '/audio/yearning_tree.wav', '/marks/yfiTree.png'],
-	['TECHNE', '/audio/techne.wav', '/marks/techne.png'],
-	['DOMINION', '/audio/dominion.wav', '/marks/dominion.png'],
-	['COMMUNITY', '/audio/community.wav', '/marks/community.png'],
-	['TRANSMISSION', '/audio/transmission.wav', '/marks/transmission.png'],
+	['YEARNING TREE', '/audio/yearning_tree.wav', '/audio-marks/yfiTree.png'],
+	['TECHNE', '/audio/techne.wav', '/audio-marks/techne.png'],
+	['DOMINION', '/audio/dominion.wav', '/audio-marks/dominion.png'],
+	['COMMUNITY', '/audio/community.wav', '/audio-marks/community.png'],
+	['TRANSMISSION', '/audio/transmission.wav', '/audio-marks/transmission.png'],
 ];
 
 
@@ -21,7 +21,7 @@ export const AudioContextApp = ({children}) => {
 			AUDIO_LIST
 		}}>
 			{children}
-			<audio controls preload={'auto'}>
+			<audio controls preload={'auto'} style={{visibility: 'hidden', height: 0, width: 0}}>
 				{AUDIO_LIST.map((track) => (
 					<source key={`audio-preload-track-${track[0]}`} src={track[1]} type={'audio/wav'} />	
 				))}

@@ -14,7 +14,7 @@ function	TributeElement({tribute, className, hasInfo, set_hasInfo, onClick, onIm
 						onClick={onImageClick}
 						className={'cursor-pointer'}
 						objectFit={'contain'}
-						src={tribute.url}
+						src={tribute.src}
 						loading={'eager'}
 						width={500}
 						height={761} />
@@ -63,7 +63,7 @@ export default function TributeSlider({medias, hasInfo, set_hasInfo}) {
 						className={currentSlide > index ? 'horizontal-snap-on-left' : currentSlide < index ? 'horizontal-snap-on-right' : 'horizontal-snap-center'}
 						onImageClick={() => {
 							if (currentSlide === index) {
-								window.open(tribute.url, '_blank');
+								window.open(tribute.src, '_blank');
 							} else {
 								set_currentSlide(index);
 								const	viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -90,7 +90,7 @@ export default function TributeSlider({medias, hasInfo, set_hasInfo}) {
 								}
 							}
 						}}
-						data-action={tribute.url}
+						data-action={tribute.src}
 						hasInfo={hasInfo}
 						set_hasInfo={set_hasInfo}
 						tribute={tribute}
