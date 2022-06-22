@@ -99,7 +99,7 @@ function	Header() {
 							{renderTimer()}
 						</div>
 						<IconExpand
-							className={'hidden md:block'}
+							className={'text-white'}
 							onClick={() => set_hasMediaPlayer(!hasMediaPlayer)} />
 					</div>
 				</div>

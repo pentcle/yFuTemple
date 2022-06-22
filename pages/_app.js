@@ -1,6 +1,8 @@
 import	React						from	'react';
 import	Head						from	'next/head';
+import	Image						from	'next/image';
 import	{DefaultSeo}				from	'next-seo';
+import	{AnimateSharedLayout, AnimatePresence}	from	'framer-motion';
 import	{Dialog, Transition}		from	'@headlessui/react';
 import	{AudioContextApp}			from	'contexts/useAudio';
 import	Header						from	'components/Header';
@@ -12,12 +14,6 @@ const WithSplash = React.memo(function WithSplash({children}) {
 	const	[display, set_display] = React.useState(true);
 	const	[videoDisplay] = React.useState(true);
 
-	React.useEffect(() => {
-		setTimeout(() => {
-			// set_videoDisplay(false);
-		}, 5200);
-	}, []);
-
 	return (
 		<>
 			<Transition appear show={display} as={React.Fragment}>
@@ -28,9 +24,11 @@ const WithSplash = React.memo(function WithSplash({children}) {
 					<div className={`absolute inset-0 flex flex-col justify-center items-center z-50 transition-opacity duration-1000 ${opacity ? 'opacity-100' : 'opacity-0'} ${!display ? 'hidden' : ''}`}>
 						<div className={'flex relative justify-center items-center mx-auto w-full h-full'}>
 							<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${videoDisplay ? 'opacity-100' : 'opacity-0'}`}>
-								<video playsInline autoPlay muted poster={'/splash.gif'} style={{width: 640, height: 360}}>
-									<source src={'/splash.webm'} type={'video/webm'} />
-								</video>
+								<Image
+									src={'/splash.gif'}
+									loading={'eager'}
+									width={640}
+									height={360} />
 							</div>
 							<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${!videoDisplay ? 'opacity-100' : 'opacity-100'}`}>
 								<div className={'mt-[360px]'}>
@@ -59,10 +57,7 @@ const WithSplash = React.memo(function WithSplash({children}) {
 	);
 });
 
-function	AppWrapper(props) {
-	const	{Component, pageProps, router} = props;
-	const	WEBSITE_URI = process.env.WEBSITE_URI;
-
+function	AppMeta() {
 	return (
 		<>
 			<Head>
@@ -93,13 +88,13 @@ function	AppWrapper(props) {
 				openGraph={{
 					type: 'website',
 					locale: 'en_US',
-					url: WEBSITE_URI,
+					url: process.env.WEBSITE_URI,
 					site_name: 'YFU Temple',
 					title: 'YFU Temple',
 					description: 'YFU Temple',
 					images: [
 						{
-							url: `${WEBSITE_URI}og.jpg`,
+							url: `${process.env.WEBSITE_URI}og.jpg`,
 							width: 1200,
 							height: 675,
 							alt: 'Yearn',
@@ -111,14 +106,34 @@ function	AppWrapper(props) {
 					site: '@iearnfinance',
 					cardType: 'summary_large_image',
 				}} />
+		</>
+	);
+}
+
+function	AppWrapper(props) {
+	const	{Component, pageProps, router} = props;
+
+	function handleExitComplete() {
+		if (typeof window !== 'undefined') {
+			window.scrollTo({top: 0});
+		}
+	}
+
+	return (
+		<>
+			<AppMeta />
 			<WithSplash>
 				<Header />
 				<div className={'overflow-x-hidden z-10 pt-24 md:pt-16'}>
-					<Component
-						key={router.route}
-						element={props.element}
-						router={props.router}
-						{...pageProps} />
+					<AnimateSharedLayout>
+						<AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
+							<Component
+								key={router.route}
+								element={props.element}
+								router={props.router}
+								{...pageProps} />
+						</AnimatePresence>
+					</AnimateSharedLayout>
 				</div>
 			</WithSplash>
 			<div className={'fixed inset-0 -z-10'}>

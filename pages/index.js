@@ -5,7 +5,14 @@ import	axios					from	'axios';
 import	Redis					from	'ioredis';
 import	Title					from	'components/Title';
 import	Footer					from	'components/Footer';
-import	YFU_DATA				from	'utils/data';
+import	{motion}					from	'framer-motion';
+import	YFU_DATA					from	'utils/data';
+
+const variants = {
+	initial: {y: 0, opacity: 1},
+	enter: {y: 0, opacity: 1, transition: {duration: 0.2, ease: 'easeIn'}},
+	exit: {y: 20, opacity: 0, transition: {duration: 0.2, ease: 'easeIn'}}
+};
 
 const	redis = new Redis(process.env.REDIS_URL);
 
@@ -86,7 +93,13 @@ function	Index({visitors}) {
 	}, []);
 
 	return (
-		<>
+		<motion.div
+			key={'home'}
+			initial={'initial'}
+			animate={'enter'}
+			exit={'exit'}
+			className={'flex overflow-hidden relative flex-col p-0 -mt-1 w-screen border-t-0 border-t-white md:p-6 md:border-t-2'}
+			variants={variants}>
 			<main id={'app'} className={'relative mx-auto max-w-screen-xl'} style={{minHeight: '100vh'}}>
 				<div>
 					<div className={'flex justify-center items-center py-8'}>
@@ -115,7 +128,7 @@ function	Index({visitors}) {
 				</div>
 			</main>
 			<Footer visitors={visitorsUpdated} />
-		</>
+		</motion.div>
 	);
 }
 

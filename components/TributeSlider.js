@@ -63,7 +63,7 @@ export default function TributeSlider({medias, hasInfo, set_hasInfo}) {
 						className={currentSlide > index ? 'horizontal-snap-on-left' : currentSlide < index ? 'horizontal-snap-on-right' : 'horizontal-snap-center'}
 						onImageClick={() => {
 							if (currentSlide === index) {
-								window.open(tribute.src, '_blank');
+								window.open(tribute.src.replace('assetsThumbnail', 'assets'), '_blank');
 							} else {
 								set_currentSlide(index);
 								const	viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
