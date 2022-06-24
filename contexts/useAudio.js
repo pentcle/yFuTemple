@@ -1,11 +1,11 @@
 import	React, {useContext, createContext}	from	'react';
 
 const	AUDIO_LIST = [
-	['YEARNING TREE', '/audio/yearning_tree.wav', '/audio-marks/yfiTree.png'],
-	['TECHNE', '/audio/techne.wav', '/audio-marks/techne.png'],
-	['DOMINION', '/audio/dominion.wav', '/audio-marks/dominion.png'],
-	['COMMUNITY', '/audio/community.wav', '/audio-marks/community.png'],
-	['TRANSMISSION', '/audio/transmission.wav', '/audio-marks/transmission.png'],
+	['YEARNING TREE', '/audio/yearning_tree.opus', '/audio-marks/yfiTree.png'],
+	['TECHNE', '/audio/techne.opus', '/audio-marks/techne.png'],
+	['DOMINION', '/audio/dominion.opus', '/audio-marks/dominion.png'],
+	['COMMUNITY', '/audio/community.opus', '/audio-marks/community.png'],
+	['TRANSMISSION', '/audio/transmission.opus', '/audio-marks/transmission.png'],
 ];
 
 
@@ -23,7 +23,7 @@ export const AudioContextApp = ({children}) => {
 			{children}
 			<audio controls preload={'auto'} style={{visibility: 'hidden', height: 0, width: 0}}>
 				{AUDIO_LIST.map((track) => (
-					<source key={`audio-preload-track-${track[0]}`} src={track[1]} type={'audio/wav'} />	
+					<source key={`audio-preload-track-${track[0]}`} src={track[1]} type={'audio/opus'} />	
 				))}
 			</audio>
 		</Audio.Provider>

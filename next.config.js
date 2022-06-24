@@ -3,6 +3,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = ({
 	plugins: [new Dotenv()],
 	images: {
+		formats: ['image/avif', 'image/webp'],
 		domains: [
 			'rawcdn.githack.com',
 			'images.ctfassets.net'
