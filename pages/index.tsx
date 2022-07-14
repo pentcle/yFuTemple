@@ -3,10 +3,10 @@ import	Image					from	'next/image';
 import	{useRouter}				from	'next/router';
 import	axios					from	'axios';
 import	Redis					from	'ioredis';
-import	Title					from	'components/Title';
-import	Footer					from	'components/Footer';
-import	{motion}					from	'framer-motion';
-import	YFU_DATA					from	'utils/data';
+import	Title					from	'../components/Title';
+import	Footer					from	'../components/Footer';
+import	{motion}				from	'framer-motion';
+import	YFU_DATA, { yfuData }	from	'../utils/data';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
@@ -16,7 +16,7 @@ const variants = {
 
 const	redis = new Redis(process.env.REDIS_URL);
 
-function	Goddess({characterSrc, typoSrc, id, title, children}) {
+function	Goddess({characterSrc="", typoSrc="", id="", title="", children=<div />}) {
 	const	router = useRouter();
 
 	return (
@@ -84,7 +84,7 @@ function	Tree() {
 	);
 }
 
-function	Index({visitors}) {
+function	Index({visitors=[<div />]}) {
 	const	[visitorsUpdated, set_visitorsUpdated] = React.useState(visitors);
 	const	allData = YFU_DATA;
 
@@ -106,7 +106,7 @@ function	Index({visitors}) {
 						<Title />
 					</div>
 					<section className={'px-4 w-full md:px-0'}>
-						{allData.sort((a, b) => a.order - b.order).map((goddess, index) => (
+						{allData.sort((a:yfuData, b:yfuData) => a.order - b.order).map((goddess:yfuData, index:number) => (
 							<div key={goddess.id}>
 								<Goddess
 									id={goddess.id}

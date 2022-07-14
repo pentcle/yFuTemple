@@ -1,10 +1,12 @@
 import	React			from	'react';
 import	Draggable		from	'react-draggable';
-import	{parseMarkdown}	from	'utils/parseMarkdown';
+import	{parseMarkdown}	from	'../utils/parseMarkdown';
 
-function	DraggableInfo({hasInfo, set_hasInfo}) {
+//@ts-ignore
+function	DraggableInfo({hasInfo=false, set_hasInfo}) {
 	return (
 		<div className={`fixed inset-0 justify-center items-center z-50 ${hasInfo ? 'flex' : 'hidden'}`} style={{zIndex: 10000}}>
+			{/*@ts-ignore*/}
 			<Draggable handle={'.cursor-grab'}>
 				<div className={'flex relative z-50 flex-col pb-2 w-80 bg-black border-2 border-white md:w-96'}>
 					<div className={'flex flex-row justify-between w-full h-7 font-scope text-lg text-left text-white border-b-2 border-white'}>
@@ -20,6 +22,7 @@ function	DraggableInfo({hasInfo, set_hasInfo}) {
 						</div>
 					</div>
 					<div className={'flex overflow-scroll p-2 w-full h-96 font-scope text-lg text-left text-white border-white'}>
+						{/*@ts-ignore*/}
 						<p dangerouslySetInnerHTML={{__html: parseMarkdown(hasInfo?.description || '')}} />
 					</div>
 				</div>

@@ -8,11 +8,12 @@ const	AUDIO_LIST = [
 	['TRANSMISSION', '/audio/transmission.opus', '/audio-marks/transmission.png'],
 ];
 
+// @ts-ignore
+const Audio = createContext();
 
-const	Audio = createContext();
-export const AudioContextApp = ({children}) => {
-	const	[audio, set_audio] = React.useState(AUDIO_LIST[0]);
-	const	[isPlaying, set_isPlaying] = React.useState(false);
+export const AudioContextApp = ({children=<div />}) => {
+	const [audio, set_audio] = React.useState(AUDIO_LIST[0]);
+	const [isPlaying, set_isPlaying] = React.useState(false);
 
 	return (
 		<Audio.Provider value={{

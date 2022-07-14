@@ -1,10 +1,10 @@
 import	React						from	'react';
 import	Link						from	'next/link';
 import	{useRouter}					from	'next/router';
-import	TributeSlider				from	'components/TributeSlider';
-import	DraggableInfo				from	'components/DraggableInfo';
+import	TributeSlider				from	'../../components/TributeSlider';
+import	DraggableInfo				from	'../../components/DraggableInfo';
 import	{motion}					from	'framer-motion';
-import	YFU_DATA					from	'utils/data';
+import	YFU_DATA					from	'../../utils/data';
 
 const variants = {
 	initial: {y: 100, scale: 0.9, opacity: 0},

@@ -1,8 +1,11 @@
+// @ts-nocheck
+// applies @ts-ignore to this file
 import	React					from	'react';
-import	useAudio				from	'contexts/useAudio';
-import	IconPause				from	'components/icons/IconPause';
-import	IconPlay				from	'components/icons/IconPlay';
-import	IconPrev				from	'components/icons/IconPrev';
+import	useAudio				from	'../contexts/useAudio';
+import	IconPause				from	'./icons/IconPause';
+import	IconPlay				from	'./icons/IconPlay';
+import	IconPrev				from	'./icons/IconPrev';
+
 
 function	AudioPlayerSimple({name, src, isSelected, setIsSelected, onSelectNext}) {
 	const	{set_audio, isPlaying, set_isPlaying} = useAudio();

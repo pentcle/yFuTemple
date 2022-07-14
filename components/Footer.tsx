@@ -1,6 +1,6 @@
 import	React							from	'react';
 
-function	Footer({visitors}) {
+function	Footer({visitors=[<div />]}) {
 	const	visitorsAsArr = visitors.toString().split('');
 	return (
 		<footer className={'flex z-20 flex-col items-center pb-5 mt-12 border-t-2 border-white md:pb-12 md:mt-20'}>

@@ -36,6 +36,9 @@
     "tailwindcss": "^3.0.23"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/ioredis": "^4.28.10",
+    "@types/react": "^18.0.15",
     "contentful-import": "^8.2.28",
     "eslint": "^8.11.0",
     "eslint-config-next": "^12.1.0",

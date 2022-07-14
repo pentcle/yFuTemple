@@ -1,14 +1,15 @@
 import	React				from	'react';
 import	Image				from	'next/image';
-import	useAudio			from	'contexts/useAudio';
-import	DraggablePlayer		from	'components/DraggablePlayer';
-import	IconPause			from	'components/icons/IconPause';
-import	IconPlay			from	'components/icons/IconPlay';
-import	IconPrev			from	'components/icons/IconPrev';
-import	IconExpand			from	'components/icons/IconExpand';
+import	useAudio			from	'../contexts/useAudio';
+import	DraggablePlayer		from	'./DraggablePlayer';
+import	IconPause			from	'./icons/IconPause';
+import	IconPlay			from	'./icons/IconPlay';
+import	IconPrev			from	'./icons/IconPrev';
+import	IconExpand			from	'./icons/IconExpand';
 
 function	Header() {
 	const	readInterval = React.useRef();
+	//@ts-ignore
 	const	{AUDIO_LIST, audio, isPlaying, set_isPlaying} = useAudio();
 	const	[hasModal, set_hasModal] = React.useState(false);
 	const	[hasMediaPlayer, set_hasMediaPlayer] = React.useState(false);
@@ -16,6 +17,7 @@ function	Header() {
 	const	[, set_nonce] = React.useState(0);
 	
 	React.useEffect(() => {
+		//@ts-ignore
 		readInterval.current = setInterval(() => {
 			set_nonce(n => n + 1);
 		} , 300);
@@ -25,7 +27,7 @@ function	Header() {
 	function renderTimer() {
 		const	remaining = (audio?.duration || 0) - (audio?.currentTime || 0);
 		const	minutes = Math.floor(remaining / 60);
-		let		seconds = Math.floor(remaining % 60);
+		let		seconds:number|string = Math.floor(remaining % 60);
 		if (seconds < 10) {
 			seconds = `0${seconds}`;
 		}
@@ -114,8 +116,10 @@ function	Header() {
 			</header>
 			<DraggablePlayer
 				selected={selected}
+				//@ts-ignore
 				set_selected={set_selected}
 				hasMediaPlayer={hasMediaPlayer}
+				//@ts-ignore
 				set_hasMediaPlayer={set_hasMediaPlayer}
 			/>
 		</>

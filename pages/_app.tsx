@@ -1,14 +1,15 @@
-import	React						from	'react';
+import React 						from 	'react';		
 import	Head						from	'next/head';
 import	Image						from	'next/image';
 import	{DefaultSeo}				from	'next-seo';
 import	{AnimateSharedLayout, AnimatePresence}	from	'framer-motion';
 import	{Dialog, Transition}		from	'@headlessui/react';
-import	{AudioContextApp}			from	'contexts/useAudio';
-import	Header						from	'components/Header';
+import	{AudioContextApp}			from	'../contexts/useAudio';
+import	Header						from	'../components/Header';
 
 import	'style/Default.scss';
 
+//@ts-ignore
 const WithSplash = React.memo(function WithSplash({children}) {
 	const	[opacity, set_opacity] = React.useState(true);
 	const	[display, set_display] = React.useState(true);
@@ -110,6 +111,7 @@ function	AppMeta() {
 	);
 }
 
+//@ts-ignore
 function	AppWrapper(props) {
 	const	{Component, pageProps, router} = props;
 
@@ -125,6 +127,7 @@ function	AppWrapper(props) {
 			<WithSplash>
 				<Header />
 				<div className={'overflow-x-hidden z-10 pt-24 md:pt-16'}>
+					{/*@ts-ignore*/}
 					<AnimateSharedLayout>
 						<AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
 							<Component
@@ -145,6 +148,7 @@ function	AppWrapper(props) {
 	);
 }
 
+//@ts-ignore
 function	MyApp(props) {
 	const	{Component, pageProps} = props;
 	
