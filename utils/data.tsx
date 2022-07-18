@@ -1,4 +1,4 @@
-export type yfuData = {
+export type TYFUData = {
 	'id': string,
 	'title': string,
 	'tributeTitle': string,
@@ -6,16 +6,16 @@ export type yfuData = {
 	'order': number,
 	'watermark': string,
 	'mainIllustration': string,
-	'medias': yfuDataMedia[],
+	'medias': TYFUDataMedia[],
 }
 
-export type yfuDataMedia = {
+export type TYFUDataMedia = {
 	title: string,
 	description: string,
 	src: string,	
 }
 
-const	YFU_DATA:yfuData[] = [
+const	YFU_DATA: TYFUData[] = [
 	{
 		'id': 'temple',
 		'title': 'Welcome to the yFu Temple',

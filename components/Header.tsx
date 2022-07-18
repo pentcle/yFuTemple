@@ -1,34 +1,32 @@
-import	React				from	'react';
-import	Image				from	'next/image';
-import	useAudio			from	'../contexts/useAudio';
-import	DraggablePlayer		from	'./DraggablePlayer';
-import	IconPause			from	'./icons/IconPause';
-import	IconPlay			from	'./icons/IconPlay';
-import	IconPrev			from	'./icons/IconPrev';
-import	IconExpand			from	'./icons/IconExpand';
+import	React, {ReactElement}	from	'react';
+import	Image					from	'next/image';
+import	useAudio				from	'../contexts/useAudio';
+import	DraggablePlayer			from	'./DraggablePlayer';
+import	IconPause				from	'./icons/IconPause';
+import	IconPlay				from	'./icons/IconPlay';
+import	IconPrev				from	'./icons/IconPrev';
+import	IconExpand				from	'./icons/IconExpand';
 
-function	Header() {
-	const	readInterval = React.useRef();
-	//@ts-ignore
+function	Header(): ReactElement {
+	const	readInterval = React.useRef<NodeJS.Timer>();
 	const	{AUDIO_LIST, audio, isPlaying, set_isPlaying} = useAudio();
 	const	[hasModal, set_hasModal] = React.useState(false);
 	const	[hasMediaPlayer, set_hasMediaPlayer] = React.useState(false);
 	const	[selected, set_selected] = React.useState(0);
 	const	[, set_nonce] = React.useState(0);
 	
-	React.useEffect(() => {
-		//@ts-ignore
-		readInterval.current = setInterval(() => {
-			set_nonce(n => n + 1);
-		} , 300);
-		return () => clearInterval(readInterval.current);
+	React.useEffect((): () => void => {
+		readInterval.current = setInterval((): void => {
+			set_nonce((n: number): number => n + 1);
+		}, 300);
+		return (): void => clearInterval(readInterval.current);
 	}, []);
 
-	function renderTimer() {
+	function renderTimer(): string {
 		const	remaining = (audio?.duration || 0) - (audio?.currentTime || 0);
 		const	minutes = Math.floor(remaining / 60);
-		let		seconds:number|string = Math.floor(remaining % 60);
-		if (seconds < 10) {
+		let		seconds = String(Math.floor(remaining % 60));
+		if (Number(seconds) < 10) {
 			seconds = `0${seconds}`;
 		}
 		return (`${minutes}:${seconds}`);
@@ -40,13 +38,13 @@ function	Header() {
 				<div className={'flex relative col-span-1 items-center w-full h-12 bg-black border-b-2 border-white md:w-68 md:min-w-68 md:h-full'}>
 					<div
 						className={'flex justify-between items-center px-4 w-full cursor-pointer'}
-						onClick={() => set_hasModal(!hasModal)}>
+						onClick={(): void => set_hasModal(!hasModal)}>
 						<p className={'font-scope text-xl text-white select-none md:text-2xl'}>{'INFO'}</p>
 					</div>
 					<div className={`absolute top-full w-250% md:w-full bg-black border-white border-0 border-b-2 md:border-2 left-0 z-50 p-4 px-4 ${hasModal ? '' : 'opacity-0 pointer-events-none'}`}>
 						<div
 							className={'flex justify-end p-1 -m-1 w-full font-scope text-lg text-white cursor-pointer select-none'}
-							onClick={() => set_hasModal(!hasModal)}>
+							onClick={(): void => set_hasModal(!hasModal)}>
 							{'X'}
 						</div>
 						<div className={'flex justify-center w-full select-none'}>
@@ -75,25 +73,27 @@ function	Header() {
 					<div className={'flex justify-between items-center px-2 w-max cursor-pointer md:px-4'}>
 						<div className={'flex flex-row justify-center items-center font-scope'}>
 							<IconPrev
-								onClick={() => audio.currentTime = 0}
+								onClick={(): void => {
+									audio.currentTime = 0;
+								}}
 								className={'w-3 h-3 text-white cursor-pointer md:w-4 md:h-4'} />
 							{isPlaying ? (
 								<IconPause
-									onClick={() => {
+									onClick={(): void => {
 										set_isPlaying(false);
 										audio.pause();
 									}}
 									className={'mx-0.5 w-3 h-3 text-white cursor-pointer md:mx-1 md:w-4 md:h-4'}/>
 							) : (
 								<IconPlay
-									onClick={() => {
+									onClick={(): void => {
 										set_isPlaying(true);
 										audio.play();
 									}}
 									className={'mx-0.5 w-3 h-3 text-white cursor-pointer md:mx-1 md:w-4 md:h-4'}/>
 							)}
 							<IconPrev
-								onClick={() => set_selected(selected === 4 ? 0 : selected + 1)}
+								onClick={(): void => set_selected(selected === 4 ? 0 : selected + 1)}
 								className={'w-3 h-3 text-white rotate-180 cursor-pointer md:w-4 md:h-4'}/>
 						</div>
 						<div className={'flex mx-2 mb-0.5 font-scope text-xs text-white md:mx-3 md:text-base'}>{AUDIO_LIST[selected][0]}</div>
@@ -102,7 +102,7 @@ function	Header() {
 						</div>
 						<IconExpand
 							className={'text-white'}
-							onClick={() => set_hasMediaPlayer(!hasMediaPlayer)} />
+							onClick={(): void => set_hasMediaPlayer(!hasMediaPlayer)} />
 					</div>
 				</div>
 				<div className={'flex overflow-x-hidden relative col-span-2 items-center w-250% h-12 font-scope text-white bg-[#181D20] border-b-2 border-white select-none md:w-full md:h-16'}>
@@ -116,10 +116,8 @@ function	Header() {
 			</header>
 			<DraggablePlayer
 				selected={selected}
-				//@ts-ignore
 				set_selected={set_selected}
 				hasMediaPlayer={hasMediaPlayer}
-				//@ts-ignore
 				set_hasMediaPlayer={set_hasMediaPlayer}
 			/>
 		</>

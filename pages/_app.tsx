@@ -1,4 +1,4 @@
-import React 						from 	'react';		
+import React, {ReactElement, ReactNode} 						from 	'react';		
 import	Head						from	'next/head';
 import	Image						from	'next/image';
 import	{DefaultSeo}				from	'next-seo';
@@ -8,35 +8,35 @@ import	{AudioContextApp}			from	'../contexts/useAudio';
 import	Header						from	'../components/Header';
 
 import	'style/Default.scss';
+import {AppProps} from 'next/app';
 
-//@ts-ignore
-const WithSplash = React.memo(function WithSplash({children}) {
-	const	[opacity, set_opacity] = React.useState(true);
-	const	[display, set_display] = React.useState(true);
-	const	[videoDisplay] = React.useState(true);
+const WithSplash = React.memo(function WithSplash({children}: {children: ReactNode}): ReactElement {
+	const	[hasOpacity, set_hasOpacity] = React.useState(true);
+	const	[shouldDisplay, set_shouldDisplay] = React.useState(true);
+	const	[shouldDisplayVideo] = React.useState(true);
 
 	return (
 		<>
-			<Transition appear show={display} as={React.Fragment}>
+			<Transition appear show={shouldDisplay} as={React.Fragment}>
 				<Dialog
 					as={'div'}
 					className={'fixed inset-0 z-20'}
-					onClose={() => set_display(false)}>
-					<div className={`absolute inset-0 flex flex-col justify-center items-center z-50 transition-opacity duration-1000 ${opacity ? 'opacity-100' : 'opacity-0'} ${!display ? 'hidden' : ''}`}>
+					onClose={(): void => set_shouldDisplay(false)}>
+					<div className={`absolute inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-1000 ${hasOpacity ? 'opacity-100' : 'opacity-0'} ${!shouldDisplay ? 'hidden' : ''}`}>
 						<div className={'flex relative justify-center items-center mx-auto w-full h-full'}>
-							<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${videoDisplay ? 'opacity-100' : 'opacity-0'}`}>
+							<div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${shouldDisplayVideo ? 'opacity-100' : 'opacity-0'}`}>
 								<Image
 									src={'/splash.gif'}
 									loading={'eager'}
 									width={640}
 									height={360} />
 							</div>
-							<div className={`transition-opacity duration-1000 absolute inset-0 flex justify-center items-center ${!videoDisplay ? 'opacity-100' : 'opacity-100'}`}>
+							<div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${!shouldDisplayVideo ? 'opacity-100' : 'opacity-100'}`}>
 								<div className={'mt-[360px]'}>
 									<button
-										onClick={() => {
-											set_opacity(false);
-											setTimeout(() => set_display(false), 1000);
+										onClick={(): void => {
+											set_hasOpacity(false);
+											setTimeout((): void => set_shouldDisplay(false), 1000);
 										}}
 										className={'font-scope bg-beige button-glowing'}>
 										{'ENTER'}
@@ -50,15 +50,15 @@ const WithSplash = React.memo(function WithSplash({children}) {
 				</Dialog>
 			</Transition>
 			<div
-				className={`transition-opacity duration-1000 ${opacity ? 'h-screen overflow-hidden pointer-events-none' : ''}`}
-				style={{opacity: opacity ? 0 : 1}}>
+				className={`transition-opacity duration-1000 ${hasOpacity ? 'pointer-events-none h-screen overflow-hidden' : ''}`}
+				style={{opacity: hasOpacity ? 0 : 1}}>
 				{children}
 			</div>
 		</>
 	);
 });
 
-function	AppMeta() {
+function	AppMeta(): ReactElement {
 	return (
 		<>
 			<Head>
@@ -98,24 +98,23 @@ function	AppMeta() {
 							url: `${process.env.WEBSITE_URI}og.jpg`,
 							width: 1200,
 							height: 675,
-							alt: 'Yearn',
+							alt: 'Yearn'
 						}
 					]
 				}}
 				twitter={{
 					handle: '@iearnfinance',
 					site: '@iearnfinance',
-					cardType: 'summary_large_image',
+					cardType: 'summary_large_image'
 				}} />
 		</>
 	);
 }
 
-//@ts-ignore
-function	AppWrapper(props) {
+function	AppWrapper(props: AppProps): ReactElement {
 	const	{Component, pageProps, router} = props;
 
-	function handleExitComplete() {
+	function handleExitComplete(): void {
 		if (typeof window !== 'undefined') {
 			window.scrollTo({top: 0});
 		}
@@ -127,12 +126,10 @@ function	AppWrapper(props) {
 			<WithSplash>
 				<Header />
 				<div className={'overflow-x-hidden z-10 pt-24 md:pt-16'}>
-					{/*@ts-ignore*/}
 					<AnimateSharedLayout>
 						<AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
 							<Component
 								key={router.route}
-								element={props.element}
 								router={props.router}
 								{...pageProps} />
 						</AnimatePresence>
@@ -148,8 +145,7 @@ function	AppWrapper(props) {
 	);
 }
 
-//@ts-ignore
-function	MyApp(props) {
+function	MyApp(props: AppProps): ReactElement {
 	const	{Component, pageProps} = props;
 	
 	return (
@@ -157,7 +153,6 @@ function	MyApp(props) {
 			<AppWrapper
 				Component={Component}
 				pageProps={pageProps}
-				element={props.element}
 				router={props.router} />
 		</AudioContextApp>
 	);
