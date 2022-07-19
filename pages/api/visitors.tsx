@@ -1,5 +1,5 @@
 import	Redis	from	'ioredis';
-import {Response} from 'express';
+import { NextApiResponse } from 'next';
 
 const	redis = new Redis(process.env.REDIS_URL);
 
@@ -8,7 +8,7 @@ export async function incVisitors(): Promise<number> {
 	return visitors;
 }
 
-export default async function handler(res: Response): Promise<void> {
+export default async function handler(res: NextApiResponse): Promise<void> {
 	const visitors = await redis.incr('counter');
 	res.status(200).send(visitors);
 	return;
