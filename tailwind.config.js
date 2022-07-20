@@ -1,28 +1,28 @@
-const colors = require('tailwindcss/colors');
+const {join} = require('path');
 
 module.exports = {
-	corePlugins: {
-		ringColor: false
-	},
-	darkMode: 'class',
+	presets: [
+		require('@yearn-finance/web-lib/tailwind.plugin')
+	],
 	content: [
-		'./pages/**/*.js',
-		'./components/**/*.js'
+		join(__dirname, 'pages', '**', '*.{js,jsx,ts,tsx}'),
+		join(__dirname, 'components', 'icons', '**', '*.{js,jsx,ts,tsx}'),
+		join(__dirname, 'components', 'logo', '**', '*.{js,jsx,ts,tsx}'),
+		join(__dirname, 'components', 'strategies', '**', '*.{js,jsx,ts,tsx}'),
+		join(__dirname, 'components', 'vaults', '**', '*.{js,jsx,ts,tsx}'),
+		join(__dirname, 'components', '**', '*.{js,jsx,ts,tsx}'),
+		join(__dirname, 'node_modules', '@yearn-finance', 'web-lib', 'dist', 'layouts', '**', '*.js'),
+		join(__dirname, 'node_modules', '@yearn-finance', 'web-lib', 'dist', 'components', '**', '*.js'),
+		join(__dirname, 'node_modules', '@yearn-finance', 'web-lib', 'dist', 'contexts', '**', '*.js'),
+		join(__dirname, 'node_modules', '@yearn-finance', 'web-lib', 'dist', 'icons', '**', '*.js'),
+		join(__dirname, 'node_modules', '@yearn-finance', 'web-lib', 'dist', 'utils', '**', '*.js')
 	],
 	theme: {
-		colors: {
-			red: colors.red,
-			white: colors.white,
-			beige: '#EAE8E1',
-			black: colors.black,
-			slate: colors.slate,
-			yblue: '#6176b4',
-			dark: {
-				900: '#0f172a',
-				600: '#141e37'
-			}
-		},
 		extend: {
+			colors: {
+				beige: '#EAE8E1',
+				yblue: '#6176b4'
+			},
 			width: {
 				68: '17rem',
 				'250%': '250%'
@@ -39,7 +39,10 @@ module.exports = {
 				bluepill: ['New Spirit Bold Condensed', 'sans-serif']
 			},
 			fontSize: {
-				'base': ['16px', '24px']
+				'base': ['16px', '24px'],
+				'lg': ['1.125rem', '1.75rem'],
+				'4xl': ['2.25rem', '2.5rem']
+
 			},
 			animation: {
 				marquee: 'marquee 25s linear infinite',
@@ -57,8 +60,5 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [
-		require('@tailwindcss/typography'),
-		require('@tailwindcss/forms')
-	]
+	plugins: []
 };

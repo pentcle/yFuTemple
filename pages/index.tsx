@@ -57,7 +57,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 					</button>
 				</div>
 			</div>
-			<div className={'hidden col-span-1 md:block image-wrapper'}>
+			<div className={'hidden col-span-1 md:flex image-wrapper'}>
 				<Image
 					src={characterSrc}
 					objectFit={'cover'}

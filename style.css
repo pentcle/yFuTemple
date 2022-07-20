@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '@yearn-finance/web-lib/style.css';
 
 @font-face {
     font-family: 'Scope';
@@ -71,6 +69,12 @@
 html {
 	background: #000000;
 	margin-left: calc(100vw - 100%);
+}
+h1, h2, h3, h4, h5, h6 {
+    @apply text-white;
+}
+* {
+    @apply font-scope;
 }
 
 #__next {
@@ -198,7 +202,6 @@ html {
     grid-auto-flow: column;
     width: 100%;
     overflow-y: auto;
-    // overscroll-behavior-x: contain;
     scroll-snap-type: x;
     -webkit-scroll-snap-type: x mandatory;
 }

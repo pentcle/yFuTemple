@@ -1,14 +1,14 @@
-import React, {ReactElement, ReactNode} 						from 	'react';		
-import	Head						from	'next/head';
-import	Image						from	'next/image';
-import	{DefaultSeo}				from	'next-seo';
+import React, {ReactElement, ReactNode} 		from 	'react';		
+import	Head									from	'next/head';
+import	Image									from	'next/image';
+import	{DefaultSeo}							from	'next-seo';
+import	{AppProps}								from	'next/app';
 import	{AnimateSharedLayout, AnimatePresence}	from	'framer-motion';
-import	{Dialog, Transition}		from	'@headlessui/react';
-import	{AudioContextApp}			from	'../contexts/useAudio';
-import	Header						from	'../components/Header';
+import	{Dialog, Transition}					from	'@headlessui/react';
+import	{AudioContextApp}						from	'../contexts/useAudio';
+import	Header									from	'../components/Header';
 
-import	'style/Default.scss';
-import {AppProps} from 'next/app';
+import	'../style.css';
 
 const WithSplash = React.memo(function WithSplash({children}: {children: ReactNode}): ReactElement {
 	const	[hasOpacity, set_hasOpacity] = React.useState(true);
