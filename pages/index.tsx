@@ -50,7 +50,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 						onClick={(): void => {
 							router.push(`/tribute/${id}`);
 						}}
-						className={'button-glowing bg-white font-peste'}>
+						className={'button-glowing bg-beige font-peste'}>
 						{'SEE TRIBUTES'}
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
