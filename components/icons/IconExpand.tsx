@@ -1,6 +1,6 @@
 import	React							from	'react';
 
-function	Icon({width = '16', height = '16', ...props}) {
+function	Icon({width = '16', height = '16', ...props}): React.ReactElement {
 	return (
 		<svg xmlns={'http://www.w3.org/2000/svg'} {...props} width={width} height={height} viewBox={'0 0 13.462 13.483'}>
 			<g fill={'currentcolor'}>

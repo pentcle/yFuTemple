@@ -1,12 +1,12 @@
-import	React					from	'react';
+import	React, {ReactElement}					from	'react';
 import	Image					from	'next/image';
 import	{useRouter}				from	'next/router';
 import	axios					from	'axios';
 import	Redis					from	'ioredis';
-import	Title					from	'components/Title';
-import	Footer					from	'components/Footer';
-import	{motion}					from	'framer-motion';
-import	YFU_DATA					from	'utils/data';
+import	Title					from	'../components/Title';
+import	Footer					from	'../components/Footer';
+import	{motion}				from	'framer-motion';
+import	YFU_DATA, {TYFUData}	from	'../utils/data';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
@@ -16,7 +16,7 @@ const variants = {
 
 const	redis = new Redis(process.env.REDIS_URL);
 
-function	Goddess({characterSrc, typoSrc, id, title, children}) {
+function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />}): ReactElement {
 	const	router = useRouter();
 
 	return (
@@ -47,7 +47,9 @@ function	Goddess({characterSrc, typoSrc, id, title, children}) {
 				</div>
 				<div className={'mx-auto mt-8 md:mt-auto'}>
 					<button
-						onClick={() => router.push(`/tribute/${id}`)}
+						onClick={(): void => {
+							router.push(`/tribute/${id}`);
+						}}
 						className={'font-peste bg-white button-glowing'}>
 						{'SEE TRIBUTES'}
 						<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
@@ -55,7 +57,7 @@ function	Goddess({characterSrc, typoSrc, id, title, children}) {
 					</button>
 				</div>
 			</div>
-			<div className={'hidden col-span-1 md:block image-wrapper'}>
+			<div className={'hidden col-span-1 md:flex image-wrapper'}>
 				<Image
 					src={characterSrc}
 					objectFit={'cover'}
@@ -67,7 +69,7 @@ function	Goddess({characterSrc, typoSrc, id, title, children}) {
 	);
 }
 
-function	Tree() {
+function	Tree(): ReactElement {
 	return (
 		<div className={'grid grid-cols-1 border-2 border-white'}>
 			<div className={'col-span-1 image-wrapper'}>
@@ -84,12 +86,12 @@ function	Tree() {
 	);
 }
 
-function	Index({visitors}) {
+function	Index({visitors=[]}): ReactElement {
 	const	[visitorsUpdated, set_visitorsUpdated] = React.useState(visitors);
 	const	allData = YFU_DATA;
 
-	React.useEffect(() => {
-		axios.get('/api/visitors').then(v => set_visitorsUpdated(v.data));
+	React.useEffect((): void => {
+		axios.get('/api/visitors').then((v): void => set_visitorsUpdated(v.data));
 	}, []);
 
 	return (
@@ -106,20 +108,22 @@ function	Index({visitors}) {
 						<Title />
 					</div>
 					<section className={'px-4 w-full md:px-0'}>
-						{allData.sort((a, b) => a.order - b.order).map((goddess, index) => (
-							<div key={goddess.id}>
-								<Goddess
-									id={goddess.id}
-									title={goddess.title}
-									characterSrc={goddess.mainIllustration}
-									typoSrc={goddess.watermark}>
-									<p>{goddess.description}</p>
-								</Goddess>
-								<div className={`flex justify-center items-center my-0 ${index + 1 === allData.length ? 'hidden' : ''}`}>
-									<Image src={`/divider-${index + 1}.gif`} width={200} height={200} />
+						{allData
+							.sort((a: TYFUData, b: TYFUData): number => a.order - b.order)
+							.map((goddess: TYFUData, index: number): ReactElement => (
+								<div key={goddess.id}>
+									<Goddess
+										id={goddess.id}
+										title={goddess.title}
+										characterSrc={goddess.mainIllustration}
+										typoSrc={goddess.watermark}>
+										<p>{goddess.description}</p>
+									</Goddess>
+									<div className={`flex justify-center items-center my-0 ${index + 1 === allData.length ? 'hidden' : ''}`}>
+										<Image src={`/divider-${index + 1}.gif`} width={200} height={200} />
+									</div>
 								</div>
-							</div>
-						))}
+							))}
 						<div className={'flex justify-center items-center my-9'}>
 							<Image src={'/yfiTree2.png'} width={112} height={112} />
 						</div>
@@ -134,7 +138,7 @@ function	Index({visitors}) {
 
 export default Index;
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<unknown> {
 	const visitors = await redis.incr('counter');
 	return {props: {visitors}};
 }

@@ -1,6 +1,6 @@
 import	React							from	'react';
 
-function	Icon({className, width = 233, height = 115}) {
+function	Icon({className='', width = 233, height = 115}): React.ReactElement {
 	return (
 		<svg id={'Groupe_42'} data-name={'Groupe 42'} xmlns={'http://www.w3.org/2000/svg'} width={width} height={height} className={className} viewBox={'0 0 233.283 115.409'}>
 			<defs>

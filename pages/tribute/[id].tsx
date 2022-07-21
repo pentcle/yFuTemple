@@ -1,10 +1,10 @@
-import	React						from	'react';
+import	React, {ReactElement}						from	'react';
 import	Link						from	'next/link';
 import	{useRouter}					from	'next/router';
-import	TributeSlider				from	'components/TributeSlider';
-import	DraggableInfo				from	'components/DraggableInfo';
+import	TributeSlider				from	'../../components/TributeSlider';
+import	DraggableInfo				from	'../../components/DraggableInfo';
 import	{motion}					from	'framer-motion';
-import	YFU_DATA					from	'utils/data';
+import	YFU_DATA					from	'../../utils/data';
 
 const variants = {
 	initial: {y: 100, scale: 0.9, opacity: 0},
@@ -12,14 +12,14 @@ const variants = {
 	exit: {y: 100, scale: 0.9, opacity: 0, transition: {duration: 0.3, ease: 'easeIn'}}
 };
 
-export default function Index() {
+export default function Index(): ReactElement {
 	const	router = useRouter();
 	const	[hasInfo, set_hasInfo] = React.useState(false);
-	const	[currentTemple, set_currentTemple] = React.useState(YFU_DATA.find(e => e.id === router?.query?.id));
+	const	[currentTemple, set_currentTemple] = React.useState(YFU_DATA.find((e): boolean => e.id === router?.query?.id));
 
-	React.useEffect(() => {
+	React.useEffect((): void => {
 		if(router?.query?.id) {
-			const	_currentTemple = YFU_DATA.find(e => e.id === router?.query?.id);
+			const	_currentTemple = YFU_DATA.find((e): boolean => e.id === router?.query?.id);
 			set_currentTemple(_currentTemple);
 		}
 	}, [router.query]);
@@ -58,7 +58,10 @@ export default function Index() {
 					</div>
 				</Link>
 				<button
-					onClick={() => window.open('https://discord.gg/UyNbrABFYA', '_blank')}
+					onClick={(): void => {
+						if (window)
+							window.open('https://discord.gg/UyNbrABFYA', '_blank');
+					}}
 					className={'font-scope bg-white button-glowing-small'}>
 					{'SUBMIT'}
 					<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
@@ -72,7 +75,7 @@ export default function Index() {
 				<TributeSlider
 					medias={currentTemple?.medias || []}
 					hasInfo={hasInfo}
-					set_hasInfo={set_hasInfo} />
+					set_hasInfo={set_hasInfo as any} />
 			</div>
 			<DraggableInfo
 				hasInfo={hasInfo}

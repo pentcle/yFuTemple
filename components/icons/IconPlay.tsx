@@ -1,6 +1,6 @@
 import	React							from	'react';
 
-function	Icon({width = '12.387', height = '14.573', ...props}) {
+function	Icon({width = '12.387', height = '14.573', ...props}): React.ReactElement {
 	return (
 		<svg xmlns={'http://www.w3.org/2000/svg'} {...props} width={width} height={height} viewBox={'0 0 12.387 14.573'}>
 			<path
