@@ -7,7 +7,7 @@ import	{AnimateSharedLayout, AnimatePresence}	from	'framer-motion';
 import	{Dialog, Transition}					from	'@headlessui/react';
 import	{AudioContextApp}						from	'../contexts/useAudio';
 import	Header									from	'../components/Header';
-
+import {WithYearn}								from 	'@yearn-finance/web-lib/contexts';
 import	'../style.css';
 
 const WithSplash = React.memo(function WithSplash({children}: {children: ReactNode}): ReactElement {
@@ -149,12 +149,14 @@ function	MyApp(props: AppProps): ReactElement {
 	const	{Component, pageProps} = props;
 	
 	return (
-		<AudioContextApp>
-			<AppWrapper
-				Component={Component}
-				pageProps={pageProps}
-				router={props.router} />
-		</AudioContextApp>
+		<WithYearn>
+			<AudioContextApp>
+				<AppWrapper
+					Component={Component}
+					pageProps={pageProps}
+					router={props.router} />
+			</AudioContextApp>
+		</WithYearn>
 	);
 }
 
