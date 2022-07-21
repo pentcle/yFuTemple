@@ -23,16 +23,16 @@ function	DraggablePlayer({
 			<Draggable
 				handle={'.cursor-grab'}
 				defaultPosition={{x: 200, y: 200}}>
-				<div className={'flex relative z-50 flex-col w-96 bg-black border-2 border-b-0 border-white'}>
-					<div className={'flex flex-row justify-between px-2 w-full h-7 font-scope text-lg text-white border-b-2 border-white cursor-grab'}>
+				<div className={'relative z-50 flex w-96 flex-col border-2 border-b-0 border-white bg-black'}>
+					<div className={'flex h-7 w-full cursor-grab flex-row justify-between border-b-2 border-white px-2 font-scope text-lg text-white'}>
 						<div className={'w-full'}>{'YFU MEDIA PLAYER'}</div>
 						<div
-							className={'p-1 -m-1 cursor-pointer select-none'}
+							className={'-m-1 cursor-pointer select-none p-1'}
 							onClick={(): void => set_hasMediaPlayer(false)}>
 							{'X'}
 						</div>
 					</div>
-					<div className={'flex px-2 w-full h-80 font-scope text-lg text-white border-b-2 border-white'}>
+					<div className={'flex h-80 w-full border-b-2 border-white px-2 font-scope text-lg text-white'}>
 						<Image src={AUDIO_LIST[selected][2]} width={380} height={320} objectFit={'cover'} />
 					</div>
 					<AudioPlayerSimple

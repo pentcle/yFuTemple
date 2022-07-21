@@ -23,7 +23,7 @@ const WithSplash = React.memo(function WithSplash({children}: {children: ReactNo
 					className={'fixed inset-0 z-20'}
 					onClose={(): void => set_shouldDisplay(false)}>
 					<div className={`absolute inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-1000 ${hasOpacity ? 'opacity-100' : 'opacity-0'} ${!shouldDisplay ? 'hidden' : ''}`}>
-						<div className={'flex relative justify-center items-center mx-auto w-full h-full'}>
+						<div className={'relative mx-auto flex h-full w-full items-center justify-center'}>
 							<div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${shouldDisplayVideo ? 'opacity-100' : 'opacity-0'}`}>
 								<Image
 									src={'/splash.gif'}
@@ -38,10 +38,10 @@ const WithSplash = React.memo(function WithSplash({children}: {children: ReactNo
 											set_hasOpacity(false);
 											setTimeout((): void => set_shouldDisplay(false), 1000);
 										}}
-										className={'font-scope bg-beige button-glowing'}>
+										className={'button-glowing bg-beige font-scope'}>
 										{'ENTER'}
-										<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
-										<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
+										<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+										<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 									</button>
 								</div>
 							</div>
@@ -125,7 +125,7 @@ function	AppWrapper(props: AppProps): ReactElement {
 			<AppMeta />
 			<WithSplash>
 				<Header />
-				<div className={'overflow-x-hidden z-10 pt-24 md:pt-16'}>
+				<div className={'z-10 overflow-x-hidden pt-24 md:pt-16'}>
 					<AnimateSharedLayout>
 						<AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
 							<Component
@@ -137,7 +137,7 @@ function	AppWrapper(props: AppProps): ReactElement {
 				</div>
 			</WithSplash>
 			<div className={'fixed inset-0 -z-10'}>
-				<video playsInline autoPlay muted loop poster={'/bg.jpg'} className={'object-cover w-full h-full'}>
+				<video playsInline autoPlay muted loop poster={'/bg.jpg'} className={'h-full w-full object-cover'}>
 					<source src={'/bglow.webm'} type={'video/webm'} />
 				</video>
 			</div>

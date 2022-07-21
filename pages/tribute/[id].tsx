@@ -30,16 +30,16 @@ export default function Index(): ReactElement {
 			initial={'initial'}
 			animate={'enter'}
 			exit={'exit'}
-			className={'flex overflow-hidden relative flex-col p-0 -mt-1 w-screen border-t-0 border-t-white md:p-6 md:border-t-2'}
+			className={'relative -mt-1 flex w-screen flex-col overflow-hidden border-t-0 border-t-white p-0 md:border-t-2 md:p-6'}
 			variants={variants}>
-			<div className={'flex flex-row justify-between items-center px-2 h-12 border-b-2 border-b-white md:hidden'}>
+			<div className={'flex h-12 flex-row items-center justify-between border-b-2 border-b-white px-2 md:hidden'}>
 				<Link href={'/'}>
-					<div className={'flex flex-row items-center cursor-pointer'}>
+					<div className={'flex cursor-pointer flex-row items-center'}>
 						<p className={'mr-1 font-scope text-xl text-white'}>{'<'}</p>
 						<p className={'mt-1 font-scope text-xl text-white'}>{'BACK'}</p>
 					</div>
 				</Link>
-				<div className={'flex flex-row items-center cursor-pointer'}>
+				<div className={'flex cursor-pointer flex-row items-center'}>
 					<a
 						href={'https://discord.gg/UyNbrABFYA'}
 						target={'_blank'}
@@ -50,9 +50,9 @@ export default function Index(): ReactElement {
 				</div>
 			</div>
 
-			<div className={'hidden absolute inset-x-4 top-4 flex-row justify-between items-center md:flex'}>
+			<div className={'absolute inset-x-4 top-4 hidden flex-row items-center justify-between md:flex'}>
 				<Link href={'/'}>
-					<div className={'flex-row items-center cursor-pointer md:flex'}>
+					<div className={'cursor-pointer flex-row items-center md:flex'}>
 						<p className={'mr-1 font-scope text-5xl text-white'}>{'<'}</p>
 						<p className={'mt-3 font-scope text-2xl text-white'}>{'BACK'}</p>
 					</div>
@@ -62,16 +62,16 @@ export default function Index(): ReactElement {
 						if (window)
 							window.open('https://discord.gg/UyNbrABFYA', '_blank');
 					}}
-					className={'font-scope bg-white button-glowing-small'}>
+					className={'button-glowing-small bg-white font-scope'}>
 					{'SUBMIT'}
-					<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
-					<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
+					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 				</button>
 			</div>
-			<h3 className={'px-3 pb-3 mx-auto mt-4 w-fit max-w-xl font-peste text-2xl font-medium text-white uppercase whitespace-pre-wrap break-words border-b-2 border-b-white md:px-0 md:mt-0 md:text-5xl'}>
+			<h3 className={'mx-auto mt-4 w-fit max-w-xl whitespace-pre-wrap break-words border-b-2 border-b-white px-3 pb-3 font-peste text-2xl font-medium uppercase text-white md:mt-0 md:px-0 md:text-5xl'}>
 				{currentTemple?.tributeTitle}
 			</h3>
-			<div className={'mx-auto mt-2 w-full h-full md:mt-10'}>
+			<div className={'mx-auto mt-2 h-full w-full md:mt-10'}>
 				<TributeSlider
 					medias={currentTemple?.medias || []}
 					hasInfo={hasInfo}

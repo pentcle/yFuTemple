@@ -14,15 +14,15 @@ const variants = {
 	exit: {y: 20, opacity: 0, transition: {duration: 0.2, ease: 'easeIn'}}
 };
 
-const	redis = new Redis(process.env.REDIS_URL);
+const	redis = new Redis(process.env.REDIS_URL as string);
 
 function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />}): ReactElement {
 	const	router = useRouter();
 
 	return (
-		<div className={'grid grid-cols-1 border-2 border-white divide-y divide-white md:grid-cols-3 md:divide-y-0'}>
-			<div className={'flex relative flex-col col-span-1 justify-center items-center p-0 divide-y divide-white md:p-8 md:divide-y-0'}>
-				<div className={'px-8 h-48 md:px-0 md:h-auto image-wrapper-full-height'}>
+		<div className={'grid grid-cols-1 divide-y divide-white border-2 border-white md:grid-cols-3 md:divide-y-0'}>
+			<div className={'relative col-span-1 flex flex-col items-center justify-center divide-y divide-white p-0 md:divide-y-0 md:p-8'}>
+				<div className={'image-wrapper-full-height h-48 px-8 md:h-auto md:px-0'}>
 					<Image
 						src={typoSrc}
 						loading={'eager'}
@@ -32,7 +32,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 						height={497} />
 				</div>
 			</div>
-			<div className={'block col-span-1 md:hidden image-wrapper'}>
+			<div className={'image-wrapper col-span-1 block md:hidden'}>
 				<Image
 					src={characterSrc}
 					objectFit={'cover'}
@@ -40,7 +40,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 					width={600}
 					height={895} />
 			</div>
-			<div className={'flex flex-col col-span-1 p-4 pb-8 w-full h-full border-0 border-white md:p-8 md:pb-14 md:border-x-2'}>
+			<div className={'col-span-1 flex h-full w-full flex-col border-0 border-white p-4 pb-8 md:border-x-2 md:p-8 md:pb-14'}>
 				<div className={'space-y-4 font-scope text-base text-white md:text-lg'}>
 					<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>{title}</h4>
 					{children}
@@ -50,14 +50,14 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 						onClick={(): void => {
 							router.push(`/tribute/${id}`);
 						}}
-						className={'font-peste bg-white button-glowing'}>
+						className={'button-glowing bg-white font-peste'}>
 						{'SEE TRIBUTES'}
-						<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
-						<div className={'absolute -inset-0 rounded-full rotate-180 glow'} />
+						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 					</button>
 				</div>
 			</div>
-			<div className={'hidden col-span-1 md:flex image-wrapper'}>
+			<div className={'image-wrapper col-span-1 hidden md:flex'}>
 				<Image
 					src={characterSrc}
 					objectFit={'cover'}
@@ -72,14 +72,14 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 function	Tree(): ReactElement {
 	return (
 		<div className={'grid grid-cols-1 border-2 border-white'}>
-			<div className={'col-span-1 image-wrapper'}>
+			<div className={'image-wrapper col-span-1'}>
 				<Image
 					src={'/yearningTree.jpg'}
 					loading={'eager'}
 					width={2000}
 					height={1000} />
 			</div>
-			<div className={'col-span-1 p-4 font-scope text-base text-left text-white md:p-6 md:text-center'}>
+			<div className={'col-span-1 p-4 text-left font-scope text-base text-white md:p-6 md:text-center'}>
 				<p>{'The YFI faction is guided by the four yFu, who interpret the knowledge of the Yearning Tree - an ancient being who hears the desires of creatures across the universe - and responds by growing yield-bearing seeds containing the answers to their wishes'}</p>
 			</div>
 		</div>
@@ -100,14 +100,14 @@ function	Index({visitors=[]}): ReactElement {
 			initial={'initial'}
 			animate={'enter'}
 			exit={'exit'}
-			className={'flex overflow-hidden relative flex-col p-0 -mt-1 w-screen border-t-0 border-t-white md:p-6 md:border-t-2'}
+			className={'relative -mt-1 flex w-screen flex-col overflow-hidden border-t-0 border-t-white p-0 md:border-t-2 md:p-6'}
 			variants={variants}>
 			<main id={'app'} className={'relative mx-auto max-w-screen-xl'} style={{minHeight: '100vh'}}>
 				<div>
-					<div className={'flex justify-center items-center py-8'}>
+					<div className={'flex items-center justify-center py-8'}>
 						<Title />
 					</div>
-					<section className={'px-4 w-full md:px-0'}>
+					<section className={'w-full px-4 md:px-0'}>
 						{allData
 							.sort((a: TYFUData, b: TYFUData): number => a.order - b.order)
 							.map((goddess: TYFUData, index: number): ReactElement => (
@@ -119,12 +119,12 @@ function	Index({visitors=[]}): ReactElement {
 										typoSrc={goddess.watermark}>
 										<p>{goddess.description}</p>
 									</Goddess>
-									<div className={`flex justify-center items-center my-0 ${index + 1 === allData.length ? 'hidden' : ''}`}>
+									<div className={`my-0 flex items-center justify-center ${index + 1 === allData.length ? 'hidden' : ''}`}>
 										<Image src={`/divider-${index + 1}.gif`} width={200} height={200} />
 									</div>
 								</div>
 							))}
-						<div className={'flex justify-center items-center my-9'}>
+						<div className={'my-9 flex items-center justify-center'}>
 							<Image src={'/yfiTree2.png'} width={112} height={112} />
 						</div>
 						<Tree />

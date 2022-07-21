@@ -68,7 +68,7 @@ function	AudioPlayerSimple({
 		if (!isSelected) {
 			return (
 				<>
-					<div className={'flex flex-row justify-center items-center'}>
+					<div className={'flex flex-row items-center justify-center'}>
 						<IconPlay
 							onClick={(): void => {
 								set_selected(ref.current);
@@ -85,7 +85,7 @@ function	AudioPlayerSimple({
 		}
 		return (
 			<>
-				<div className={'flex flex-row justify-center items-center'}>
+				<div className={'flex flex-row items-center justify-center'}>
 					<IconPrev
 						onClick={(): void => {
 							if (ref.current)
@@ -119,11 +119,11 @@ function	AudioPlayerSimple({
 	}
 
 	return (
-		<div className={'flex flex-row items-center px-2 space-x-2 w-full h-8 font-scope text-base text-white border-b-2 border-white'}>
+		<div className={'flex h-8 w-full flex-row items-center space-x-2 border-b-2 border-white px-2 font-scope text-base text-white'}>
 			{renderLayout()}
 			<div className={'relative w-full'} style={!isSelected ? {opacity: 0} : {}}>
-				<div className={'flex relative flex-row justify-center items-center space-x-2 w-full'}>
-					<div ref={progress as never} className={'py-2 -my-2 w-full cursor-pointer'}>
+				<div className={'relative flex w-full flex-row items-center justify-center space-x-2'}>
+					<div ref={progress as never} className={'-my-2 w-full cursor-pointer py-2'}>
 						<div className={'relative w-full bg-white'} style={{height: 1}}>
 							<div
 								className={'absolute h-4 bg-white transition-all'}

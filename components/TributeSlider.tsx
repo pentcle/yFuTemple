@@ -20,7 +20,7 @@ function	TributeElement({
 		<div
 			onClick={onClick}
 			className={`w-[50vw] md:w-[20vw] ${className}`}>
-			<div className={'select-none figure'}>
+			<div className={'figure select-none'}>
 				<div className={'carousel-slider-animate-opacity'}>
 					<Image
 						onClick={onImageClick}
@@ -30,7 +30,7 @@ function	TributeElement({
 						loading={'eager'}
 						width={500}
 						height={761} />
-					<div className={'mx-auto text-left text-white slide-content'}>
+					<div className={'slide-content mx-auto text-left text-white'}>
 						<h2
 							className={'select-text'}
 							dangerouslySetInnerHTML={{__html: parseMarkdown(tribute?.title || '')}} />
@@ -38,7 +38,7 @@ function	TributeElement({
 							onClick={(): void => {
 								set_hasInfo((i: any): (TYFUDataMedia | boolean) => i?.title === tribute.title ? false : tribute);
 							}}
-							className={'font-scope cursor-pointer'}>
+							className={'cursor-pointer font-scope'}>
 							{(hasInfo as TYFUDataMedia)?.title === tribute.title ? 'CLOSE' : 'INFO +'}
 						</p>
 					</div>
@@ -72,7 +72,7 @@ export default function TributeSlider({medias, hasInfo, set_hasInfo}: TTributeSl
 	return (
 		<div
 			id={'tribute-slider'}
-			className={'gap-0 px-20 w-screen scroll-smooth md:px-[40vw] horizontal-snap scrollbar-none'}
+			className={'horizontal-snap w-screen gap-0 scroll-smooth px-20 scrollbar-none md:px-[40vw]'}
 			onScroll={handleScroll}>
 			{
 				medias.map((tribute: TYFUDataMedia, index: number): ReactElement => (
