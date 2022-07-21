@@ -2,7 +2,7 @@ const {join} = require('path');
 
 module.exports = {
 	presets: [
-		require('@yearn-finance/web-lib/tailwind.plugin')
+		require('@yearn-finance/web-lib/config/tailwind.config.cjs')
 	],
 	content: [
 		join(__dirname, 'pages', '**', '*.{js,jsx,ts,tsx}'),
