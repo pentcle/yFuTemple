@@ -17,7 +17,7 @@ const variants = {
 	exit: {y: 20, opacity: 0, transition: {duration: 0.2, ease: 'easeIn'}}
 };
 
-const	redis = new Redis(process.env.REDIS_URL as string);
+// const	redis = new Redis(process.env.REDIS_URL as string);
 
 function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />}): ReactElement {
 	const	router = useRouter();
@@ -94,17 +94,15 @@ function	Index({visitors=[]}): ReactElement {
 	const	allData = YFU_DATA;
 	const {openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
 	const {isConnected, address, ens} = useAccount();
-	const [walletIdentity, set_walletIdentity] = React.useState('Connect with Web3');
+	const [walletIdentity, set_walletIdentity] = React.useState('Connect Wallet');
 	
 	React.useEffect((): void => {
 		if (!isConnected && address) {
 			set_walletIdentity('Invalid chain');
-		} else if (ens) {
-			set_walletIdentity(ens);
 		} else if (address) {
-			set_walletIdentity(truncateHex(address, 4));
+			set_walletIdentity('Mint NFT');
 		} else {
-			set_walletIdentity('Connect with Web3');
+			set_walletIdentity('Connect Wallet');
 		}
 	}, [ens, address, isConnected]);
 
@@ -126,35 +124,58 @@ function	Index({visitors=[]}): ReactElement {
 						<Title />
 					</div>
 					<section className={'w-full px-4 md:px-0'}>
-						<div className={'flex flex-col items-center border-2 border-white p-8 text-white'}>
+						<div className={'mb-48 flex flex-col items-center border-2 border-white p-8 text-white'}>
 							<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>
 								{'YFU - The Comic, episode 1\r'}
 							</h4>
-							<p>
-								{'Connect your wallet to mint a YFU Comic NFT\r'}
-							</p>
-							<button
-								className={'button-glowing bg-white font-peste text-black'}
-								onClick={(): void => {
-									if (isConnected) {
-										onDesactivate();
-									} else if (!isConnected && address) {
-										onSwitchChain(1, true);
-									} else {
-										openLoginModal();
-									}
-								}}>
-								<p>{walletIdentity}</p>
-							</button>
-							<p>
-								{'999 of 1000 NFTs Minted So Far\r'}
-							</p>
-							<p>
-								{'Each NFT holder will be eligeble to receive a copy of the limited edition comic\r'}
-							</p>
-							<p>
-								{'By leveling up your NFT, via Yearn product usage, you will be able to claim free 1/1 art NFTs, upgrade special edition comics, etc\r'}
-							</p>
+							<div className={'grid w-full grid-cols-12 gap-16'}>
+								<div className={'col-span-4 flex flex-col px-6'}>
+									<Image
+										src={'/assetsThumbnail/comic1-main.jpg'}
+										objectFit={'contain'}
+										loading={'eager'}
+										width={595}
+										height={842} />
+								</div>
+								<div className={'col-span-8 flex w-full flex-col justify-center'}>
+									<p className={'text-xl'}>
+										{'Connect your wallet to mint a YFU Comic NFT\r'}
+									</p>
+									<div className={'flex flex-row items-center space-x-6 py-8'}>
+										<button
+											className={'button-glowing my-4 bg-white font-peste text-black'}
+											onClick={(): void => {
+												if (isConnected) {
+													onDesactivate();
+												} else if (!isConnected && address) {
+													onSwitchChain(1, true);
+												} else {
+													openLoginModal();
+												}
+											}}>
+											<p>{walletIdentity}</p>
+											<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+											<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+										</button>
+										<div>
+											{isConnected ? (
+												<p className={'text-lg'}>
+													{'0.1 ETH'}
+												</p>
+											) : null}
+											<p className={'text-lg'}>
+												{'999 of 1000 NFTs Minted So Far'}
+											</p>
+										</div>
+									</div>
+									<p className={'text-xl'}>
+										{'Each NFT holder will be eligible to receive a copy of the limited edition comic\r'}
+									</p>
+									<p className={'text-xl'}>
+										{'By leveling up your NFT, via Yearn product usage, you will be able to claim free 1/1 art NFTs, upgrade special edition comics, etc\r'}
+									</p>
+								</div>
+							</div>
 						</div>
 						{allData
 							.sort((a: TYFUData, b: TYFUData): number => a.order - b.order)
@@ -186,7 +207,7 @@ function	Index({visitors=[]}): ReactElement {
 
 export default Index;
 
-export async function getStaticProps(): Promise<unknown> {
-	const visitors = await redis.incr('counter');
-	return {props: {visitors}};
-}
+// export async function getStaticProps(): Promise<unknown> {
+// 	const visitors = await redis.incr('counter');
+// 	return {props: {visitors}};
+// }
