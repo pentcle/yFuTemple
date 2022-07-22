@@ -1,4 +1,4 @@
-import	React, {ReactElement}					from	'react';
+import	React, {ReactElement}	from	'react';
 import	Image					from	'next/image';
 import	{useRouter}				from	'next/router';
 import	axios					from	'axios';
@@ -7,6 +7,9 @@ import	Title					from	'../components/Title';
 import	Footer					from	'../components/Footer';
 import	{motion}				from	'framer-motion';
 import	YFU_DATA, {TYFUData}	from	'../utils/data';
+import {useWeb3} 				from '@yearn-finance/web-lib/contexts';
+import {useAccount} 			from '@yearn-finance/web-lib/hooks';
+import {truncateHex} 			from '@yearn-finance/web-lib/utils';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
@@ -50,7 +53,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 						onClick={(): void => {
 							router.push(`/tribute/${id}`);
 						}}
-						className={'button-glowing bg-beige font-peste'}>
+						className={'button-glowing bg-white font-peste'}>
 						{'SEE TRIBUTES'}
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
@@ -89,6 +92,21 @@ function	Tree(): ReactElement {
 function	Index({visitors=[]}): ReactElement {
 	const	[visitorsUpdated, set_visitorsUpdated] = React.useState(visitors);
 	const	allData = YFU_DATA;
+	const {openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
+	const {isConnected, address, ens} = useAccount();
+	const [walletIdentity, set_walletIdentity] = React.useState('Connect with Web3');
+	
+	React.useEffect((): void => {
+		if (!isConnected && address) {
+			set_walletIdentity('Invalid chain');
+		} else if (ens) {
+			set_walletIdentity(ens);
+		} else if (address) {
+			set_walletIdentity(truncateHex(address, 4));
+		} else {
+			set_walletIdentity('Connect with Web3');
+		}
+	}, [ens, address, isConnected]);
 
 	React.useEffect((): void => {
 		axios.get('/api/visitors').then((v): void => set_visitorsUpdated(v.data));
@@ -108,6 +126,36 @@ function	Index({visitors=[]}): ReactElement {
 						<Title />
 					</div>
 					<section className={'w-full px-4 md:px-0'}>
+						<div className={'flex flex-col items-center border-2 border-white p-8 text-white'}>
+							<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>
+								{'YFU - The Comic, episode 1\r'}
+							</h4>
+							<p>
+								{'Connect your wallet to mint a YFU Comic NFT\r'}
+							</p>
+							<button
+								className={'button-glowing bg-white font-peste text-black'}
+								onClick={(): void => {
+									if (isConnected) {
+										onDesactivate();
+									} else if (!isConnected && address) {
+										onSwitchChain(1, true);
+									} else {
+										openLoginModal();
+									}
+								}}>
+								<p>{walletIdentity}</p>
+							</button>
+							<p>
+								{'999 of 1000 NFTs Minted So Far\r'}
+							</p>
+							<p>
+								{'Each NFT holder will be eligeble to receive a copy of the limited edition comic\r'}
+							</p>
+							<p>
+								{'By leveling up your NFT, via Yearn product usage, you will be able to claim free 1/1 art NFTs, upgrade special edition comics, etc\r'}
+							</p>
+						</div>
 						{allData
 							.sort((a: TYFUData, b: TYFUData): number => a.order - b.order)
 							.map((goddess: TYFUData, index: number): ReactElement => (
