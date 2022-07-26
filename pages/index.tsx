@@ -2,14 +2,14 @@ import	React, {ReactElement}	from	'react';
 import	Image					from	'next/image';
 import	{useRouter}				from	'next/router';
 import	axios					from	'axios';
-import	Redis					from	'ioredis';
+// import	Redis					from	'ioredis';
 import	Title					from	'../components/Title';
 import	Footer					from	'../components/Footer';
 import	{motion}				from	'framer-motion';
 import	YFU_DATA, {TYFUData}	from	'../utils/data';
-import {useWeb3} 				from '@yearn-finance/web-lib/contexts';
-import {useAccount} 			from '@yearn-finance/web-lib/hooks';
-import {truncateHex} 			from '@yearn-finance/web-lib/utils';
+import {useWeb3} 				from 	'@yearn-finance/web-lib/contexts';
+import {useAccount} 			from 	'@yearn-finance/web-lib/hooks';
+// import {truncateHex} 			from 	'@yearn-finance/web-lib/utils';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
