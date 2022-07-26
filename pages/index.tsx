@@ -8,6 +8,7 @@ import	Footer					from	'../components/Footer';
 import	{motion}				from	'framer-motion';
 import	YFU_DATA, {TYFUData}	from	'../utils/data';
 import {useWeb3} 				from 	'@yearn-finance/web-lib/contexts';
+import useSwr	 				from 	'swr';
 import {useAccount} 			from 	'@yearn-finance/web-lib/hooks';
 // import {truncateHex} 			from 	'@yearn-finance/web-lib/utils';
 
@@ -89,12 +90,65 @@ function	Tree(): ReactElement {
 	);
 }
 
+const buildRequest = (address: string): string => `query {
+	campaign(id: "GCxHoUUft6") {
+		numberID # campaign number ID
+		name # campaign name
+		description # campaign description
+		thumbnail # campaign cover image
+		numNFTMinted # how many NFTs have been minted for this campaign
+		startTime # campaign start time in unix time
+		endTime # campaign end time in unix time, if null means no end time
+		gasType # campaign in gas or gasless mode, please refer to api item 2 for explanation
+
+		# Credential object is to determine whether an address is eligible to claim the NFT,
+		# it will be created by BD team along with campaign setup.
+		# in most case, a campaign only has one credential object enabled, 
+		# so if user is eligible for that credential, 
+		# he/she will be eligible to claim campaign's NFT.
+		creds {
+		# credential id
+		id
+		# credential name
+		name 
+		# input is user's address, and output shows whether the address is eligible for this credential
+		# you can use this to check if user can claim or not in first place
+		eligible(address: "${address}") 
+		}
+
+		# formula is a combination of credential and entry, the output of formual decide how many NFTs a user can claim
+		formula
+
+		gamification {
+		# the object that stores NFT metadata
+		nfts {
+			probability # probability numerator of getting this NFT
+			nft {
+			name # NFT name
+			image # NFT image URL
+			ipfsImage # NFT image IPFS URL
+			nftCore{
+				contractAddress # NFT contract(NFT core) address
+				spaceStationAddress # Mint NFT(space station) contract address
+			}
+			}
+		}
+		}
+	}
+}`;
+
 function	Index({visitors=[]}): ReactElement {
 	const	[visitorsUpdated, set_visitorsUpdated] = React.useState(visitors);
 	const	allData = YFU_DATA;
 	const {openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
 	const {isConnected, address, ens} = useAccount();
 	const [walletIdentity, set_walletIdentity] = React.useState('Connect Wallet');
+
+	const data = useSwr(address ? [
+		'https://graphigo.stg.galaxy.eco',
+		buildRequest(address)
+	] : null);
+	console.log(data);
 	
 	React.useEffect((): void => {
 		if (!isConnected && address) {
