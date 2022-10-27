@@ -6,7 +6,8 @@ import {providers} from '@yearn-finance/web-lib/utils';
 import YFU_ABI from 'utils/yfu.abi';
 
 const	redisAddressPerToken = new Redis(process.env.REDIS_URL_ADDRESS_PER_TOKEN as string);
-  
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function jsonToFormData(data: any): any {
 	const formData = new FormData();
 	for (const key in data ) {
