@@ -1,4 +1,4 @@
-@import '@yearn-finance/web-lib/style.css';
+@import '@yearn-finance/web-lib/dist/style.next.css';
 
 @font-face {
     font-family: 'Scope';
@@ -243,4 +243,10 @@ h1, h2, h3, h4, h5, h6 {
     backface-visibility: hidden;
     z-index: 9;
     align-self: center;
+}
+
+
+[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+	outline: none;
+	box-shadow: none;
 }

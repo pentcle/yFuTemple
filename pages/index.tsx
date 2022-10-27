@@ -1,16 +1,17 @@
-import	React, {ReactElement}	from	'react';
-import	Image					from	'next/image';
-import	{useRouter}				from	'next/router';
-import	axios					from	'axios';
-// import	Redis					from	'ioredis';
-import	Title					from	'../components/Title';
-import	Footer					from	'../components/Footer';
-import	{motion}				from	'framer-motion';
-import	YFU_DATA, {TYFUData}	from	'../utils/data';
-import {useWeb3} 				from 	'@yearn-finance/web-lib/contexts';
-import useSwr	 				from 	'swr';
-import {useAccount} 			from 	'@yearn-finance/web-lib/hooks';
-// import {truncateHex} 			from 	'@yearn-finance/web-lib/utils';
+import React, {ReactElement, useEffect, useState} from 'react';
+import Image from 'next/image';
+import {useRouter} from 'next/router';
+import axios from 'axios';
+import Redis from 'ioredis';
+import Title from '../components/Title';
+import Footer from '../components/Footer';
+import {motion} from 'framer-motion';
+import YFU_DATA, {TYFUData} from '../utils/data';
+import {useWeb3}  from  '@yearn-finance/web-lib/contexts';
+import {useMint} from 'contexts/useMint';
+import Link from 'next/link';
+import {Transaction, defaultTxStatus} from '@yearn-finance/web-lib/utils';
+import {mint} from 'utils/mint';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
@@ -18,7 +19,7 @@ const variants = {
 	exit: {y: 20, opacity: 0, transition: {duration: 0.2, ease: 'easeIn'}}
 };
 
-// const	redis = new Redis(process.env.REDIS_URL as string);
+const	redis = new Redis(process.env.REDIS_URL as string);
 
 function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />}): ReactElement {
 	const	router = useRouter();
@@ -28,6 +29,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 			<div className={'relative col-span-1 flex flex-col items-center justify-center divide-y divide-white p-0 md:divide-y-0 md:p-8'}>
 				<div className={'image-wrapper-full-height h-48 px-8 md:h-auto md:px-0'}>
 					<Image
+						alt={''}
 						src={typoSrc}
 						loading={'eager'}
 						objectFit={'contain'}
@@ -38,6 +40,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 			</div>
 			<div className={'image-wrapper col-span-1 block md:hidden'}>
 				<Image
+					alt={''}
 					src={characterSrc}
 					objectFit={'cover'}
 					loading={'eager'}
@@ -54,7 +57,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 						onClick={(): void => {
 							router.push(`/tribute/${id}`);
 						}}
-						className={'button-glowing bg-white font-peste'}>
+						className={'button-glowing bg-white font-peste text-black'}>
 						{'SEE TRIBUTES'}
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
@@ -63,6 +66,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 			</div>
 			<div className={'image-wrapper col-span-1 hidden md:flex'}>
 				<Image
+					alt={''}
 					src={characterSrc}
 					objectFit={'cover'}
 					loading={'eager'}
@@ -78,6 +82,7 @@ function	Tree(): ReactElement {
 		<div className={'grid grid-cols-1 border-2 border-white'}>
 			<div className={'image-wrapper col-span-1'}>
 				<Image
+					alt={''}
 					src={'/yearningTree.jpg'}
 					loading={'eager'}
 					width={2000}
@@ -90,77 +95,119 @@ function	Tree(): ReactElement {
 	);
 }
 
-const buildRequest = (address: string): string => `query {
-	campaign(id: "GCxHoUUft6") {
-		numberID # campaign number ID
-		name # campaign name
-		description # campaign description
-		thumbnail # campaign cover image
-		numNFTMinted # how many NFTs have been minted for this campaign
-		startTime # campaign start time in unix time
-		endTime # campaign end time in unix time, if null means no end time
-		gasType # campaign in gas or gasless mode, please refer to api item 2 for explanation
+function	MintView(): ReactElement {
+	const {isActive, provider, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
+	const {balanceOf, totalSupply, maxSupply, refresh} = useMint();
+	const [txStatusMint, set_txStatusMint] = useState(defaultTxStatus);
 
-		# Credential object is to determine whether an address is eligible to claim the NFT,
-		# it will be created by BD team along with campaign setup.
-		# in most case, a campaign only has one credential object enabled, 
-		# so if user is eligible for that credential, 
-		# he/she will be eligible to claim campaign's NFT.
-		creds {
-		# credential id
-		id
-		# credential name
-		name 
-		# input is user's address, and output shows whether the address is eligible for this credential
-		# you can use this to check if user can claim or not in first place
-		eligible(address: "${address}") 
-		}
-
-		# formula is a combination of credential and entry, the output of formual decide how many NFTs a user can claim
-		formula
-
-		gamification {
-		# the object that stores NFT metadata
-		nfts {
-			probability # probability numerator of getting this NFT
-			nft {
-			name # NFT name
-			image # NFT image URL
-			ipfsImage # NFT image IPFS URL
-			nftCore{
-				contractAddress # NFT contract(NFT core) address
-				spaceStationAddress # Mint NFT(space station) contract address
-			}
-			}
-		}
+	function connectWallet(): void {
+		if (isActive) {
+			onDesactivate();
+		} else if (!isActive && address) {
+			onSwitchChain(1, true);
+		} else {
+			openLoginModal();
 		}
 	}
-}`;
+
+	async function	onMint(): Promise<void> {
+		new Transaction(provider, mint, set_txStatusMint)
+			.populate()
+			.onSuccess(async (): Promise<void> => {
+				await refresh();
+			}).perform();
+	}
+
+	return (
+		<div className={'mb-48 flex flex-col items-center border-2 border-white p-8 text-white'}>
+			<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>
+				{'YFU - The Comic, episode 1\r'}
+			</h4>
+			<div className={'my-10 grid w-full grid-cols-12 gap-16'}>
+				<div className={'col-span-4 flex flex-col px-6'}>
+					<Image
+						alt={'comics'}
+						src={'/assetsThumbnail/comic1-main.jpg'}
+						objectFit={'contain'}
+						loading={'eager'}
+						width={595}
+						height={842} />
+				</div>
+				<div className={'col-span-8 flex w-full flex-col'}>
+					{isActive ? <div /> : (
+						<button
+							onClick={connectWallet}
+							className={'button-glowing my-4 bg-white text-black'}>
+							{'Connect your wallet to mint a YFU Comic NFT'}
+							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+						</button>
+					)}
+					
+					<div className={!isActive ? 'pointer-events-none opacity-25' : ''}>
+						<div className={'flex flex-row items-center space-x-6 py-8'}>
+							<button
+								onClick={onMint}
+								disabled={txStatusMint.pending}
+								className={'button-glowing my-4 h-14 bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30'}>
+								<p className={txStatusMint.pending ? 'invisible' : 'visible'}>{'Mint NFT'}</p>
+								<span className={`${txStatusMint.pending ? 'visible' : 'invisible'} absolute inset-0 flex items-center justify-center`}>
+									<svg
+										className={'h-5 w-5 animate-spin text-center text-black'}
+										xmlns={'http://www.w3.org/2000/svg'}
+										fill={'none'}
+										viewBox={'0 0 24 24'}>
+										<circle
+											className={'opacity-25'}
+											cx={'12'}
+											cy={'12'}
+											r={'10'}
+											stroke={'currentColor'}
+											strokeWidth={'4'}>
+										</circle>
+										<path
+											className={'opacity-75'}
+											fill={'currentColor'}
+											d={'M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'}>
+										</path>
+									</svg>
+								</span>
+								<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+								<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+							</button>
+							<Link href={'/shipping'}>
+								<button
+									disabled={balanceOf < 1}
+									className={'button-glowing my-4 bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30'}>
+									<p>{'Fill shipping informations'}</p>
+									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+								</button>
+							</Link>
+						</div>
+						<div>
+							<p className={'pb-8 text-xl'}>
+								{`0.1 ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
+							</p>
+							<p className={'text-xl'}>
+								{'Each NFT holder will be eligible to receive a copy of the limited edition comic\r'}
+							</p>
+							<p className={'text-xl'}>
+								{'By leveling up your NFT, via Yearn product usage, you will be able to claim free 1/1 art NFTs, upgrade special edition comics, etc\r'}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
 
 function	Index({visitors=[]}): ReactElement {
-	const	[visitorsUpdated, set_visitorsUpdated] = React.useState(visitors);
-	const	allData = YFU_DATA;
-	const {openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
-	const {isConnected, address, ens} = useAccount();
-	const [walletIdentity, set_walletIdentity] = React.useState('Connect Wallet');
+	const [visitorsUpdated, set_visitorsUpdated] = useState(visitors);
+	const allData = YFU_DATA;
 
-	const data = useSwr(address ? [
-		'https://graphigo.stg.galaxy.eco',
-		buildRequest(address)
-	] : null);
-	console.log(data);
-	
-	React.useEffect((): void => {
-		if (!isConnected && address) {
-			set_walletIdentity('Invalid chain');
-		} else if (address) {
-			set_walletIdentity('Mint NFT');
-		} else {
-			set_walletIdentity('Connect Wallet');
-		}
-	}, [ens, address, isConnected]);
-
-	React.useEffect((): void => {
+	useEffect((): void => {
 		axios.get('/api/visitors').then((v): void => set_visitorsUpdated(v.data));
 	}, []);
 
@@ -170,67 +217,18 @@ function	Index({visitors=[]}): ReactElement {
 			initial={'initial'}
 			animate={'enter'}
 			exit={'exit'}
-			className={'relative -mt-1 flex w-screen flex-col overflow-hidden border-t-0 border-t-white p-0 md:border-t-2 md:p-6'}
+			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
 			variants={variants}>
-			<main id={'app'} className={'relative mx-auto max-w-screen-xl'} style={{minHeight: '100vh'}}>
+			<main
+				id={'app'}
+				className={'relative mx-auto w-full max-w-screen-xl'}
+				style={{minHeight: '100vh'}}>
 				<div>
 					<div className={'flex items-center justify-center py-8'}>
 						<Title />
 					</div>
 					<section className={'w-full px-4 md:px-0'}>
-						<div className={'mb-48 flex flex-col items-center border-2 border-white p-8 text-white'}>
-							<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>
-								{'YFU - The Comic, episode 1\r'}
-							</h4>
-							<div className={'grid w-full grid-cols-12 gap-16'}>
-								<div className={'col-span-4 flex flex-col px-6'}>
-									<Image
-										src={'/assetsThumbnail/comic1-main.jpg'}
-										objectFit={'contain'}
-										loading={'eager'}
-										width={595}
-										height={842} />
-								</div>
-								<div className={'col-span-8 flex w-full flex-col justify-center'}>
-									<p className={'text-xl'}>
-										{'Connect your wallet to mint a YFU Comic NFT\r'}
-									</p>
-									<div className={'flex flex-row items-center space-x-6 py-8'}>
-										<button
-											className={'button-glowing my-4 bg-white font-peste text-black'}
-											onClick={(): void => {
-												if (isConnected) {
-													onDesactivate();
-												} else if (!isConnected && address) {
-													onSwitchChain(1, true);
-												} else {
-													openLoginModal();
-												}
-											}}>
-											<p>{walletIdentity}</p>
-											<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
-											<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
-										</button>
-										<div>
-											{isConnected ? (
-												<p className={'text-lg'}>
-													{'0.1 ETH'}
-												</p>
-											) : null}
-											<p className={'text-lg'}>
-												{'999 of 1000 NFTs Minted So Far'}
-											</p>
-										</div>
-									</div>
-									<p className={'text-xl'}>
-										{'Each NFT holder will be eligible to receive a copy of the limited edition comic\r'}
-									</p>
-									<p className={'text-xl'}>
-										{'By leveling up your NFT, via Yearn product usage, you will be able to claim free 1/1 art NFTs, upgrade special edition comics, etc\r'}
-									</p>
-								</div>
-							</div>
-						</div>
+						<MintView />
 						{allData
 							.sort((a: TYFUData, b: TYFUData): number => a.order - b.order)
 							.map((goddess: TYFUData, index: number): ReactElement => (
@@ -243,12 +241,20 @@ function	Index({visitors=[]}): ReactElement {
 										<p>{goddess.description}</p>
 									</Goddess>
 									<div className={`my-0 flex items-center justify-center ${index + 1 === allData.length ? 'hidden' : ''}`}>
-										<Image src={`/divider-${index + 1}.gif`} width={200} height={200} />
+										<Image
+											alt={''}
+											src={`/divider-${index + 1}.gif`}
+											width={200}
+											height={200} />
 									</div>
 								</div>
 							))}
 						<div className={'my-9 flex items-center justify-center'}>
-							<Image src={'/yfiTree2.png'} width={112} height={112} />
+							<Image
+								alt={''}
+								src={'/yfiTree2.png'}
+								width={112}
+								height={112} />
 						</div>
 						<Tree />
 					</section>
@@ -261,7 +267,7 @@ function	Index({visitors=[]}): ReactElement {
 
 export default Index;
 
-// export async function getStaticProps(): Promise<unknown> {
-// 	const visitors = await redis.incr('counter');
-// 	return {props: {visitors}};
-// }
+export async function getStaticProps(): Promise<unknown> {
+	const visitors = await redis.incr('counter');
+	return {props: {visitors}};
+}

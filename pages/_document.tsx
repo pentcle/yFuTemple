@@ -1,16 +1,49 @@
-import React from 'react';
-import Document, {Html, Head, Main, NextScript, DocumentContext} from 'next/document';
+import React, {ReactElement} from 'react';
+import Document, {DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript} from 'next/document';
+
+const modeScript = `
+  let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+  updateMode()
+  darkModeMediaQuery.addEventListener('change', updateModeWithoutTransitions)
+  window.addEventListener('storage', updateModeWithoutTransitions)
+
+  function updateMode() {
+    let isSystemDarkMode = darkModeMediaQuery.matches
+    let isDarkMode = true
+
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
+    if (isDarkMode === isSystemDarkMode) {
+      delete window.localStorage.isDarkMode
+    }
+  }
+
+  function updateModeWithoutTransitions() {
+    updateMode()
+  }
+`;
 
 class MyDocument extends Document {
-	static async getInitialProps(ctx: DocumentContext): Promise<any> {
+	static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
 		const initialProps = await Document.getInitialProps(ctx);
 		return {...initialProps};
 	}
 
-	render(): React.ReactElement {
+	render(): ReactElement {
 		return (
 			<Html lang={'en'}>
-				<Head />
+				<Head>
+					<link
+						rel={'preconnect'}
+						href={'https://brand.yearn.finance'}
+						crossOrigin={'true'} />
+					<script dangerouslySetInnerHTML={{__html: modeScript}} />
+				</Head>
 				<body>
 					<Main />
 					<NextScript />

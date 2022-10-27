@@ -1,23 +1,28 @@
-import React, {ReactElement, ReactNode} 		from 	'react';		
-import	Head									from	'next/head';
-import	Image									from	'next/image';
-import	{DefaultSeo}							from	'next-seo';
-import	{AppProps}								from	'next/app';
-import	{AnimateSharedLayout, AnimatePresence}	from	'framer-motion';
-import	{Dialog, Transition}					from	'@headlessui/react';
-import	{AudioContextApp}						from	'../contexts/useAudio';
-import	Header									from	'../components/Header';
-import {WithYearn}								from 	'@yearn-finance/web-lib/contexts';
-import	'../style.css';
+import React, {Fragment, ReactElement, ReactNode, memo, useState} from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+import {DefaultSeo} from 'next-seo';
+import {AppProps} from 'next/app';
+import {AnimatePresence} from 'framer-motion';
+import {Dialog, Transition} from '@headlessui/react';
+import {AudioContextApp} from '../contexts/useAudio';
+import Header from '../components/Header';
+import {WithYearn} from  '@yearn-finance/web-lib/contexts';
+import {MintContextApp} from 'contexts/useMint';
 
-const WithSplash = React.memo(function WithSplash({children}: {children: ReactNode}): ReactElement {
-	const	[hasOpacity, set_hasOpacity] = React.useState(true);
-	const	[shouldDisplay, set_shouldDisplay] = React.useState(true);
-	const	[shouldDisplayVideo] = React.useState(true);
+import '../style.css';
+
+const WithSplash = memo(function WithSplash({children}: {children: ReactNode}): ReactElement {
+	const	[hasOpacity, set_hasOpacity] = useState(true);
+	const	[shouldDisplay, set_shouldDisplay] = useState(true);
+	const	[shouldDisplayVideo] = useState(true);
 
 	return (
 		<>
-			<Transition appear show={shouldDisplay} as={React.Fragment}>
+			<Transition
+				appear
+				show={shouldDisplay}
+				as={Fragment}>
 				<Dialog
 					as={'div'}
 					className={'fixed inset-0 z-20'}
@@ -26,6 +31,7 @@ const WithSplash = React.memo(function WithSplash({children}: {children: ReactNo
 						<div className={'relative mx-auto flex h-full w-full items-center justify-center'}>
 							<div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${shouldDisplayVideo ? 'opacity-100' : 'opacity-0'}`}>
 								<Image
+									alt={''}
 									src={'/splash.gif'}
 									loading={'eager'}
 									width={640}
@@ -69,11 +75,30 @@ function	AppMeta(): ReactElement {
 				<meta charSet={'utf-8'} />
 
 				{/* FAVICONS */}
-				<link rel={'apple-touch-icon'} sizes={'180x180'} href={'/favicons/apple-touch-icon.png'} />
-				<link rel={'icon'} type={'image/png'} sizes={'192x192'}  href={'/favicons/android-chrome-192x192.png'} />
-				<link rel={'icon'} type={'image/png'} sizes={'512x512'}  href={'/favicons/android-chrome-512x512.png'} />
-				<link rel={'icon'} type={'image/png'} sizes={'32x32'} href={'/favicons/favicon-32x32.png'} />
-				<link rel={'icon'} type={'image/png'} sizes={'16x16'} href={'/favicons/favicon-16x16.png'} />
+				<link
+					rel={'apple-touch-icon'}
+					sizes={'180x180'}
+					href={'/favicons/apple-touch-icon.png'} />
+				<link
+					rel={'icon'}
+					type={'image/png'}
+					sizes={'192x192'}
+					href={'/favicons/android-chrome-192x192.png'} />
+				<link
+					rel={'icon'}
+					type={'image/png'}
+					sizes={'512x512'}
+					href={'/favicons/android-chrome-512x512.png'} />
+				<link
+					rel={'icon'}
+					type={'image/png'}
+					sizes={'32x32'}
+					href={'/favicons/favicon-32x32.png'} />
+				<link
+					rel={'icon'}
+					type={'image/png'}
+					sizes={'16x16'}
+					href={'/favicons/favicon-16x16.png'} />
 				<link rel={'manifest'} href={'/favicons/site.webmanifest'} />
 				<meta name={'msapplication-TileColor'} content={'#ffffff'} />
 				<meta name={'theme-color'} content={'#ffffff'} />
@@ -126,18 +151,22 @@ function	AppWrapper(props: AppProps): ReactElement {
 			<WithSplash>
 				<Header />
 				<div className={'z-10 overflow-x-hidden pt-24 md:pt-16'}>
-					<AnimateSharedLayout>
-						<AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
-							<Component
-								key={router.route}
-								router={props.router}
-								{...pageProps} />
-						</AnimatePresence>
-					</AnimateSharedLayout>
+					<AnimatePresence mode={'wait'} onExitComplete={handleExitComplete}>
+						<Component
+							key={router.route}
+							router={props.router}
+							{...pageProps} />
+					</AnimatePresence>
 				</div>
 			</WithSplash>
 			<div className={'fixed inset-0 -z-10'}>
-				<video playsInline autoPlay muted loop poster={'/bg.jpg'} className={'h-full w-full object-cover'}>
+				<video
+					playsInline
+					autoPlay
+					muted
+					loop
+					poster={'/bg.jpg'}
+					className={'h-full w-full object-cover'}>
 					<source src={'/bglow.webm'} type={'video/webm'} />
 				</video>
 			</div>
@@ -149,13 +178,21 @@ function	MyApp(props: AppProps): ReactElement {
 	const	{Component, pageProps} = props;
 	
 	return (
-		<WithYearn>
-			<AudioContextApp>
-				<AppWrapper
-					Component={Component}
-					pageProps={pageProps}
-					router={props.router} />
-			</AudioContextApp>
+		<WithYearn
+			options={{
+				web3: {
+					defaultChainID: 10,
+					supportedChainID: [10, 1337]
+				}
+			}}>
+			<MintContextApp>
+				<AudioContextApp>
+					<AppWrapper
+						Component={Component}
+						pageProps={pageProps}
+						router={props.router} />
+				</AudioContextApp>
+			</MintContextApp>
 		</WithYearn>
 	);
 }

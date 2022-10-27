@@ -7,9 +7,8 @@ export async function incVisitors(): Promise<number> {
 	return visitors;
 }
 
-export default async function handler(): Promise<void> {
+export default async function handler(req: any, res: any): Promise<void> {
 	const visitors = await redis.incr('counter');
-	console.log(visitors);
-	// res.status(200).send(visitors);
+	res.status(200).send(visitors);
 	return;
 }

@@ -1,10 +1,10 @@
-import	React, {ReactElement}						from	'react';
-import	Link						from	'next/link';
-import	{useRouter}					from	'next/router';
-import	TributeSlider				from	'../../components/TributeSlider';
-import	DraggableInfo				from	'../../components/DraggableInfo';
-import	{motion}					from	'framer-motion';
-import	YFU_DATA					from	'../../utils/data';
+import React, {ReactElement, useEffect, useState} from 'react';
+import Link from 'next/link';
+import {useRouter} from 'next/router';
+import TributeSlider from '../../components/TributeSlider';
+import DraggableInfo from '../../components/DraggableInfo';
+import {motion} from 'framer-motion';
+import YFU_DATA from '../../utils/data';
 
 const variants = {
 	initial: {y: 100, scale: 0.9, opacity: 0},
@@ -14,10 +14,10 @@ const variants = {
 
 export default function Index(): ReactElement {
 	const	router = useRouter();
-	const	[hasInfo, set_hasInfo] = React.useState(false);
-	const	[currentTemple, set_currentTemple] = React.useState(YFU_DATA.find((e): boolean => e.id === router?.query?.id));
+	const	[hasInfo, set_hasInfo] = useState(false);
+	const	[currentTemple, set_currentTemple] = useState(YFU_DATA.find((e): boolean => e.id === router?.query?.id));
 
-	React.useEffect((): void => {
+	useEffect((): void => {
 		if(router?.query?.id) {
 			const	_currentTemple = YFU_DATA.find((e): boolean => e.id === router?.query?.id);
 			set_currentTemple(_currentTemple);
@@ -30,7 +30,7 @@ export default function Index(): ReactElement {
 			initial={'initial'}
 			animate={'enter'}
 			exit={'exit'}
-			className={'relative -mt-1 flex w-screen flex-col overflow-hidden border-t-0 border-t-white p-0 md:border-t-2 md:p-6'}
+			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
 			variants={variants}>
 			<div className={'flex h-12 flex-row items-center justify-between border-b-2 border-b-white px-2 md:hidden'}>
 				<Link href={'/'}>
