@@ -1,21 +1,24 @@
-import	React, {ReactElement}	from	'react';
-import	Image					from	'next/image';
-import	useAudio				from	'../contexts/useAudio';
-import	DraggablePlayer			from	'./DraggablePlayer';
-import	IconPause				from	'./icons/IconPause';
-import	IconPlay				from	'./icons/IconPlay';
-import	IconPrev				from	'./icons/IconPrev';
-import	IconExpand				from	'./icons/IconExpand';
+import React, {useEffect, useRef, useState} from 'react';
+import Image from 'next/image';
+
+import {useAudio} from '../contexts/useAudio';
+import DraggablePlayer from './DraggablePlayer';
+import IconExpand from './icons/IconExpand';
+import IconPause from './icons/IconPause';
+import IconPlay from './icons/IconPlay';
+import IconPrev from './icons/IconPrev';
+
+import type {ReactElement} from 'react';
 
 function	Header(): ReactElement {
-	const	readInterval = React.useRef<NodeJS.Timer>();
+	const	readInterval = useRef<NodeJS.Timer>();
 	const	{AUDIO_LIST, audio, isPlaying, set_isPlaying} = useAudio();
-	const	[hasModal, set_hasModal] = React.useState(false);
-	const	[hasMediaPlayer, set_hasMediaPlayer] = React.useState(false);
-	const	[selected, set_selected] = React.useState(0);
-	const	[, set_nonce] = React.useState(0);
-	
-	React.useEffect((): () => void => {
+	const	[hasModal, set_hasModal] = useState(false);
+	const	[hasMediaPlayer, set_hasMediaPlayer] = useState(false);
+	const	[selected, set_selected] = useState(0);
+	const	[, set_nonce] = useState(0);
+
+	useEffect((): () => void => {
 		readInterval.current = setInterval((): void => {
 			set_nonce((n: number): number => n + 1);
 		}, 300);
@@ -48,22 +51,51 @@ function	Header(): ReactElement {
 							{'X'}
 						</div>
 						<div className={'flex w-full select-none justify-center'}>
-							<Image src={'/yfiTree.png'} width={150} height={186} />
+							<Image
+								alt={''}
+								src={'/yfiTree.png'}
+								width={150}
+								height={186} />
 						</div>
 						<div className={'mt-4 font-scope tracking-widest text-yblue'}>
 							<span className={'mb-1 flex w-full flex-row'}>
 								<p>{'Find us:'}</p>
-								<a href={'https://yearn.finance'} target={'_blank'} rel={'noreferrer'} className={'ml-1 pl-28 hover:underline'}>{'YEARN'}</a>
+								<a
+									href={'https://yearn.finance'}
+									target={'_blank'}
+									rel={'noreferrer'}
+									className={'ml-1 pl-28 hover:underline'}>{'YEARN'}
+								</a>
 							</span>
 							<span className={'mb-1'}>
-								<a href={'https://twitter.com/iearnfinance'} target={'_blank'} rel={'noreferrer'} className={'hover:underline'}>{'Twitter'}</a>
+								<a
+									href={'https://twitter.com/iearnfinance'}
+									target={'_blank'}
+									rel={'noreferrer'}
+									className={'hover:underline'}>{'Twitter'}
+								</a>
 								{' / '}
-								<a href={'http://blog.yearn.finance/'} target={'_blank'} rel={'noreferrer'} className={'hover:underline'}>{'Medium'}</a>
+								<a
+									href={'http://blog.yearn.finance/'}
+									target={'_blank'}
+									rel={'noreferrer'}
+									className={'hover:underline'}>{'Medium'}
+								</a>
 								{' / '}
-								<a href={'https://discord.yearn.finance/'} target={'_blank'} rel={'noreferrer'} className={'hover:underline'}>{'Discord'}</a>
+								<a
+									href={'https://discord.yearn.finance/'}
+									target={'_blank'}
+									rel={'noreferrer'}
+									className={'hover:underline'}>{'Discord'}
+								</a>
 							</span>
 							<span className={'mt-1 flex w-full flex-row justify-between font-bluepill'}>
-								<a href={'https://thebluepill.eth.link/'} target={'_blank'} rel={'noreferrer'} className={'text-xl tracking-normal hover:underline'}>{'The Blue Pill'}</a>
+								<a
+									href={'https://thebluepill.eth.link/'}
+									target={'_blank'}
+									rel={'noreferrer'}
+									className={'text-xl tracking-normal hover:underline'}>{'The Blue Pill'}
+								</a>
 							</span>
 						</div>
 

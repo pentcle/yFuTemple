@@ -1,8 +1,9 @@
-import	React					from	'react';
-import	useAudio				from	'../contexts/useAudio';
-import	IconPause				from	'./icons/IconPause';
-import	IconPlay				from	'./icons/IconPlay';
-import	IconPrev				from	'./icons/IconPrev';
+import React, {useEffect, useRef, useState} from 'react';
+
+import {useAudio} from '../contexts/useAudio';
+import IconPause from './icons/IconPause';
+import IconPlay from './icons/IconPlay';
+import IconPrev from './icons/IconPrev';
 
 type TAudioPlayerSimple = {
 	name: string,
@@ -20,11 +21,11 @@ function	AudioPlayerSimple({
 	onSelectNext
 }: TAudioPlayerSimple): React.ReactElement {
 	const	{set_audio, isPlaying, set_isPlaying} = useAudio();
-	const	ref = React.useRef<HTMLAudioElement>();
-	const	progress = React.useRef<HTMLDivElement>();
-	const	[isInitialLoad, set_isInitialLoad] = React.useState(true);
+	const	ref = useRef<HTMLAudioElement>();
+	const	progress = useRef<HTMLDivElement>();
+	const	[isInitialLoad, set_isInitialLoad] = useState(true);
 
-	React.useEffect((): void => {
+	useEffect((): void => {
 		if (progress.current) {
 			progress.current.onclick = (e: any): void => {
 				if (ref.current && e?.target?.offsetWidth) {
@@ -37,20 +38,21 @@ function	AudioPlayerSimple({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [progress.current, ref.current]);
 
-	React.useEffect((): void => {
+	useEffect((): void => {
 		if (ref.current && !isSelected) {
 			// set_currentTime(0);
 			ref.current.currentTime = 0;
 			ref.current.pause();
 		} else if (ref.current && isSelected) {
 			set_selected(ref.current);
-			if (!isInitialLoad)
+			if (!isInitialLoad) {
 				ref.current.play();
+			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isSelected, ref.current]);
 
-	React.useEffect((): void => {
+	useEffect((): void => {
 		setTimeout((): void => set_isInitialLoad(false), 100);
 	}, [isInitialLoad]);
 
@@ -74,8 +76,9 @@ function	AudioPlayerSimple({
 								set_selected(ref.current);
 								set_isPlaying(true);
 								set_audio(ref.current);
-								if (ref.current)
+								if (ref.current) {
 									ref.current.play();
+								}
 							}}
 							className={'cursor-pointer'}/>
 					</div>
@@ -88,24 +91,27 @@ function	AudioPlayerSimple({
 				<div className={'flex flex-row items-center justify-center'}>
 					<IconPrev
 						onClick={(): void => {
-							if (ref.current)
+							if (ref.current) {
 								ref.current.currentTime = 0;
+							}
 						}}
 						className={'cursor-pointer'} />
 					{isPlaying ? (
 						<IconPause
 							onClick={(): void => {
 								set_isPlaying(false);
-								if (ref.current)
+								if (ref.current) {
 									ref.current.pause();
+								}
 							}}
 							className={'mx-2 cursor-pointer'}/>
 					) : (
 						<IconPlay
 							onClick={(): void => {
 								set_isPlaying(true);
-								if (ref.current)
+								if (ref.current) {
 									ref.current.play();
+								}
 							}}
 							className={'mx-2 cursor-pointer'}/>
 					)}

@@ -1,10 +1,13 @@
-import React, {Dispatch, ReactElement, createContext, useCallback, useContext, useEffect, useState} from 'react';
-import {BigNumber, ethers} from 'ethers';
+import React, {createContext, useCallback, useContext, useEffect, useState} from 'react';
 import {Contract} from 'ethcall';
-import {useWeb3} from '@yearn-finance/web-lib/contexts';
-import {performBatchedUpdates, providers} from '@yearn-finance/web-lib/utils';
+import {ethers} from 'ethers';
 import YFU_ABI from 'utils/yfu.abi';
 import {useLocalStorage} from '@yearn-finance/web-lib';
+import {useWeb3} from '@yearn-finance/web-lib/contexts';
+import {performBatchedUpdates, providers} from '@yearn-finance/web-lib/utils';
+
+import type {BigNumber} from 'ethers';
+import type {Dispatch, ReactElement} from 'react';
 
 export type	TMintContext = {
 	balanceOf: number,
@@ -16,7 +19,8 @@ export type	TMintContext = {
 	refresh: () => Promise<void>,
 }
 
-const	MintContext = createContext<TMintContext>({balanceOf: 0,
+const	MintContext = createContext<TMintContext>({
+	balanceOf: 0,
 	totalSupply: 0,
 	maxSupply: 0,
 	ownedByUser: [],

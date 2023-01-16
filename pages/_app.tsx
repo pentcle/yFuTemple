@@ -1,14 +1,17 @@
-import React, {Fragment, ReactElement, ReactNode, memo, useState} from 'react';
+import React, {Fragment, memo, useState} from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import {DefaultSeo} from 'next-seo';
-import {AppProps} from 'next/app';
+import {MintContextApp} from 'contexts/useMint';
 import {AnimatePresence} from 'framer-motion';
 import {Dialog, Transition} from '@headlessui/react';
-import {AudioContextApp} from '../contexts/useAudio';
+import {WithYearn} from '@yearn-finance/web-lib/contexts';
+
 import Header from '../components/Header';
-import {WithYearn} from  '@yearn-finance/web-lib/contexts';
-import {MintContextApp} from 'contexts/useMint';
+import {AudioContextApp} from '../contexts/useAudio';
+
+import type {AppProps} from 'next/app';
+import type {ReactElement, ReactNode} from 'react';
 
 import '../style.css';
 

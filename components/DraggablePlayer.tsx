@@ -1,8 +1,11 @@
-import	React, {ReactElement}	from	'react';
-import	Image					from	'next/image';
-import	Draggable				from	'react-draggable';
-import	useAudio				from	'../contexts/useAudio';
-import	AudioPlayerSimple		from	'./AudioPlayerSimple';
+import React from 'react';
+import Draggable from 'react-draggable';
+import Image from 'next/image';
+
+import {useAudio} from '../contexts/useAudio';
+import AudioPlayerSimple from './AudioPlayerSimple';
+
+import type {ReactElement} from 'react';
 
 type TDraggablePlayer = {
 	hasMediaPlayer: boolean;
@@ -33,7 +36,12 @@ function	DraggablePlayer({
 						</div>
 					</div>
 					<div className={'flex h-80 w-full border-b-2 border-white px-2 font-scope text-lg text-white'}>
-						<Image src={AUDIO_LIST[selected][2]} width={380} height={320} objectFit={'cover'} />
+						<Image
+							alt={''}
+							src={AUDIO_LIST[selected][2]}
+							width={380}
+							height={320}
+							objectFit={'cover'} />
 					</div>
 					<AudioPlayerSimple
 						isSelected={selected === 0}
@@ -42,7 +50,8 @@ function	DraggablePlayer({
 							set_selected(0);
 						}}
 						onSelectNext={(): void => set_selected(1)}
-						name={AUDIO_LIST[0][0]} src={AUDIO_LIST[0][1]} />
+						name={AUDIO_LIST[0][0]}
+						src={AUDIO_LIST[0][1]} />
 					<AudioPlayerSimple
 						isSelected={selected === 1}
 						set_selected={(ref: any): void => {
@@ -50,7 +59,8 @@ function	DraggablePlayer({
 							set_selected(1);
 						}}
 						onSelectNext={(): void => set_selected(2)}
-						name={AUDIO_LIST[1][0]} src={AUDIO_LIST[1][1]} />
+						name={AUDIO_LIST[1][0]}
+						src={AUDIO_LIST[1][1]} />
 					<AudioPlayerSimple
 						isSelected={selected === 2}
 						set_selected={(ref: any): void => {
@@ -58,7 +68,8 @@ function	DraggablePlayer({
 							set_selected(2);
 						}}
 						onSelectNext={(): void => set_selected(3)}
-						name={AUDIO_LIST[2][0]} src={AUDIO_LIST[2][1]} />
+						name={AUDIO_LIST[2][0]}
+						src={AUDIO_LIST[2][1]} />
 					<AudioPlayerSimple
 						isSelected={selected === 3}
 						set_selected={(ref: any): void => {
@@ -66,7 +77,8 @@ function	DraggablePlayer({
 							set_selected(3);
 						}}
 						onSelectNext={(): void => set_selected(4)}
-						name={AUDIO_LIST[3][0]} src={AUDIO_LIST[3][1]} />
+						name={AUDIO_LIST[3][0]}
+						src={AUDIO_LIST[3][1]} />
 					<AudioPlayerSimple
 						isSelected={selected === 4}
 						set_selected={(ref: any): void => {
@@ -74,7 +86,8 @@ function	DraggablePlayer({
 							set_selected(4);
 						}}
 						onSelectNext={(): void => set_selected(0)}
-						name={AUDIO_LIST[4][0]} src={AUDIO_LIST[4][1]} />
+						name={AUDIO_LIST[4][0]}
+						src={AUDIO_LIST[4][1]} />
 				</div>
 			</Draggable>
 		</div>

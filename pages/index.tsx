@@ -1,17 +1,21 @@
-import React, {ReactElement, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
-import {useRouter} from 'next/router';
-import axios from 'axios';
-import Redis from 'ioredis';
-import Title from '../components/Title';
-import Footer from '../components/Footer';
-import {motion} from 'framer-motion';
-import YFU_DATA, {TYFUData} from '../utils/data';
-import {useWeb3}  from  '@yearn-finance/web-lib/contexts';
-import {useMint} from 'contexts/useMint';
 import Link from 'next/link';
-import {Transaction, defaultTxStatus} from '@yearn-finance/web-lib/utils';
+import {useRouter} from 'next/router';
+import {useMint} from 'contexts/useMint';
+import Redis from 'ioredis';
 import {mint} from 'utils/mint';
+import axios from 'axios';
+import {motion} from 'framer-motion';
+import {useWeb3} from '@yearn-finance/web-lib/contexts';
+import {defaultTxStatus, Transaction} from '@yearn-finance/web-lib/utils';
+
+import Footer from '../components/Footer';
+import Title from '../components/Title';
+import YFU_DATA from '../utils/data';
+
+import type {ReactElement} from 'react';
+import type {TYFUData} from '../utils/data';
 
 const variants = {
 	initial: {y: 0, opacity: 1},

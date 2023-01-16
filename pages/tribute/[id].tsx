@@ -1,10 +1,13 @@
-import React, {ReactElement, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import TributeSlider from '../../components/TributeSlider';
-import DraggableInfo from '../../components/DraggableInfo';
 import {motion} from 'framer-motion';
+
+import DraggableInfo from '../../components/DraggableInfo';
+import TributeSlider from '../../components/TributeSlider';
 import YFU_DATA from '../../utils/data';
+
+import type {ReactElement} from 'react';
 
 const variants = {
 	initial: {y: 100, scale: 0.9, opacity: 0},
@@ -59,8 +62,9 @@ export default function Index(): ReactElement {
 				</Link>
 				<button
 					onClick={(): void => {
-						if (window)
+						if (window) {
 							window.open('https://discord.gg/UyNbrABFYA', '_blank');
+						}
 					}}
 					className={'button-glowing-small bg-white font-scope'}>
 					{'SUBMIT'}

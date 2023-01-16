@@ -1,8 +1,10 @@
-/* eslint-disable tailwindcss/no-custom-classname */
-import	React, {ReactElement}	from	'react';
-import	Image					from	'next/image';
-import	{parseMarkdown}			from	'../utils/parseMarkdown';
-import	{TYFUDataMedia}			from	'../utils/data';
+import React, {useState} from 'react';
+import Image from 'next/image';
+
+import {parseMarkdown} from '../utils/parseMarkdown';
+
+import type {ReactElement} from 'react';
+import type {TYFUDataMedia} from '../utils/data';
 
 type TTributeElement = {
 	tribute: TYFUDataMedia,
@@ -23,6 +25,7 @@ function	TributeElement({
 			<div className={'figure select-none'}>
 				<div className={'carousel-slider-animate-opacity'}>
 					<Image
+						alt={''}
 						onClick={onImageClick}
 						className={'cursor-pointer'}
 						objectFit={'contain'}
@@ -53,19 +56,21 @@ type TTributeSlider = {
 	set_hasInfo: React.Dispatch<React.SetStateAction<TYFUDataMedia|boolean>>
 }
 export default function TributeSlider({medias, hasInfo, set_hasInfo}: TTributeSlider): ReactElement {
-	const	[currentSlide, set_currentSlide] = React.useState(0);
+	const	[currentSlide, set_currentSlide] = useState(0);
 
 	function	handleScroll(e: React.UIEvent): void {
 		const	viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 		const	vw = viewport / 100;
 		if (viewport > 768) {
 			const slide = Math.floor(((e.target as any).scrollLeft) / (20 * vw));
-			if (slide !== currentSlide)
+			if (slide !== currentSlide) {
 				set_currentSlide(slide);
+			}
 		} else {
 			const slide = Math.floor(((e.target as any).scrollLeft + 80) / (50 * vw));
-			if (slide !== currentSlide)
+			if (slide !== currentSlide) {
 				set_currentSlide(slide);
+			}
 		}
 	}
 

@@ -1,9 +1,10 @@
 import {ethers} from 'ethers';
-import {NextApiRequest, NextApiResponse} from 'next';
-import Redis from 'ioredis';
 import FormData from 'form-data';
-import {providers} from '@yearn-finance/web-lib/utils';
+import Redis from 'ioredis';
 import YFU_ABI from 'utils/yfu.abi';
+import {providers} from '@yearn-finance/web-lib/utils';
+
+import type {NextApiRequest, NextApiResponse} from 'next';
 
 const	redisAddressPerToken = new Redis(process.env.REDIS_URL_ADDRESS_PER_TOKEN as string);
 
@@ -15,7 +16,7 @@ function jsonToFormData(data: any): any {
 	}
 	return formData;
 }
-  
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
 	const {tokenID, walletAddress, signature} = JSON.parse(req.body.body);
 	if (!tokenID || !walletAddress || !signature) {

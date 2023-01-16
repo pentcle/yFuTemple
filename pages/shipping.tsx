@@ -1,11 +1,13 @@
-import React, {ReactElement, useMemo, useState} from 'react';
-import Footer from 'components/Footer';
+import React, {useMemo, useState} from 'react';
 import {toast} from 'react-hot-toast';
+import Link from 'next/link';
+import Footer from 'components/Footer';
+import useMint from 'contexts/useMint';
+import axios from 'axios';
 import {motion} from 'framer-motion';
 import {useWeb3} from '@yearn-finance/web-lib/contexts';
-import axios from 'axios';
-import useMint from 'contexts/useMint';
-import Link from 'next/link';
+
+import type {ReactElement} from 'react';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
