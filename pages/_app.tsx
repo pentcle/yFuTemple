@@ -179,7 +179,7 @@ function	AppWrapper(props: AppProps): ReactElement {
 
 function	MyApp(props: AppProps): ReactElement {
 	const	{Component, pageProps} = props;
-	
+
 	return (
 		<WithYearn
 			options={{

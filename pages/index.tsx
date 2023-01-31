@@ -100,6 +100,7 @@ function	Tree(): ReactElement {
 }
 
 function	MintView(): ReactElement {
+	const router = useRouter();
 	const {isActive, provider, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
 	const {balanceOf, totalSupply, maxSupply, refresh} = useMint();
 	const [txStatusMint, set_txStatusMint] = useState(defaultTxStatus);
@@ -119,6 +120,7 @@ function	MintView(): ReactElement {
 			.populate()
 			.onSuccess(async (): Promise<void> => {
 				await refresh();
+				router.push('/');
 			}).perform();
 	}
 
@@ -147,7 +149,7 @@ function	MintView(): ReactElement {
 							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 						</button>
 					)}
-					
+
 					<div className={!isActive ? 'pointer-events-none opacity-25' : ''}>
 						<div className={'flex flex-row items-center space-x-6 py-8'}>
 							<button

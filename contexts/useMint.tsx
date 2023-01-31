@@ -41,7 +41,6 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 		}
 		const	currentProvider = provider || providers.getProvider(1);
 		const	ethcallProvider = await providers.newEthCallProvider(currentProvider);
-		console.log(ethcallProvider, ethcallProvider.multicall2);
 		ethcallProvider.multicall2 = {address: '0x054FfF7ee30953DdB739458e11EAAd51224343a1', block: 0};
 
 		const	userAddress = address;
@@ -54,7 +53,7 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 		const	ownerOfCalls = [];
 		const	balanceAsNumber = (_balanceOf || ethers.constants.Zero).toNumber();
 		for (let index = 0; index < balanceAsNumber; index++) {
-			ownerOfCalls.push(yfuMintContract.tokenOfInitialOwner(userAddress, index));
+			ownerOfCalls.push(yfuMintContract.tokenOfOwnerByIndex(userAddress, index));
 		}
 		const	_ownedByUser = await ethcallProvider.tryAll(ownerOfCalls) as BigNumber[];
 

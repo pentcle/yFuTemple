@@ -1,5 +1,4 @@
 import {ethers} from 'ethers';
-import FormData from 'form-data';
 import Redis from 'ioredis';
 import YFU_ABI from 'utils/yfu.abi';
 import {providers} from '@yearn-finance/web-lib/utils';
@@ -7,15 +6,6 @@ import {providers} from '@yearn-finance/web-lib/utils';
 import type {NextApiRequest, NextApiResponse} from 'next';
 
 const	redisAddressPerToken = new Redis(process.env.REDIS_URL_ADDRESS_PER_TOKEN as string);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function jsonToFormData(data: any): any {
-	const formData = new FormData();
-	for (const key in data ) {
-		formData.append(key, data[key]);
-	}
-	return formData;
-}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
 	const {tokenID, walletAddress, signature} = JSON.parse(req.body.body);
@@ -32,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const	yfuContract = new ethers.Contract(
 		process.env.MINT_CONTRACT_ADDRESS as string,
 		YFU_ABI,
-		providers.getProvider(1337) as ethers.providers.JsonRpcProvider
+		providers.getProvider(10) as ethers.providers.JsonRpcProvider
 	);
 	const	ownerOfTokenID = await yfuContract.ownerOf(tokenID);
 
@@ -48,11 +38,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	fetch(process.env.SCRIPT_SHIPPING_URL as string, {
 		method: 'POST',
-		body: jsonToFormData(JSON.parse(req.body.body))
+		body: JSON.parse(req.body.body)
 	}).then(async (): Promise<void> => {
 		await redisAddressPerToken.set(tokenID, walletAddress);
 		res.status(200).json('success');
-	}).catch((): void => {
+	}).catch((e): void => {
+		console.log(e);
 		res.status(200).json('error: impossible to save info');
 		return;
 	});

@@ -12,7 +12,7 @@ export async function	mint(
 			['function safeMint(address _input) external payable'],
 			signer
 		);
-		const	transaction = await contract.safeMint(address, {value: ethers.constants.WeiPerEther.div(100000)});
+		const	transaction = await contract.safeMint(address, {value: '10000000000000'});
 		const	transactionResult = await transaction.wait();
 		if (transactionResult.status === 0) {
 			console.error('Fail to perform transaction');
