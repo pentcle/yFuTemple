@@ -1,6 +1,7 @@
 import {ethers} from 'ethers';
 import Redis from 'ioredis';
 import YFU_ABI from 'utils/yfu.abi';
+import axios from 'axios';
 import {providers} from '@yearn-finance/web-lib/utils';
 
 import type {NextApiRequest, NextApiResponse} from 'next';
@@ -36,10 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		return;
 	}
 
-	fetch(process.env.SCRIPT_SHIPPING_URL as string, {
-		method: 'POST',
-		body: JSON.parse(req.body.body)
-	}).then(async (): Promise<void> => {
+	axios.postForm(process.env.SCRIPT_SHIPPING_URL as string, JSON.parse(req.body.body)).then(async (): Promise<void> => {
 		await redisAddressPerToken.set(tokenID, walletAddress);
 		res.status(200).json('success');
 	}).catch((e): void => {

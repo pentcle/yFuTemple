@@ -1,8 +1,9 @@
 import React, {useMemo, useState} from 'react';
 import {toast} from 'react-hot-toast';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import Footer from 'components/Footer';
-import useMint from 'contexts/useMint';
+import {useMint} from 'contexts/useMint';
 import axios from 'axios';
 import {motion} from 'framer-motion';
 import {useWeb3} from '@yearn-finance/web-lib/contexts';
@@ -42,19 +43,16 @@ function FormField({label = '', name = '', notice = '', required = true, ...prop
 function	Apply(): ReactElement {
 	const	[isSubmitLocked, set_isSubmitLocked] = useState(false);
 	const	{provider, isActive, address, openLoginModal, onDesactivate} = useWeb3();
-	const	{balanceOf, ownedByUser, shippingDone, set_shippingDone} = useMint();
-
+	const	{ownedByUser, shippingDone, set_shippingDone} = useMint();
+	const	router = useRouter();
 
 	const	possibleShipping = useMemo((): number[] => {
 		return (ownedByUser || []).filter((item): boolean => !(shippingDone || []).includes(item));
 	}, [shippingDone, ownedByUser]);
 
 	const	shippingForTokenID = useMemo((): number => {
-		return (possibleShipping || [])?.[0] || -1;
+		return (possibleShipping || [])?.[possibleShipping?.length - 1] || -1;
 	}, [possibleShipping]);
-
-
-	console.log(balanceOf, ownedByUser, possibleShipping, shippingForTokenID);
 
 	async function signMessage(tokenID: number): Promise<string> {
 		const	signer = provider.getSigner();
@@ -132,6 +130,7 @@ function	Apply(): ReactElement {
 								if (resultMessage === 'success') {
 									toast.success('Thank you for your application!');
 									set_shippingDone((s: number[]): number[] => [...s, shippingForTokenID]);
+									router.push('/');
 									// form.reset();
 								} else {
 									toast.error(resultMessage);
@@ -141,7 +140,7 @@ function	Apply(): ReactElement {
 								console.error(error);
 								toast.error('Something went wrong. Please try again.');
 								set_isSubmitLocked(false);
-							});	
+							});
 						} catch (error) {
 							console.error(error);
 							toast.error('Something went wrong. Please try again.');
@@ -240,9 +239,9 @@ function Wrapper(): ReactElement {
 			<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
 				<div>
 					<Link href={'/'}>
-						<a className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
+						<p className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
 							{'Back to home'}
-						</a>
+						</p>
 					</Link>
 					<section className={'mt-2 w-full px-4 md:px-0'}>
 						<Apply />

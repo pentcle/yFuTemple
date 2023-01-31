@@ -100,7 +100,6 @@ function	Tree(): ReactElement {
 }
 
 function	MintView(): ReactElement {
-	const router = useRouter();
 	const {isActive, provider, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
 	const {balanceOf, totalSupply, maxSupply, refresh} = useMint();
 	const [txStatusMint, set_txStatusMint] = useState(defaultTxStatus);
@@ -120,7 +119,6 @@ function	MintView(): ReactElement {
 			.populate()
 			.onSuccess(async (): Promise<void> => {
 				await refresh();
-				router.push('/');
 			}).perform();
 	}
 
