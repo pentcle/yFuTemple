@@ -56,7 +56,7 @@ function	Apply(): ReactElement {
 
 	async function signMessage(tokenID: number): Promise<string> {
 		const	signer = provider.getSigner();
-		const	signature = await signer.signMessage('I own the edition #' + tokenID);
+		const	signature = await signer.signMessage('I own edition #' + tokenID);
 		return signature;
 	}
 
@@ -90,8 +90,15 @@ function	Apply(): ReactElement {
 	return (
 		<div className={'relative mb-10 flex flex-col border-2 border-white text-white'}>
 			<div className={'border-b-2 border-white bg-black p-8'}>
-				<h1 className={'whitespace-pre-wrap text-4xl font-bold text-white'}>{'Shipping Informations'}</h1>
-				<p className={'text-grey-2 my-2 text-base'}>{'Theses informations will only be used for shipping and all removed once the comics are delivered.'}</p>
+				<h1 className={'whitespace-pre-wrap text-4xl font-bold text-white'}>
+					{'Shipping Information'}
+				</h1>
+				<p className={'text-grey-2 my-2 text-base'}>
+					{'This information will only be used for shipping and removed once comics are delivered.  Please note, you will need to enter shipping separately for each NFT you purchase. Shipping is free!'}
+				</p>
+				<p className={'text-grey-2 my-2 text-base'}>
+					{'See our FAQ for more details on shipping process and policy.'}
+				</p>
 			</div>
 
 			<div className={'relative grid w-full grid-cols-12 p-8'}>

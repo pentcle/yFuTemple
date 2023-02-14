@@ -31,13 +31,13 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 	return (
 		<div className={'grid grid-cols-1 divide-y divide-white border-2 border-white md:grid-cols-3 md:divide-y-0'}>
 			<div className={'relative col-span-1 flex flex-col items-center justify-center divide-y divide-white p-0 md:divide-y-0 md:p-8'}>
-				<div className={'image-wrapper-full-height h-48 px-8 md:h-auto md:px-0'}>
+				<div className={'image-wrapper-full-height h-32 md:h-auto'}>
 					<Image
 						alt={''}
 						src={typoSrc}
 						loading={'eager'}
-						objectFit={'contain'}
 						quality={90}
+						className={'aspect-square w-32 object-contain p-2 md:w-full'}
 						width={497}
 						height={497} />
 				</div>
@@ -52,7 +52,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 					height={895} />
 			</div>
 			<div className={'col-span-1 flex h-full w-full flex-col border-0 border-white p-4 pb-8 md:border-x-2 md:p-8 md:pb-14'}>
-				<div className={'space-y-4 font-scope text-base text-white md:text-lg'}>
+				<div className={'space-y-4 font-scope text-base text-white md:text-lg'} style={{whiteSpace: 'break-spaces'}}>
 					<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>{title}</h4>
 					{children}
 				</div>
@@ -123,21 +123,21 @@ function	MintView(): ReactElement {
 	}
 
 	return (
-		<div className={'mb-48 flex flex-col items-center border-2 border-white p-8 text-white'}>
-			<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>
-				{'YFU - The Comic, episode 1\r'}
+		<div className={'mb-48 flex flex-col items-center border-2 border-white p-4 text-white md:p-8'}>
+			<h4 className={'mx-auto mb-0 hidden w-3/4 text-center text-2xl font-bold md:mb-6 md:flex md:w-full md:text-left md:text-4xl'}>
+				{'yFu - The Comic, Episodes 1 to 4'}
 			</h4>
-			<div className={'my-10 grid w-full grid-cols-12 gap-16'}>
-				<div className={'col-span-4 flex flex-col px-6'}>
+			<div className={'mb-4 grid w-full grid-cols-12 gap-2 md:my-10 md:gap-16'}>
+				<div className={'col-span-12 flex flex-col px-0 md:col-span-4 md:px-6'}>
 					<Image
 						alt={'comics'}
 						src={'/assetsThumbnail/comic1-main.jpg'}
-						objectFit={'contain'}
 						loading={'eager'}
+						className={'w-full object-cover md:aspect-auto md:object-contain'}
 						width={595}
 						height={842} />
 				</div>
-				<div className={'col-span-8 flex w-full flex-col'}>
+				<div className={'col-span-12 flex w-full flex-col md:col-span-8'}>
 					{isActive ? <div /> : (
 						<button
 							onClick={connectWallet}
@@ -149,11 +149,11 @@ function	MintView(): ReactElement {
 					)}
 
 					<div className={!isActive ? 'pointer-events-none opacity-25' : ''}>
-						<div className={'flex flex-row items-center space-x-6 py-8'}>
+						<div className={'flex flex-col items-center space-x-0 py-8 md:flex-row md:space-x-6'}>
 							<button
 								onClick={onMint}
 								disabled={txStatusMint.pending}
-								className={'button-glowing my-4 h-14 bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30'}>
+								className={'button-glowing mb-4 w-full bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
 								<p className={txStatusMint.pending ? 'invisible' : 'visible'}>{'Mint NFT'}</p>
 								<span className={`${txStatusMint.pending ? 'visible' : 'invisible'} absolute inset-0 flex items-center justify-center`}>
 									<svg
@@ -179,25 +179,31 @@ function	MintView(): ReactElement {
 								<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 								<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 							</button>
-							<Link href={'/shipping'}>
+							<Link href={balanceOf < 1 ? '' : '/shipping'} className={`w-full md:w-auto ${balanceOf < 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 								<button
 									disabled={balanceOf < 1}
-									className={'button-glowing my-4 bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30'}>
-									<p>{'Fill shipping informations'}</p>
+									className={'button-glowing w-full bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
+									<p>{'Fill Shipping Information'}</p>
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 								</button>
 							</Link>
 						</div>
 						<div>
-							<p className={'pb-8 text-xl'}>
+							{/* <p className={'pb-8 text-xl'}>
 								{`0.1 ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
+							</p> */}
+							<h4 className={'mb-6 flex text-2xl font-bold md:hidden md:text-4xl'}>
+								{'yFu - The Comic, Episodes 1 to 4'}
+							</h4>
+							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
+								{'Each NFT holder is eligible to receive a physical set of all four limited edition comics, at no additional cost. Mint, enter shipping info, and prepare to receive your piece of DeFi history.'}
 							</p>
-							<p className={'text-xl'}>
-								{'Each NFT holder will be eligible to receive a copy of the limited edition comic\r'}
+							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
+								{'As a bonus, upon reveal your NFT will get one collectible frame of original artwork from the comics.'}
 							</p>
-							<p className={'text-xl'}>
-								{'By leveling up your NFT, via Yearn product usage, you will be able to claim free 1/1 art NFTs, upgrade special edition comics, etc\r'}
+							<p className={'font-scope text-base text-white underline md:text-lg'}>
+								{'See FAQ for all the details.'}
 							</p>
 						</div>
 					</div>

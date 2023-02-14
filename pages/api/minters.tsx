@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		res.status(200).json('error: missing token, address or signature');
 		return;
 	}
-	const signer = ethers.utils.verifyMessage('I own the edition #' + tokenID, signature || '');
+	const signer = ethers.utils.verifyMessage('I own edition #' + tokenID, signature || '');
 	if (signer !== walletAddress) {
 		res.status(200).json('error: invalid signature');
 		return;
