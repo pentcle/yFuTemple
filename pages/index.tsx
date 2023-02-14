@@ -101,7 +101,7 @@ function	Tree(): ReactElement {
 
 function	MintView(): ReactElement {
 	const {isActive, provider, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
-	const {balanceOf, totalSupply, maxSupply, refresh} = useMint();
+	const {balanceOf, totalSupply, maxSupply, refresh, shippingDone} = useMint();
 	const [txStatusMint, set_txStatusMint] = useState(defaultTxStatus);
 
 	function connectWallet(): void {
@@ -148,8 +148,8 @@ function	MintView(): ReactElement {
 						</button>
 					)}
 
-					<div className={!isActive ? 'pointer-events-none opacity-25' : ''}>
-						<div className={'flex flex-col items-center space-x-0 py-8 md:flex-row md:space-x-6'}>
+					<div className={!isActive ? 'pointer-events-none opacity-25' : 'flex h-full flex-col'}>
+						<div className={'mb-8 flex flex-col items-center space-x-0 md:flex-row md:space-x-6'}>
 							<button
 								onClick={onMint}
 								disabled={txStatusMint.pending}
@@ -202,9 +202,19 @@ function	MintView(): ReactElement {
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
 								{'As a bonus, upon reveal your NFT will get one collectible frame of original artwork from the comics.'}
 							</p>
-							<p className={'font-scope text-base text-white underline md:text-lg'}>
+							<p className={'mb-4 font-scope text-base text-white underline md:text-lg'}>
 								{'See FAQ for all the details.'}
 							</p>
+						</div>
+						<div className={'mt-auto flex flex-row space-x-4 border-2 border-white p-6'}>
+							<div className={'pt-1'}>
+								<div className={'h-4 w-4 animate-pulse rounded-full bg-green-500'} />
+							</div>
+							<div>
+								<p>{`You have minted ${balanceOf} yFu Comic NFT${balanceOf > 1 ? 's' : ''}`}</p>
+								<p>{`You entered shipping for ${shippingDone.length} yFu Comic NFT${balanceOf > 1 ? 's' : ''}`}</p>
+								<p className={'mt-2'}>{'Please fill your shipping information before the 22th of September 2023'}</p>
+							</div>
 						</div>
 					</div>
 				</div>
