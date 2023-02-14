@@ -190,12 +190,12 @@ function	MintView(): ReactElement {
 							</Link>
 						</div>
 						<div>
-							{/* <p className={'pb-8 text-xl'}>
-								{`0.1 ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
-							</p> */}
 							<h4 className={'mb-6 flex text-2xl font-bold md:hidden md:text-4xl'}>
 								{'yFu - The Comic, Episodes 1 to 4'}
 							</h4>
+							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
+								{`0.1 ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
+							</p>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
 								{'Each NFT holder is eligible to receive a physical set of all four limited edition comics, at no additional cost. Mint, enter shipping info, and prepare to receive your piece of DeFi history.'}
 							</p>
