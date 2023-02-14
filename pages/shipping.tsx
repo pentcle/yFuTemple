@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {toast} from 'react-hot-toast';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
@@ -23,9 +23,9 @@ type TFormField = {
 	formType?: string,
 	required?: boolean
 }
-function FormField({label = '', name = '', notice = '', required = true, ...props}: TFormField & React.HTMLProps<HTMLInputElement>): ReactElement {
+function FormField({label = '', name = '', notice = '', required = true, style, ...props}: TFormField & React.HTMLProps<HTMLInputElement>): ReactElement {
 	return (
-		<div className={'grid grid-cols-12 items-center gap-x-0 gap-y-2 md:gap-x-6 md:gap-y-0'}>
+		<div className={'grid grid-cols-12 items-center gap-x-0 gap-y-2 md:gap-x-6 md:gap-y-0'} style={style}>
 			<label className={'text-grey-2 col-span-12 flex flex-col font-bold'}>
 				{label}
 				<p className={'text-grey-2 text-xs'}>{notice}</p>
@@ -41,24 +41,28 @@ function FormField({label = '', name = '', notice = '', required = true, ...prop
 }
 
 function	Apply(): ReactElement {
-	const	[isSubmitLocked, set_isSubmitLocked] = useState(false);
 	const	{provider, isActive, address, openLoginModal, onDesactivate} = useWeb3();
 	const	{ownedByUser, shippingDone, set_shippingDone} = useMint();
 	const	router = useRouter();
+	const	[isSubmitLocked, set_isSubmitLocked] = useState(false);
+	const	[shippingForTokenID, set_shippingForTokenID] = useState(-1);
 
 	const	possibleShipping = useMemo((): number[] => {
 		return (ownedByUser || []).filter((item): boolean => !(shippingDone || []).includes(item));
 	}, [shippingDone, ownedByUser]);
 
-	const	shippingForTokenID = useMemo((): number => {
-		return (possibleShipping || [])?.[possibleShipping?.length - 1] || -1;
+	useEffect((): void => {
+		set_shippingForTokenID((possibleShipping || [])?.[possibleShipping?.length - 1] || -1);
 	}, [possibleShipping]);
+
 
 	async function signMessage(tokenID: number): Promise<string> {
 		const	signer = provider.getSigner();
 		const	signature = await signer.signMessage('I own edition #' + tokenID);
 		return signature;
 	}
+
+	console.log(possibleShipping, shippingForTokenID);
 
 	const	handleSubmit = (): ReactElement => {
 		if (!isSubmitLocked) {
@@ -186,29 +190,51 @@ function	Apply(): ReactElement {
 						name={'phone'}
 						type={'tel'} />
 					<FormField label={'Contact email or telegram'} name={'contact'} />
-					<FormField
-						required
-						label={'NFT owner Address'}
-						name={'owner'}
-						readOnly
-						value={isActive ? address : ''}
-						notice={
-							<button
-								type={'button'}
-								className={'text-sm italic text-white underline opacity-40'}
-								onClick={(): void => {
-									if (isActive) {
-										onDesactivate();
-									} else {
-										openLoginModal();
-									}
-								}}>
-								<p>{isActive ? 'Disconnect' : 'Connect Wallet'}</p>
-							</button>
-						} />
+					<div className={'flex w-full flex-col space-x-0 space-y-4 md:flex-row md:space-y-0 md:space-x-4'}>
+						<FormField
+							style={{width: '100%'}}
+							required
+							label={'NFT owner Address'}
+							name={'owner'}
+							readOnly
+							value={isActive ? address : ''}
+							notice={
+								<button
+									type={'button'}
+									className={'text-sm italic text-white underline opacity-40'}
+									onClick={(): void => {
+										if (isActive) {
+											onDesactivate();
+										} else {
+											openLoginModal();
+										}
+									}}>
+									<p>{isActive ? 'Disconnect' : 'Connect Wallet'}</p>
+								</button>
+							} />
+
+						<div className={'grid grid-cols-12 items-center gap-x-0 gap-y-2 md:gap-x-6 md:gap-y-0'} style={{width: '100%'}}>
+							<label className={'text-grey-2 col-span-12 flex flex-col font-bold'}>
+								{'Token ID'}
+								<p className={'text-grey-2 text-xs'}>{'The token ID of the NFT you are filling out shipping for.'}</p>
+								<select
+									className={'input mt-2 h-10 border-none bg-white/10 p-2'}
+									value={shippingForTokenID}
+									onChange={(e): void => set_shippingForTokenID(Number(e.target.value))}>
+									{possibleShipping.map((tokenID: number): JSX.Element => {
+										return (
+											<option key={tokenID} value={tokenID}>
+												{tokenID}
+											</option>
+										);
+									})}
+								</select>
+							</label>
+						</div>
+					</div>
 					<button
 						disabled={isSubmitLocked}
-						className={'button-glowing my-4 flex h-12 w-full items-center justify-center bg-white text-center text-black'}
+						className={'button-glowing my-4 flex h-12 w-full items-center justify-center bg-white text-center text-lg text-black'}
 						type={'submit'}>
 						{handleSubmit()}
 					</button>
