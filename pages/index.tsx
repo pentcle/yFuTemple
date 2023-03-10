@@ -202,9 +202,11 @@ function	MintView(): ReactElement {
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
 								{'As a bonus, upon reveal your NFT will get one collectible frame of original artwork from the comics.'}
 							</p>
-							<p className={'mb-4 font-scope text-base text-white underline md:text-lg'}>
-								{'See FAQ for all the details.'}
-							</p>
+							<Link href={'/faq'}>
+								<p className={'mb-4 font-scope text-base text-white underline md:text-lg'}>
+									{'See FAQ for all the details.'}
+								</p>
+							</Link>
 						</div>
 						<div className={'mt-auto flex flex-row space-x-4 border-2 border-white p-6'}>
 							<div className={'pt-1'}>
