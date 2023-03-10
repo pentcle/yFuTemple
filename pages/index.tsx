@@ -127,15 +127,17 @@ function	MintView(): ReactElement {
 			<h4 className={'mx-auto mb-0 hidden w-3/4 text-center text-2xl font-bold md:mb-6 md:flex md:w-full md:text-left md:text-4xl'}>
 				{'yFu - The Comic, Episodes 1 to 4'}
 			</h4>
-			<div className={'mb-4 grid w-full grid-cols-12 gap-2 md:my-10 md:gap-16'}>
-				<div className={'col-span-12 flex flex-col px-0 md:col-span-4 md:px-6'}>
-					<Image
-						alt={'comics'}
-						src={'/assetsThumbnail/comic1-main.jpg'}
-						loading={'eager'}
-						className={'w-full object-cover md:aspect-auto md:object-contain'}
-						width={595}
-						height={842} />
+			<div className={'mb-4 grid w-full grid-cols-12 gap-2 md:my-10 md:gap-10'}>
+				<div className={'col-span-12 flex flex-col px-0 md:col-span-4 mb-4 md:mb-0'}>
+					<video
+						playsInline
+						autoPlay
+						muted
+						loop
+						poster={'/artwork.png'}
+						className={'w-full h-full object-cover md:aspect-auto md:object-contain'}>
+						<source src={'/artwork.mp4'} type={'video/mp4'} />
+					</video>
 				</div>
 				<div className={'col-span-12 flex w-full flex-col md:col-span-8'}>
 					{isActive ? <div /> : (
