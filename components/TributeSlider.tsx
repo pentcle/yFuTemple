@@ -41,7 +41,7 @@ function	TributeElement({
 							onClick={(): void => {
 								set_hasInfo((i: any): (TYFUDataMedia | boolean) => i?.title === tribute.title ? false : tribute);
 							}}
-							className={'cursor-pointer font-scope'}>
+							className={'font-scope cursor-pointer'}>
 							{(hasInfo as TYFUDataMedia)?.title === tribute.title ? 'CLOSE' : 'INFO +'}
 						</p>
 					</div>
@@ -77,7 +77,7 @@ export default function TributeSlider({medias, hasInfo, set_hasInfo}: TTributeSl
 	return (
 		<div
 			id={'tribute-slider'}
-			className={'horizontal-snap w-screen gap-0 scroll-smooth px-20 scrollbar-none md:px-[40vw]'}
+			className={'horizontal-snap scrollbar-none w-screen gap-0 scroll-smooth px-20 md:px-[40vw]'}
 			onScroll={handleScroll}>
 			{
 				medias.map((tribute: TYFUDataMedia, index: number): ReactElement => (

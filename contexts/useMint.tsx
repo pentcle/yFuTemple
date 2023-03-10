@@ -2,9 +2,10 @@ import React, {createContext, useCallback, useContext, useEffect, useState} from
 import {Contract} from 'ethcall';
 import {ethers} from 'ethers';
 import YFU_ABI from 'utils/yfu.abi';
-import {useLocalStorage} from '@yearn-finance/web-lib';
-import {useWeb3} from '@yearn-finance/web-lib/contexts';
-import {performBatchedUpdates, providers} from '@yearn-finance/web-lib/utils';
+import {useWeb3} from '@yearn-finance/web-lib/contexts/useWeb3';
+import {useLocalStorage} from '@yearn-finance/web-lib/hooks/useLocalStorage';
+import performBatchedUpdates from '@yearn-finance/web-lib/utils/performBatchedUpdates';
+import {getProvider, newEthCallProvider} from '@yearn-finance/web-lib/utils/web3/providers';
 
 import type {BigNumber} from 'ethers';
 import type {Dispatch, ReactElement} from 'react';
@@ -39,8 +40,8 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 		if (!isActive || !provider) {
 			return;
 		}
-		const	currentProvider = provider || providers.getProvider(1);
-		const	ethcallProvider = await providers.newEthCallProvider(currentProvider);
+		const	currentProvider = provider || getProvider(1);
+		const	ethcallProvider = await newEthCallProvider(currentProvider);
 		ethcallProvider.multicall2 = {address: '0x054FfF7ee30953DdB739458e11EAAd51224343a1', block: 0};
 
 		const	userAddress = address;

@@ -5,7 +5,7 @@ import {DefaultSeo} from 'next-seo';
 import {MintContextApp} from 'contexts/useMint';
 import {AnimatePresence} from 'framer-motion';
 import {Dialog, Transition} from '@headlessui/react';
-import {WithYearn} from '@yearn-finance/web-lib/contexts';
+import {WithYearn} from '@yearn-finance/web-lib/contexts/WithYearn';
 
 import Header from '../components/Header';
 import {AudioContextApp} from '../contexts/useAudio';

@@ -6,7 +6,7 @@ import Footer from 'components/Footer';
 import {useMint} from 'contexts/useMint';
 import axios from 'axios';
 import {motion} from 'framer-motion';
-import {useWeb3} from '@yearn-finance/web-lib/contexts';
+import {useWeb3} from '@yearn-finance/web-lib/contexts/useWeb3';
 
 import type {ReactElement} from 'react';
 
@@ -197,7 +197,7 @@ function	Apply(): ReactElement {
 							label={'NFT owner Address'}
 							name={'owner'}
 							readOnly
-							value={isActive ? address : ''}
+							value={isActive ? address as string : ''}
 							notice={
 								<button
 									type={'button'}

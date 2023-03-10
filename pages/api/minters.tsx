@@ -2,7 +2,7 @@ import {ethers} from 'ethers';
 import Redis from 'ioredis';
 import YFU_ABI from 'utils/yfu.abi';
 import axios from 'axios';
-import {providers} from '@yearn-finance/web-lib/utils';
+import {getProvider} from '@yearn-finance/web-lib/utils/web3/providers';
 
 import type {NextApiRequest, NextApiResponse} from 'next';
 
@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const	yfuContract = new ethers.Contract(
 		process.env.MINT_CONTRACT_ADDRESS as string,
 		YFU_ABI,
-		providers.getProvider(10) as ethers.providers.JsonRpcProvider
+		getProvider(10) as ethers.providers.JsonRpcProvider
 	);
 	const	ownerOfTokenID = await yfuContract.ownerOf(tokenID);
 

@@ -9,13 +9,13 @@ function	Footer({visitors=[]}): ReactElement {
 			<div className={'my-8 md:my-12'}>
 				<div className={'flex flex-row items-center justify-center space-x-1'}>
 					{visitorsAsArr.map((e, index): ReactElement => (
-						<div key={index} className={'flex h-12 w-9 items-center justify-center border-2 border-white bg-black font-chicago tabular-nums text-white'}>
+						<div key={index} className={'font-chicago flex h-12 w-9 items-center justify-center border-2 border-white bg-black tabular-nums text-white'}>
 							{e}
 						</div>
 					))}
 				</div>
 			</div>
-			<nav className={'flex w-full flex-col items-center justify-center space-y-5 space-x-0 font-monument text-lg text-yblue md:flex-row md:space-y-0 md:space-x-8 md:text-xl'}>
+			<nav className={'font-monument text-yblue flex w-full flex-col items-center justify-center space-y-5 space-x-0 text-lg md:flex-row md:space-y-0 md:space-x-8 md:text-xl'}>
 				<p className={'text-shadow transition-all duration-150'}>{'TWITTER'}</p>
 				<p className={'text-shadow transition-all duration-150'}>{'DISCORD'}</p>
 				<p className={'text-shadow transition-all duration-150'}>{'MEDIUM'}</p>

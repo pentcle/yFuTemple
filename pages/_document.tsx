@@ -44,7 +44,7 @@ class MyDocument extends Document {
 					<link
 						rel={'preconnect'}
 						href={'https://brand.yearn.finance'}
-						crossOrigin={'true'} />
+						crossOrigin={'anonymous'} />
 					<script dangerouslySetInnerHTML={{__html: modeScript}} />
 				</Head>
 				<body>
