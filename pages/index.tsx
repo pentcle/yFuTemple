@@ -52,7 +52,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 					height={895} />
 			</div>
 			<div className={'col-span-1 flex h-full w-full flex-col border-0 border-white p-4 pb-8 md:border-x-2 md:p-8 md:pb-14'}>
-				<div className={'font-scope space-y-4 text-base text-white md:text-lg'} style={{whiteSpace: 'break-spaces'}}>
+				<div className={'space-y-4 font-scope text-base text-white md:text-lg'} style={{whiteSpace: 'break-spaces'}}>
 					<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>{title}</h4>
 					{children}
 				</div>
@@ -61,7 +61,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 						onClick={(): void => {
 							router.push(`/tribute/${id}`);
 						}}
-						className={'button-glowing font-peste bg-white text-black'}>
+						className={'button-glowing bg-white font-peste text-black'}>
 						{'SEE TRIBUTES'}
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
@@ -92,7 +92,7 @@ function	Tree(): ReactElement {
 					width={2000}
 					height={1000} />
 			</div>
-			<div className={'font-scope col-span-1 p-4 text-left text-base text-white md:p-6 md:text-center'}>
+			<div className={'col-span-1 p-4 text-left font-scope text-base text-white md:p-6 md:text-center'}>
 				<p>{'The YFI faction is guided by the four yFu, who interpret the knowledge of the Yearning Tree - an ancient being who hears the desires of creatures across the universe - and responds by growing yield-bearing seeds containing the answers to their wishes'}</p>
 			</div>
 		</div>
@@ -128,14 +128,14 @@ function	MintView(): ReactElement {
 				{'yFu - The Comic, Episodes 1 to 4'}
 			</h4>
 			<div className={'mb-4 grid w-full grid-cols-12 gap-2 md:my-10 md:gap-10'}>
-				<div className={'col-span-12 flex flex-col px-0 md:col-span-4 mb-4 md:mb-0'}>
+				<div className={'col-span-12 mb-4 flex flex-col px-0 md:col-span-4 md:mb-0'}>
 					<video
 						playsInline
 						autoPlay
 						muted
 						loop
 						poster={'/artwork.png'}
-						className={'w-full h-full object-cover md:aspect-auto md:object-contain'}>
+						className={'h-full w-full object-cover md:aspect-auto md:object-contain'}>
 						<source src={'/artwork.mp4'} type={'video/mp4'} />
 					</video>
 				</div>
@@ -155,7 +155,7 @@ function	MintView(): ReactElement {
 							<button
 								onClick={onMint}
 								disabled={txStatusMint.pending}
-								className={'button-glowing font-peste mb-4 w-full bg-white text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
+								className={'button-glowing mb-4 w-full bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
 								<p className={txStatusMint.pending ? 'invisible' : 'visible'}>{'Mint NFT'}</p>
 								<span className={`${txStatusMint.pending ? 'visible' : 'invisible'} absolute inset-0 flex items-center justify-center`}>
 									<svg
@@ -184,7 +184,7 @@ function	MintView(): ReactElement {
 							<Link href={balanceOf < 1 ? '' : '/shipping'} className={`w-full md:w-auto ${balanceOf < 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 								<button
 									disabled={balanceOf < 1}
-									className={'button-glowing font-peste w-full bg-white text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
+									className={'button-glowing w-full bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
 									<p>{'Fill Shipping Information'}</p>
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
@@ -195,17 +195,17 @@ function	MintView(): ReactElement {
 							<h4 className={'mb-6 flex text-2xl font-bold md:hidden md:text-4xl'}>
 								{'yFu - The Comic, Episodes 1 to 4'}
 							</h4>
-							<p className={'font-scope mb-4 text-base text-white md:text-lg'}>
+							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
 								{`0.1 ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
 							</p>
-							<p className={'font-scope mb-4 text-base text-white md:text-lg'}>
+							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
 								{'Each NFT holder is eligible to receive a physical set of all four limited edition comics, at no additional cost. Mint, enter shipping info, and prepare to receive your piece of DeFi history.'}
 							</p>
-							<p className={'font-scope mb-4 text-base text-white md:text-lg'}>
+							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
 								{'As a bonus, upon reveal your NFT will get one collectible frame of original artwork from the comics.'}
 							</p>
 							<Link href={'/faq'}>
-								<p className={'font-scope mb-4 text-base text-white underline md:text-lg'}>
+								<p className={'mb-4 font-scope text-base text-white underline md:text-lg'}>
 									{'See FAQ for all the details.'}
 								</p>
 							</Link>

@@ -38,15 +38,15 @@ function	Header(): ReactElement {
 	return (
 		<>
 			<header className={'fixed top-0 z-20 grid h-24 w-full grid-cols-2 flex-col items-center md:flex md:h-16 md:flex-row'}>
-				<div className={'md:w-68 md:min-w-68 relative col-span-1 flex h-12 w-full items-center border-b-2 border-white bg-black md:h-full'}>
+				<div className={'relative col-span-1 flex h-12 w-full items-center border-b-2 border-white bg-black md:h-full md:w-68 md:min-w-68'}>
 					<div
 						className={'flex w-full cursor-pointer items-center justify-between px-4'}
 						onClick={(): void => set_hasModal(!hasModal)}>
-						<p className={'font-scope select-none text-xl text-white md:text-2xl'}>{'INFO'}</p>
+						<p className={'select-none font-scope text-xl text-white md:text-2xl'}>{'INFO'}</p>
 					</div>
-					<div className={`w-250% absolute top-full left-0 z-50 border-0 border-b-2 border-white bg-black p-4 md:w-full md:border-2${hasModal ? '' : 'pointer-events-none opacity-0'}`}>
+					<div className={`absolute top-full left-0 z-50 w-250% border-0 border-b-2 border-white bg-black p-4 md:w-full md:border-2${hasModal ? '' : 'pointer-events-none opacity-0'}`}>
 						<div
-							className={'font-scope -m-1 flex w-full cursor-pointer select-none justify-end p-1 text-lg text-white'}
+							className={'-m-1 flex w-full cursor-pointer select-none justify-end p-1 font-scope text-lg text-white'}
 							onClick={(): void => set_hasModal(!hasModal)}>
 							{'X'}
 						</div>
@@ -57,7 +57,7 @@ function	Header(): ReactElement {
 								width={150}
 								height={186} />
 						</div>
-						<div className={'font-scope text-yblue mt-4 tracking-widest'}>
+						<div className={'mt-4 font-scope tracking-widest text-yblue'}>
 							<span className={'mb-1 flex w-full flex-row'}>
 								<p>{'Find us:'}</p>
 								<a
@@ -89,7 +89,7 @@ function	Header(): ReactElement {
 									className={'hover:underline'}>{'Discord'}
 								</a>
 							</span>
-							<span className={'font-bluepill mt-1 flex w-full flex-row justify-between'}>
+							<span className={'mt-1 flex w-full flex-row justify-between font-bluepill'}>
 								<a
 									href={'https://thebluepill.eth.link/'}
 									target={'_blank'}
@@ -103,7 +103,7 @@ function	Header(): ReactElement {
 				</div>
 				<div className={'relative col-span-1 flex h-12 min-w-0 border-b-2 border-l-2 border-white bg-black md:h-16 md:w-[300px] md:min-w-[300px]'}>
 					<div className={'flex w-max cursor-pointer items-center justify-between px-2 md:px-4'}>
-						<div className={'font-scope flex flex-row items-center justify-center'}>
+						<div className={'flex flex-row items-center justify-center font-scope'}>
 							<IconPrev
 								onClick={(): void => {
 									audio.currentTime = 0;
@@ -128,8 +128,8 @@ function	Header(): ReactElement {
 								onClick={(): void => set_selected(selected === 4 ? 0 : selected + 1)}
 								className={'h-3 w-3 rotate-180 cursor-pointer text-white md:h-4 md:w-4'}/>
 						</div>
-						<div className={'font-scope mx-2 mb-0.5 flex text-xs text-white md:mx-3 md:text-base'}>{AUDIO_LIST[selected][0]}</div>
-						<div className={'font-scope mr-0 mb-0.5 text-xs tabular-nums text-white md:mr-3 md:text-base'}>
+						<div className={'mx-2 mb-0.5 flex font-scope text-xs text-white md:mx-3 md:text-base'}>{AUDIO_LIST[selected][0]}</div>
+						<div className={'mr-0 mb-0.5 font-scope text-xs tabular-nums text-white md:mr-3 md:text-base'}>
 							{renderTimer()}
 						</div>
 						<IconExpand
@@ -137,11 +137,11 @@ function	Header(): ReactElement {
 							onClick={(): void => set_hasMediaPlayer(!hasMediaPlayer)} />
 					</div>
 				</div>
-				<div className={'w-250% font-scope relative col-span-2 flex h-12 select-none items-center overflow-x-hidden border-b-2 border-white bg-[#181D20] text-white md:h-16 md:w-full'}>
+				<div className={'relative col-span-2 flex h-12 w-250% select-none items-center overflow-x-hidden border-b-2 border-white bg-[#181D20] font-scope text-white md:h-16 md:w-full'}>
 					<div className={'animate-marquee whitespace-nowrap'}>
 						<span className={'mx-4 text-xl md:text-2xl'}>{'THE TEMPLE IS A SACRED PLACE, DESIGNED SO THE ACOLYTES THAT REPRESENT YFI MAY COMMUNE AND WORSHIP'}</span>
 					</div>
-					<div className={'animate-marquee2 absolute top-0 flex h-full items-center whitespace-nowrap'}>
+					<div className={'absolute top-0 flex h-full animate-marquee2 items-center whitespace-nowrap'}>
 						<span className={'mx-4 text-xl md:text-2xl'}>{'THE TEMPLE IS A SACRED PLACE, DESIGNED SO THE ACOLYTES THAT REPRESENT YFI MAY COMMUNE AND WORSHIP'}</span>
 					</div>
 				</div>

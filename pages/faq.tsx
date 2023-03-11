@@ -15,32 +15,32 @@ function	FAQ(): ReactElement {
 	return (
 		<div className={'relative mb-10 flex flex-col border-2 border-white text-white'}>
 			<div className={'border-b-2 border-white p-8'}>
-			<h1 className={'whitespace-pre-wrap text-4xl font-bold text-white'}>
+				<h1 className={'whitespace-pre-wrap text-4xl font-bold text-white'}>
 					{'Campaign Timeline'}
 				</h1>
 				<div className={'mt-10'}>
 					<ul className={'list-inside list-disc space-y-2'}>
 						<li className={'text-base text-white'}>
-							5/1/23 NFT Minting Begins!
+							{'5/1/23 NFT Minting Begins!'}
 						</li>
 						<li className={'text-base text-white'}>
-							Minting is Open until 5/21/23, or supply runs out.
+							{'Minting is Open until 5/21/23, or supply runs out.'}
 						</li>
 						<li className={'text-base text-white'}>
-							Shipping Information Entry is open until 6/1/23
+							{'Shipping Information Entry is open until 6/1/23'}
 						</li>
 						<li className={'text-base text-white'}>
-							NFT artwork is revealed by 6/2/23 (exact dates TBA)
+							{'NFT artwork is revealed by 6/2/23 (exact dates TBA)'}
 						</li>
 						<li className={'text-base text-white'}>
-							NFTs become transferable on 6/2/23
+							{'NFTs become transferable on 6/2/23'}
 						</li>
 						<li className={'text-base text-white'}>
-							Comics will ship (expect 6-8 weeks for delivery)
+							{'Comics will ship (expect 6-8 weeks for delivery)'}
 						</li>
 					</ul>
 				</div>
-				<h1 className={'whitespace-pre-wrap text-4xl font-bold text-white mt-20'}>
+				<h1 className={'mt-20 whitespace-pre-wrap text-4xl font-bold text-white'}>
 					{'F.A.Q.'}
 				</h1>
 				<div className={'mt-10'}>

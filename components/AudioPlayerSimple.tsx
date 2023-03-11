@@ -125,7 +125,7 @@ function	AudioPlayerSimple({
 	}
 
 	return (
-		<div className={'font-scope flex h-8 w-full flex-row items-center space-x-2 border-b-2 border-white px-2 text-base text-white'}>
+		<div className={'flex h-8 w-full flex-row items-center space-x-2 border-b-2 border-white px-2 font-scope text-base text-white'}>
 			{renderLayout()}
 			<div className={'relative w-full'} style={!isSelected ? {opacity: 0} : {}}>
 				<div className={'relative flex w-full flex-row items-center justify-center space-x-2'}>

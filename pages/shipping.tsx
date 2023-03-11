@@ -40,6 +40,11 @@ function FormField({label = '', name = '', notice = '', required = true, style, 
 	);
 }
 
+function	normalizeString(str: string): string {
+	str = str.replace(/[^\w\s]/gi, '');
+	return str;
+}
+
 function	Apply(): ReactElement {
 	const	{provider, isActive, address, openLoginModal, onDesactivate} = useWeb3();
 	const	{ownedByUser, shippingDone, set_shippingDone} = useMint();
@@ -61,8 +66,6 @@ function	Apply(): ReactElement {
 		const	signature = await signer.signMessage('I own edition #' + tokenID);
 		return signature;
 	}
-
-	console.log(possibleShipping, shippingForTokenID);
 
 	const	handleSubmit = (): ReactElement => {
 		if (!isSubmitLocked) {
@@ -115,19 +118,37 @@ function	Apply(): ReactElement {
 						try {
 							const	signature = await signMessage(shippingForTokenID);
 							const	data = {
-								fullName: (e.target as any).fullName.value,
-								streetaddress: (e.target as any).streetaddress.value,
-								city: (e.target as any).city.value,
-								state: (e.target as any).state.value,
-								zip: (e.target as any).zip.value,
-								country: (e.target as any).country.value,
-								phone: (e.target as any).phone.value,
-								contact: (e.target as any).contact.value,
-								walletAddress: (e.target as any).owner.value,
+								//Default fields
+								RECID: 'CRDSRV',
+								CLIENT_ID: 601,
+								PRTNUM: 'yFU_001',
+								//Empty fields,
+								COMPANY: '',
+								ADRLN2: '',
+								ADRLN3: '',
+								MKTCOD: '',
+								SDDFLG: '',
+								CSMThirdPartyCode: '',
+								ExternalSystem: '',
+								ORDQTY: '',
+								Comments: '',
+								UNTPRC: '',
+								SHIPHAND: '',
+								TAX: '',
+								//Custom fields
+								ADRNAM: normalizeString((e.target as any).fullName.value),
+								ADRLN1: normalizeString((e.target as any).streetaddress.value),
+								ADRCTY: normalizeString((e.target as any).city.value),
+								ADRSTC: normalizeString((e.target as any).state.value),
+								ADRPSZ: normalizeString((e.target as any).zip.value),
+								CTRY_NAME: normalizeString((e.target as any).country.value),
+								PHNNUM: normalizeString(((e.target as any).phone.value).replace('+', '00')),
+								EMAIL: normalizeString((e.target as any).contact.value),
+								HOST_ORDNUM: shippingForTokenID,
 								tokenID: shippingForTokenID,
+								walletAddress: normalizeString((e.target as any).owner.value),
 								signature: signature
 							};
-							console.log(signature);
 
 							// const scriptURL = process.env.FORM_APPLY as string;
 							const scriptURL = '/api/minters';
@@ -182,14 +203,17 @@ function	Apply(): ReactElement {
 						name={'zip'} />
 					<FormField
 						required
-						label={'Country'}
+						label={'Full Country Name (no abbreviations)'}
 						name={'country'} />
 					<FormField
 						required
 						label={'Phone'}
 						name={'phone'}
 						type={'tel'} />
-					<FormField label={'Contact email or telegram'} name={'contact'} />
+					<FormField
+						label={'Email'}
+						name={'contact'}
+						type={'email'} />
 					<div className={'flex w-full flex-col space-x-0 space-y-4 md:flex-row md:space-y-0 md:space-x-4'}>
 						<FormField
 							style={{width: '100%'}}
