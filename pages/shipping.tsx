@@ -143,7 +143,7 @@ function	Apply(): ReactElement {
 								ADRPSZ: normalizeString((e.target as any).zip.value),
 								CTRY_NAME: normalizeString((e.target as any).country.value),
 								PHNNUM: normalizeString(((e.target as any).phone.value).replace('+', '00')),
-								EMAIL: normalizeString((e.target as any).contact.value),
+								EMAIL: (e.target as any).contact.value,
 								HOST_ORDNUM: shippingForTokenID,
 								tokenID: shippingForTokenID,
 								walletAddress: normalizeString((e.target as any).owner.value),
