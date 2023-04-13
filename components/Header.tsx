@@ -44,7 +44,7 @@ function	Header(): ReactElement {
 						onClick={(): void => set_hasModal(!hasModal)}>
 						<p className={'select-none font-scope text-xl text-white md:text-2xl'}>{'INFO'}</p>
 					</div>
-					<div className={`absolute top-full left-0 z-50 w-250% border-0 border-b-2 border-white bg-black p-4 md:w-full md:border-2${hasModal ? '' : 'pointer-events-none opacity-0'}`}>
+					<div className={`absolute top-full left-0 z-50 w-250% border-0 border-b-2 border-white bg-black p-4 md:w-full md:border-2 ${hasModal ? '' : 'pointer-events-none opacity-0'}`}>
 						<div
 							className={'-m-1 flex w-full cursor-pointer select-none justify-end p-1 font-scope text-lg text-white'}
 							onClick={(): void => set_hasModal(!hasModal)}>

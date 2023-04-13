@@ -46,7 +46,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 				<Image
 					alt={''}
 					src={characterSrc}
-					objectFit={'cover'}
+					className={'object-cover w-full'}
 					loading={'eager'}
 					width={600}
 					height={895} />
@@ -56,7 +56,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 					<h4 className={'mb-6 text-2xl font-bold md:text-4xl'}>{title}</h4>
 					{children}
 				</div>
-				<div className={'mx-auto mt-8 md:mt-auto'}>
+				<div className={'mx-auto mt-8 pt-8 md:mt-auto'}>
 					<button
 						onClick={(): void => {
 							router.push(`/tribute/${id}`);
@@ -72,7 +72,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 				<Image
 					alt={''}
 					src={characterSrc}
-					objectFit={'cover'}
+					className={'object-cover w-full'}
 					loading={'eager'}
 					width={600}
 					height={895} />
@@ -150,8 +150,8 @@ function	MintView(): ReactElement {
 						</button>
 					)}
 
-					<div className={!isActive ? 'pointer-events-none opacity-25' : 'flex h-full flex-col'}>
-						<div className={'mb-8 flex flex-col items-center space-x-0 md:flex-row md:space-x-6'}>
+					<div className={'flex h-full flex-col'}>
+						<div className={`mb-8 flex flex-col items-center space-x-0 md:flex-row md:space-x-6 ${!isActive ? 'pointer-events-none opacity-25' : ''}`}>
 							<button
 								onClick={onMint}
 								disabled={txStatusMint.pending}
