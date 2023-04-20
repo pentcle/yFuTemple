@@ -181,7 +181,7 @@ function Wrapper(): ReactElement {
 			<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
 				<div>
 					<Link href={'/'}>
-						<p className={'cursor-pointer text-sm z-[100] opacity-60 transition-opacity hover:opacity-100'}>
+						<p className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
 							{'Back to home'}
 						</p>
 					</Link>
