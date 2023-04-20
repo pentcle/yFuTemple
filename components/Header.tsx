@@ -91,7 +91,7 @@ function	Header(): ReactElement {
 							</span>
 							<span className={'mt-1 flex w-full flex-row justify-between font-bluepill'}>
 								<a
-									href={'https://yfistory.org/'}
+									href={'https://thebluepill.eth.limo/'}
 									target={'_blank'}
 									rel={'noreferrer'}
 									className={'text-xl tracking-normal hover:underline'}>{'The Blue Pill'}
