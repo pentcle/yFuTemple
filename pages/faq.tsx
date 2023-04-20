@@ -11,7 +11,7 @@ const variants = {
 	exit: {y: 20, opacity: 0, transition: {duration: 0.2, ease: 'easeIn'}}
 };
 
-function	FAQ(): ReactElement {
+function FAQ(): ReactElement {
 	return (
 		<div className={'relative mb-10 flex flex-col border-2 border-white text-white'}>
 			<div className={'border-b-2 border-white p-8'}>
@@ -130,7 +130,13 @@ function	FAQ(): ReactElement {
 							{'Customs charges may be applied in some locations, and will be the responsibility of the recipient.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'If you have any issues with shipping, please post in our '}<a href={'https://discord.gg/yearn'} target={'_blank'}><span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span></a>{', and we can support your questions.'}
+							{'If you have any issues with shipping, please post in our '}
+							<a
+								href={'https://discord.gg/yearn'}
+								target={'_blank'} 
+								rel={'noreferrer'}>
+								<span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span>
+							</a>{', and we can support your questions.'}
 						</li>
 					</ul>
 				</div>
@@ -158,7 +164,13 @@ function	FAQ(): ReactElement {
 							{'The yFu Temple was created in the process of developing the lore and characters in the yFu comic.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'It is managed by Yearn contributors currently. You can get involved by finding us in the'} <a href={'https://discord.gg/yearn'} target={'_blank'}><span className={'underline hover:text-yearn-blue'} > {'Yearn Discord'}</span></a>
+							{'It is managed by Yearn contributors currently. You can get involved by finding us in the'}
+							<a
+								href={'https://discord.gg/yearn'}
+								target={'_blank'}
+								rel={'noreferrer'}>
+								<span className={'underline hover:text-yearn-blue'}> {'Yearn Discord'}</span>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -186,11 +198,11 @@ function Wrapper(): ReactElement {
 						</p>
 					</Link>
 					<section className={'mt-2 w-full px-4 md:px-0'}>
-						<FAQ />
+						<FAQ/>
 					</section>
 				</div>
 			</div>
-			<Footer />
+			<Footer/>
 		</motion.div>
 	);
 }
