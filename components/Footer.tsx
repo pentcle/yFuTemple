@@ -20,7 +20,7 @@ function	Footer({visitors=[]}): ReactElement {
 				<p className={'text-shadow transition-all duration-150'}><a href={'https://discord.gg/yearn'} target={'_blank'}>{'DISCORD'}</a></p>
 				<p className={'text-shadow transition-all duration-150'}><a href={'http://blog.yearn.finance'} target={'_blank'}>{'MEDIUM'}</a></p>
 				<p className={'text-shadow transition-all duration-150'}><a href={'https://t.me/yearnfinance'} target={'_blank'}>{'TELEGRAM'}</a></p>
-				<p className={'text-shadow transition-all duration-150'}><a href={'https://thebluepill.eth.limo'} target={'_blank'}>{'THE BLUE PILL'}</a></p>
+				<p className={'text-shadow transition-all duration-150'}><a href={'https://yfistory.org'} target={'_blank'}>{'THE BLUE PILL'}</a></p>
 			</nav>
 		</footer>
 	);

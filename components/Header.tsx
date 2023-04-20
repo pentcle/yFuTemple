@@ -83,7 +83,7 @@ function	Header(): ReactElement {
 								</a>
 								{' / '}
 								<a
-									href={'https://discord.yearn.finance/'}
+									href={'https://discord.yearn.finance'}
 									target={'_blank'}
 									rel={'noreferrer'}
 									className={'hover:underline'}>{'Discord'}
@@ -91,7 +91,7 @@ function	Header(): ReactElement {
 							</span>
 							<span className={'mt-1 flex w-full flex-row justify-between font-bluepill'}>
 								<a
-									href={'https://thebluepill.eth.limo/'}
+									href={'https://yfistory.org/'}
 									target={'_blank'}
 									rel={'noreferrer'}
 									className={'text-xl tracking-normal hover:underline'}>{'The Blue Pill'}
