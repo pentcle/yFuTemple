@@ -16,11 +16,11 @@ function	Footer({visitors=[]}): ReactElement {
 				</div>
 			</div>
 			<nav className={'flex w-full flex-col items-center justify-center space-y-5 space-x-0 font-monument text-lg text-yblue md:flex-row md:space-y-0 md:space-x-8 md:text-xl'}>
-				<p className={'text-shadow transition-all duration-150'}>{'TWITTER'}</p>
-				<p className={'text-shadow transition-all duration-150'}>{'DISCORD'}</p>
-				<p className={'text-shadow transition-all duration-150'}>{'MEDIUM'}</p>
-				<p className={'text-shadow transition-all duration-150'}>{'TELEGRAM'}</p>
-				<p className={'text-shadow transition-all duration-150'}>{'THE BLUE PILL'}</p>
+				<p className={'text-shadow transition-all duration-150'}><a href={'https://twitter.com/yearnfi'} target={'_blank'}>{'TWITTER'}</a></p>
+				<p className={'text-shadow transition-all duration-150'}><a href={'https://discord.gg/yearn'} target={'_blank'}>{'DISCORD'}</a></p>
+				<p className={'text-shadow transition-all duration-150'}><a href={'https://medium.com/iearn'} target={'_blank'}>{'MEDIUM'}</a></p>
+				<p className={'text-shadow transition-all duration-150'}><a href={'https://t.me/yearnfinance'} target={'_blank'}>{'TELEGRAM'}</a></p>
+				<p className={'text-shadow transition-all duration-150'}><a href={'https://yfistory.org/'} target={'_blank'}>{'THE BLUE PILL'}</a></p>
 			</nav>
 		</footer>
 	);

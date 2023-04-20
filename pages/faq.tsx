@@ -24,7 +24,7 @@ function	FAQ(): ReactElement {
 							{'5/1/23 NFT Minting Begins!'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'Minting is Open until 5/21/23, or supply runs out.'}
+							{'Minting is Open until 5/21/23, or supply runs out'}
 						</li>
 						<li className={'text-base text-white'}>
 							{'Shipping Information Entry is open until 6/1/23'}
@@ -47,7 +47,7 @@ function	FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'What is yFu the comic?'}
 					</h2>
-					<ul className={'mt-4 list-inside list-disc space-y-2'}>
+					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
 						<li className={'text-base text-white'}>
 							{'yFu is a comic series in four books, each 24 pages, which tells the story of Yearn Finance’s origination, DAO and philosophy, with an epic narrative set within the Pills universe.'}
 						</li>
@@ -67,7 +67,7 @@ function	FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'What is this NFT all about?'}
 					</h2>
-					<ul className={'mt-4 list-inside list-disc space-y-2'}>
+					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
 						<li className={'text-base text-white'}>
 							{'yFu Comic NFTs are your ticket to receive physical copies of all four comics.'}
 						</li>
@@ -87,7 +87,7 @@ function	FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How will this work, exactly?'}
 					</h2>
-					<ul className={'mt-4 list-inside list-disc space-y-2'}>
+					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
 						<li className={'text-base text-white'}>
 							{'Anyone can mint one or more yFu Comic NFTs via our website.'}
 						</li>
@@ -113,7 +113,7 @@ function	FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How will this work, exactly?'}
 					</h2>
-					<ul className={'mt-4 list-inside list-disc space-y-2'}>
+					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
 						<li className={'text-base text-white'}>
 							{'Comics are produced and shipped by the good people at Devil’s Due Comics.  They will be sent from the U.S.A.'}
 						</li>
@@ -130,7 +130,7 @@ function	FAQ(): ReactElement {
 							{'Customs charges may be applied in some locations, and will be the responsibility of the recipient.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'If you have any issues with shipping, please post in our [Discord channel](https://discord.com/channels/734804446353031319/963482983405338624), and we can support your questions.'}
+							{'If you have any issues with shipping, please post in our '}<a href={'https://discord.gg/yearn'}><span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span></a>{', and we can support your questions.'}
 						</li>
 					</ul>
 				</div>
@@ -139,7 +139,7 @@ function	FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'But I’m anon. How am I going to get the comics?'}
 					</h2>
-					<ul className={'mt-4 list-inside list-disc space-y-2'}>
+					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
 						<li className={'text-base text-white'}>
 							{'Feel free to mint from a non-public wallet and / or use a P.O. box, a third party recipient, etc.'}
 						</li>
@@ -153,12 +153,12 @@ function	FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How is the yFu Temple affiliated with Yearn?'}
 					</h2>
-					<ul className={'mt-4 list-inside list-disc space-y-2'}>
+					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
 						<li className={'text-base text-white'}>
 							{'The yFu Temple was created in the process of developing the lore and characters in the yFu comic.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'It is managed by Yearn contributors currently. You can get involved by finding us in the [Yearn Discord.](https://discord.com/channels/734804446353031319/963482983405338624)'}
+							{'It is managed by Yearn contributors currently. You can get involved by finding us in the'} <a href={'https://discord.gg/yearn'} target={'_blank'}><span className={'underline hover:text-yearn-blue'} > {'Yearn Discord'}</span></a>
 						</li>
 					</ul>
 				</div>
@@ -181,7 +181,7 @@ function Wrapper(): ReactElement {
 			<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
 				<div>
 					<Link href={'/'}>
-						<p className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
+						<p className={'cursor-pointer text-sm z-[100] opacity-60 transition-opacity hover:opacity-100'}>
 							{'Back to home'}
 						</p>
 					</Link>
