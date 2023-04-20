@@ -130,7 +130,7 @@ function	FAQ(): ReactElement {
 							{'Customs charges may be applied in some locations, and will be the responsibility of the recipient.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'If you have any issues with shipping, please post in our '}<a href={'https://discord.gg/yearn'}><span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span></a>{', and we can support your questions.'}
+							{'If you have any issues with shipping, please post in our '}<a href={'https://discord.gg/yearn'} target={'_blank'}><span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span></a>{', and we can support your questions.'}
 						</li>
 					</ul>
 				</div>
