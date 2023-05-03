@@ -69,7 +69,7 @@ function	Header(): ReactElement {
 							</span>
 							<span className={'mb-1'}>
 								<a
-									href={'https://twitter.com/iearnfinance'}
+									href={'https://twitter.com/yearnfi'}
 									target={'_blank'}
 									rel={'noreferrer'}
 									className={'hover:underline'}>{'Twitter'}
@@ -83,7 +83,7 @@ function	Header(): ReactElement {
 								</a>
 								{' / '}
 								<a
-									href={'https://discord.yearn.finance/'}
+									href={'https://discord.yearn.finance'}
 									target={'_blank'}
 									rel={'noreferrer'}
 									className={'hover:underline'}>{'Discord'}
@@ -91,7 +91,7 @@ function	Header(): ReactElement {
 							</span>
 							<span className={'mt-1 flex w-full flex-row justify-between font-bluepill'}>
 								<a
-									href={'https://thebluepill.eth.link/'}
+									href={'https://yfistory.org/'}
 									target={'_blank'}
 									rel={'noreferrer'}
 									className={'text-xl tracking-normal hover:underline'}>{'The Blue Pill'}
