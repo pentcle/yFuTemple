@@ -1,6 +1,8 @@
-import	React, {useContext, createContext, ReactElement}	from	'react';
+import React, {createContext, useContext, useState} from 'react';
 
-const	AUDIO_LIST: [string, string, string][] = [
+import type {ReactElement} from 'react';
+
+const AUDIO_LIST: [string, string, string][] = [
 	['YEARNING TREE', '/audio/yearning_tree.opus', '/audio-marks/yfiTree.png'],
 	['TECHNE', '/audio/techne.opus', '/audio-marks/techne.png'],
 	['DOMINION', '/audio/dominion.opus', '/audio-marks/dominion.png'],
@@ -24,19 +26,28 @@ const Audio = createContext<TAudioContext>({
 });
 
 export const AudioContextApp = ({children=<div />}): ReactElement => {
-	const [audio, set_audio] = React.useState<any>(AUDIO_LIST[0]);
-	const [isPlaying, set_isPlaying] = React.useState<boolean>(false);
+	const [audio, set_audio] = useState<any>(AUDIO_LIST[0]);
+	const [isPlaying, set_isPlaying] = useState<boolean>(false);
 
 	return (
-		<Audio.Provider value={{
-			audio, set_audio,
-			isPlaying, set_isPlaying,
-			AUDIO_LIST
-		}}>
+		<Audio.Provider
+			value={{
+				audio,
+				set_audio,
+				isPlaying,
+				set_isPlaying,
+				AUDIO_LIST
+			}}>
 			{children}
-			<audio controls preload={'auto'} style={{visibility: 'hidden', height: 0, width: 0}}>
+			<audio
+				controls
+				preload={'auto'}
+				style={{visibility: 'hidden', height: 0, width: 0}}>
 				{AUDIO_LIST.map((track: [string, string, string]): ReactElement => (
-					<source key={`audio-preload-track-${track[0]}`} src={track[1]} type={'audio/opus'} />	
+					<source
+						key={`audio-preload-track-${track[0]}`}
+						src={track[1]}
+						type={'audio/opus'} />
 				))}
 			</audio>
 		</Audio.Provider>

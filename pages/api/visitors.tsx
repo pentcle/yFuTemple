@@ -7,9 +7,9 @@ export async function incVisitors(): Promise<number> {
 	return visitors;
 }
 
-export default async function handler(): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function handler(_: any, res: any): Promise<void> {
 	const visitors = await redis.incr('counter');
-	console.log(visitors);
-	// res.status(200).send(visitors);
+	res.status(200).send(visitors);
 	return;
 }

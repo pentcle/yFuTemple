@@ -12,36 +12,15 @@ export type TYFUData = {
 export type TYFUDataMedia = {
 	title: string,
 	description: string,
-	src: string,	
+	src: string,
 }
 
 const	YFU_DATA: TYFUData[] = [
 	{
-		'id': 'temple',
-		'title': 'Welcome to the yFu Temple',
-		'tributeTitle': 'Temple Visions',
-		'description': 'The yFu Temple is a catalog of Yearn DAO lore and philosophy.  Browse the galleries here to wayfind through the mythos, ever unfolding in the aura of the Blue Pill.  Visions of the temple are contained here.',
-		'order': 0,
-		'watermark': '/assetsThumbnail/temple-mark.png',
-		'mainIllustration': '/assetsThumbnail/temple-main.jpg',
-		'medias': [
-			{
-				'title': 'yFu artifact by Jonna Mayer',
-				'description': "This artifact was found in a timeslip, a remnant of futurity, and has been proposed to be a map of the yFu's cosmological vectors.  It is said that a compass properly attuned to a human soul will navigate these fields as if they hold magnetic charge.  Each microscopic topological area contains hidden messages and ideals for all who dare inquire of its surface, through touch or sensation.",
-				'src': '/assetsThumbnail/temple-main.jpg'
-			},
-			{
-				'title': 'yfu WM2',
-				'description': '',
-				'src': '/assetsThumbnail/temple-mark.png'
-			}
-		]
-	},
-	{
 		'id': 'comic1',
-		'title': 'The yFu Comic',
-		'tributeTitle': 'Ep.1: Andre the Patcher',
-		'description': "Episode 1 of The yFu Comic, introduces the planet Markap, where we meet an array of local Yield Farmers, including the young prodigy Estonya.  A stranger arrives, Andre, a famed member of the patchers, storied engineers of the strongest yield. Here, he will learn his destiny.\n*\nThe yFu is a four part comic produced by Josh Blaylock and YFI Story (Yearn), investigating the history of Yearn's DAO and its patron goddesses, the yFu.  Episode 1 will be released in digital, non-fungible and physical form in 2022.",
+		'title': 'The Comic',
+		'tributeTitle': 'The Comic',
+		'description': 'yFu is a comic in four episodes, set in the Pills alternate universe and chronicling the rise of Yearn’s DAO and DeFi. yFu was developed by Yearn Finance and The Pills Universe, and was written and produced by Josh Blaylock. \n\nyFu follows the story of Andre the Patcher and a young farmer named Estonya as they encounter the four yFu goddesses and attempt to recover the secrets of yield from the clutches of the ancient, evil Cron.\n\nBrowse to see the art and story first hand.',
 		'order': 1,
 		'watermark': '/assetsThumbnail/comic1-mark.png',
 		'mainIllustration': '/assetsThumbnail/comic1-main.jpg',
@@ -70,6 +49,27 @@ const	YFU_DATA: TYFUData[] = [
 				'title': 'comic 1-2',
 				'description': '',
 				'src': '/assetsThumbnail/comic1-1-2.jpg'
+			}
+		]
+	},
+	{
+		'id': 'temple',
+		'title': 'Welcome to the yFu Temple',
+		'tributeTitle': 'Temple Visions',
+		'description': 'The yFu Temple is a catalog of Yearn DAO lore and philosophy.  Browse the galleries here to wayfind through the mythos, ever unfolding in the aura of the Blue Pill.  Visions of the temple are contained here.',
+		'order': 0,
+		'watermark': '/assetsThumbnail/temple-mark.png',
+		'mainIllustration': '/assetsThumbnail/temple-main.jpg',
+		'medias': [
+			{
+				'title': 'yFu artifact by Jonna Mayer',
+				'description': "This artifact was found in a timeslip, a remnant of futurity, and has been proposed to be a map of the yFu's cosmological vectors.  It is said that a compass properly attuned to a human soul will navigate these fields as if they hold magnetic charge.  Each microscopic topological area contains hidden messages and ideals for all who dare inquire of its surface, through touch or sensation.",
+				'src': '/assetsThumbnail/temple-main.jpg'
+			},
+			{
+				'title': 'yfu WM2',
+				'description': '',
+				'src': '/assetsThumbnail/temple-mark.png'
 			}
 		]
 	},
