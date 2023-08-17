@@ -184,8 +184,8 @@ function	MyApp(props: AppProps): ReactElement {
 		<WithYearn
 			options={{
 				web3: {
-					defaultChainID: 10,
-					supportedChainID: [10, 1337]
+					defaultChainID: 1,
+					supportedChainID: [1, 1337]
 				}
 			}}>
 			<MintContextApp>
