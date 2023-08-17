@@ -37,7 +37,7 @@ module.exports = (phase) => withPWA({
 		INFURA_KEY: process.env.INFURA_KEY,
 		REDIS_URL: process.env.REDIS_URL,
 		WEBSITE_URI: 'https://yfu.yearn.farm/',
-		MINT_CONTRACT_ADDRESS: '0x671DC21d4d5E6bf0350ec64A2B28E5407D4aE496'
+		MINT_CONTRACT_ADDRESS: '0x0D4b8B5005611d48bc63ac5e90Bbd3b983177DdE#code'
 	}
 });
 

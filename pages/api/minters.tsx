@@ -6,7 +6,7 @@ import {getProvider} from '@yearn-finance/web-lib/utils/web3/providers';
 
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-const	redisAddressPerToken = new Redis(process.env.REDIS_URL_ADDRESS_PER_TOKEN as string);
+const redisAddressPerToken = new Redis(process.env.REDIS_URL_ADDRESS_PER_TOKEN as string);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
 	const {tokenID, walletAddress, signature} = JSON.parse(req.body.body);
@@ -20,12 +20,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		return;
 	}
 
-	const	yfuContract = new ethers.Contract(
+	const yfuContract = new ethers.Contract(
 		process.env.MINT_CONTRACT_ADDRESS as string,
 		YFU_ABI,
-		getProvider(10) as ethers.providers.JsonRpcProvider
+		getProvider(1) as ethers.providers.JsonRpcProvider
 	);
-	const	ownerOfTokenID = await yfuContract.ownerOf(tokenID);
+	const ownerOfTokenID = await yfuContract.ownerOf(tokenID);
 
 	if (ownerOfTokenID !== walletAddress) {
 		res.status(200).json('error: you are not the owner of this token');

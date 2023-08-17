@@ -7,8 +7,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract YFUtechne is ERC721, ERC721Enumerable, Ownable {
-    uint256 constant internal MAX_SUPPLY = 1000;
-    uint256 constant internal PRICE = 0.00001 ether; // 10000000000000
+    uint256 constant internal MAX_SUPPLY = 3000;
+    uint256 constant internal PRICE = 0.0444 ether; // 44400000000000000
     uint256 public tokenCount = 0;
     address payable public depositAddress;
     bool public transfers_frozen = true;
