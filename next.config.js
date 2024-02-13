@@ -22,20 +22,14 @@ module.exports = (phase) => withPWA({
 		** Config over the RPC
 		**********************************************************************/
 		WEB_SOCKET_URL: {
-			1: process.env.WS_URL_MAINNET,
-			10: process.env.WS_URL_OPTIMISM,
-			250: process.env.WS_URL_FANTOM,
-			42161: process.env.WS_URL_ARBITRUM
+			1: process.env.WS_URL_MAINNET
 		},
 		JSON_RPC_URL: {
-			1: process.env.RPC_URL_MAINNET,
-			10: process.env.RPC_URL_OPTIMISM,
-			250: process.env.RPC_URL_FANTOM,
-			42161: process.env.RPC_URL_ARBITRUM
+			1: process.env.RPC_URL_MAINNET
 		},
 		ALCHEMY_KEY: process.env.ALCHEMY_KEY,
 		INFURA_KEY: process.env.INFURA_KEY,
-		REDIS_URL: process.env.REDIS_URL,
+		REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
 		WEBSITE_URI: 'https://yfu.yearn.farm/',
 		MINT_CONTRACT_ADDRESS: '0x0D4b8B5005611d48bc63ac5e90Bbd3b983177DdE#code'
 	}

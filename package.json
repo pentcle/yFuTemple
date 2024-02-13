@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next",
+		"dev": "(docker compose up -d redis && next; docker compose down)",
 		"dev:ts": "tsc --watch",
 		"start": "tsc && next build && next start",
 		"build": "tsc && next build",
