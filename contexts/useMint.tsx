@@ -14,6 +14,7 @@ export type	TMintContext = {
 	balanceOf: number,
 	totalSupply: number,
 	maxSupply: number,
+	price: bigint,
 	ownedByUser: number[],
 	shippingDone: number[],
 	set_shippingDone: Dispatch<React.SetStateAction<number[]>>,
@@ -24,6 +25,7 @@ const MintContext = createContext<TMintContext>({
 	balanceOf: 0,
 	totalSupply: 0,
 	maxSupply: 0,
+	price: 0n,
 	ownedByUser: [],
 	shippingDone: [],
 	set_shippingDone: (): void => undefined,
@@ -79,7 +81,8 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 				ownedByUser,
 				shippingDone: shippingDone as number[],
 				set_shippingDone: set_shippingDone as Dispatch<React.SetStateAction<number[]>>,
-				maxSupply: 100,
+				maxSupply: 3000,
+				price: 44400000000000000n,
 				refresh: async (): Promise<void> => await getBalanceOf()
 			}}>
 			{children}

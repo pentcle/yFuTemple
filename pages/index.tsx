@@ -16,6 +16,7 @@ import YFU_DATA from '../utils/data';
 
 import type {ReactElement} from 'react';
 import type {TYFUData} from '../utils/data';
+import { formatEther } from 'ethers/lib/utils';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
@@ -101,7 +102,7 @@ function	Tree(): ReactElement {
 
 function	MintView(): ReactElement {
 	const {isActive, provider, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
-	const {balanceOf, totalSupply, maxSupply, refresh, shippingDone} = useMint();
+	const {balanceOf, totalSupply, maxSupply, price, refresh, shippingDone} = useMint();
 	const [txStatusMint, set_txStatusMint] = useState(defaultTxStatus);
 
 	function connectWallet(): void {
@@ -196,7 +197,7 @@ function	MintView(): ReactElement {
 								{'yFu - The Comic, Episodes 1 to 4'}
 							</h4>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
-								{`0.1 ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
+								{`${formatEther(price)} ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
 							</p>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
 								{'Each NFT holder is eligible to receive a physical set of all four limited edition comics, at no additional cost. Mint, enter shipping info, and prepare to receive your piece of DeFi history.'}
