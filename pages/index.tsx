@@ -17,6 +17,7 @@ import YFU_DATA from '../utils/data';
 import type {ReactElement} from 'react';
 import type {TYFUData} from '../utils/data';
 import { formatEther } from 'ethers/lib/utils';
+import SnapshotCountdown from 'components/SnapshotCountdown';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
@@ -211,6 +212,7 @@ function	MintView(): ReactElement {
 								</p>
 							</Link>
 						</div>
+						<SnapshotCountdown className={'mb-8'} />
 						<div className={'mt-auto flex flex-row space-x-4 border-2 border-white p-6'}>
 							<div className={'pt-1'}>
 								<div className={'h-4 w-4 animate-pulse rounded-full bg-green-500'} />
