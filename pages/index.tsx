@@ -11,13 +11,13 @@ import {useWeb3} from '@yearn-finance/web-lib/contexts/useWeb3';
 import {defaultTxStatus, Transaction} from '@yearn-finance/web-lib/utils/web3/transaction';
 
 import Footer from '../components/Footer';
+import SnapshotCountdown from '../components/SnapshotCountdown';
 import Title from '../components/Title';
 import YFU_DATA from '../utils/data';
 
 import type {ReactElement} from 'react';
 import type {TYFUData} from '../utils/data';
-import { formatEther } from 'ethers/lib/utils';
-import SnapshotCountdown from 'components/SnapshotCountdown';
+import {formatEther} from 'ethers/lib/utils';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
