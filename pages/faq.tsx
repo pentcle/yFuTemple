@@ -47,7 +47,7 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'What is yFu the comic?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'yFu is a comic series in four books, each 24 pages, which tells the story of Yearn Finance’s origination, DAO and philosophy, with an epic narrative set within the Pills universe.'}
 						</li>
@@ -67,7 +67,7 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'What is this NFT all about?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'yFu Comic NFTs are your ticket to receive physical copies of all four comics.'}
 						</li>
@@ -87,7 +87,7 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How will this work, exactly?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'Anyone can mint one or more yFu Comic NFTs via our website.'}
 						</li>
@@ -113,7 +113,7 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How will this work, exactly?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'Comics are produced and shipped by the good people at Devil’s Due Comics.  They will be sent from the U.S.A.'}
 						</li>
@@ -145,7 +145,7 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'But I’m anon. How am I going to get the comics?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'Feel free to mint from a non-public wallet and / or use a P.O. box, a third party recipient, etc.'}
 						</li>
@@ -159,7 +159,7 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How is the yFu Temple affiliated with Yearn?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'The yFu Temple was created in the process of developing the lore and characters in the yFu comic.'}
 						</li>

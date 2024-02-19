@@ -50,7 +50,7 @@ const WithSplash = memo(function WithSplash({children}: {children: ReactNode}): 
 											set_hasOpacity(false);
 											setTimeout((): void => set_shouldDisplay(false), 1000);
 										}}
-										className={'button-glowing bg-beige text-black font-scope'}>
+										className={'button-glowing bg-beige font-scope text-black'}>
 										{'ENTER'}
 										<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 										<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />

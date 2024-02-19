@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useMint} from 'contexts/useMint';
+import {formatEther} from 'ethers/lib/utils';
 import Redis from 'ioredis';
 import {mint} from 'utils/mint';
 import axios from 'axios';
@@ -17,7 +18,6 @@ import YFU_DATA from '../utils/data';
 
 import type {ReactElement} from 'react';
 import type {TYFUData} from '../utils/data';
-import {formatEther} from 'ethers/lib/utils';
 
 const variants = {
 	initial: {y: 0, opacity: 1},
@@ -48,7 +48,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 				<Image
 					alt={''}
 					src={characterSrc}
-					className={'object-cover w-full'}
+					className={'w-full object-cover'}
 					loading={'eager'}
 					width={600}
 					height={895} />
@@ -74,7 +74,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 				<Image
 					alt={''}
 					src={characterSrc}
-					className={'object-cover w-full'}
+					className={'w-full object-cover'}
 					loading={'eager'}
 					width={600}
 					height={895} />
