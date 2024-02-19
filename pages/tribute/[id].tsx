@@ -66,7 +66,7 @@ export default function Index(): ReactElement {
 							window.open('https://discord.gg/UyNbrABFYA', '_blank');
 						}
 					}}
-					className={'button-glowing-small bg-white font-scope'}>
+					className={'button-glowing-small bg-white text-black font-scope'}>
 					{'SUBMIT'}
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />

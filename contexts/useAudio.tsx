@@ -40,6 +40,7 @@ export const AudioContextApp = ({children=<div />}): ReactElement => {
 			}}>
 			{children}
 			<audio
+				autoPlay
 				controls
 				preload={'auto'}
 				style={{visibility: 'hidden', height: 0, width: 0}}>
