@@ -8,7 +8,7 @@ import {Dialog, Transition} from '@headlessui/react';
 import {WithYearn} from '@yearn-finance/web-lib/contexts/WithYearn';
 
 import Header from '../components/Header';
-import {AudioContextApp} from '../contexts/useAudio';
+import useAudio, {AudioContextApp} from '../contexts/useAudio';
 
 import type {AppProps} from 'next/app';
 import type {ReactElement, ReactNode} from 'react';
@@ -19,6 +19,7 @@ const WithSplash = memo(function WithSplash({children}: {children: ReactNode}): 
 	const	[hasOpacity, set_hasOpacity] = useState(true);
 	const	[shouldDisplay, set_shouldDisplay] = useState(true);
 	const	[shouldDisplayVideo] = useState(true);
+	const	{audio, set_isPlaying} = useAudio();
 
 	return (
 		<>
@@ -44,6 +45,8 @@ const WithSplash = memo(function WithSplash({children}: {children: ReactNode}): 
 								<div className={'mt-[360px]'}>
 									<button
 										onClick={(): void => {
+											set_isPlaying(true);
+											audio.play();
 											set_hasOpacity(false);
 											setTimeout((): void => set_shouldDisplay(false), 1000);
 										}}
