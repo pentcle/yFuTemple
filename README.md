@@ -15,3 +15,4 @@ Error: Missing getServerSnapshot, which is required for server-rendered content.
 
 This error happened while generating the page. Any console logs will be displayed in the terminal window.
 ```
+
