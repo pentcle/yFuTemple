@@ -7,7 +7,7 @@ import {formatEther} from 'ethers/lib/utils';
 import Redis from 'ioredis';
 import {mint} from 'utils/mint';
 import axios from 'axios';
-import {motion} from 'framer-motion';
+import {AnimatePresence, motion} from 'framer-motion';
 import {useWeb3} from '@yearn-finance/web-lib/contexts/useWeb3';
 import {defaultTxStatus, Transaction} from '@yearn-finance/web-lib/utils/web3/transaction';
 
@@ -238,56 +238,58 @@ function	Index({visitors=[]}): ReactElement {
 	}, []);
 
 	return (
-		<motion.div
-			key={'home'}
-			initial={'initial'}
-			animate={'enter'}
-			exit={'exit'}
-			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
-			variants={variants}>
-			<main
-				id={'app'}
-				className={'relative mx-auto w-full max-w-screen-xl'}
-				style={{minHeight: '100vh'}}>
-				<div>
-					<div className={'flex items-center justify-center py-8'}>
-						<Title />
-					</div>
-					<section className={'w-full px-4 md:px-0'}>
-						<MintView />
-						{allData
-							.sort((a: TYFUData, b: TYFUData): number => a.order - b.order)
-							.map((goddess: TYFUData, index: number): ReactElement => (
-								<div key={goddess.id}>
-									<Goddess
-										id={goddess.id}
-										title={goddess.title}
-										characterSrc={goddess.mainIllustration}
-										typoSrc={goddess.watermark}>
-										<p>{goddess.description}</p>
-									</Goddess>
-									<div className={`my-0 flex items-center justify-center ${index + 1 === allData.length ? 'hidden' : ''}`}>
-										<Image
-											alt={''}
-											src={`/divider-${index + 1}.gif`}
-											width={200}
-											height={200} />
-									</div>
-								</div>
-							))}
-						<div className={'my-9 flex items-center justify-center'}>
-							<Image
-								alt={''}
-								src={'/yfiTree2.png'}
-								width={112}
-								height={112} />
+		<AnimatePresence>
+			<motion.div
+				key={'home'}
+				initial={'initial'}
+				animate={'enter'}
+				exit={'exit'}
+				className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
+				variants={variants}>
+				<main
+					id={'app'}
+					className={'relative mx-auto w-full max-w-screen-xl'}
+					style={{minHeight: '100vh'}}>
+					<div>
+						<div className={'flex items-center justify-center py-8'}>
+							<Title />
 						</div>
-						<Tree />
-					</section>
-				</div>
-			</main>
-			<Footer visitors={visitorsUpdated} />
-		</motion.div>
+						<section className={'w-full px-4 md:px-0'}>
+							<MintView />
+							{allData
+								.sort((a: TYFUData, b: TYFUData): number => a.order - b.order)
+								.map((goddess: TYFUData, index: number): ReactElement => (
+									<div key={goddess.id}>
+										<Goddess
+											id={goddess.id}
+											title={goddess.title}
+											characterSrc={goddess.mainIllustration}
+											typoSrc={goddess.watermark}>
+											<p>{goddess.description}</p>
+										</Goddess>
+										<div className={`my-0 flex items-center justify-center ${index + 1 === allData.length ? 'hidden' : ''}`}>
+											<Image
+												alt={''}
+												src={`/divider-${index + 1}.gif`}
+												width={200}
+												height={200} />
+										</div>
+									</div>
+								))}
+							<div className={'my-9 flex items-center justify-center'}>
+								<Image
+									alt={''}
+									src={'/yfiTree2.png'}
+									width={112}
+									height={112} />
+							</div>
+							<Tree />
+						</section>
+					</div>
+				</main>
+				<Footer visitors={visitorsUpdated} />
+			</motion.div>
+		</AnimatePresence>
 	);
 }
 

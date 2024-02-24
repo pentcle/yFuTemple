@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Footer from 'components/Footer';
-import {motion} from 'framer-motion';
+import {AnimatePresence, motion} from 'framer-motion';
 
 import type {ReactElement} from 'react';
 
@@ -126,7 +126,7 @@ function FAQ(): ReactElement {
 						<li className={'text-base text-white'}>
 							{'If you have any issues with shipping, please post in our '}
 							<a
-								href={'https://discord.gg/yearn'}
+								href={'https://discord.com/invite/yearnfi'}
 								target={'_blank'} 
 								rel={'noreferrer'}>
 								<span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span>
@@ -160,7 +160,7 @@ function FAQ(): ReactElement {
 						<li className={'text-base text-white'}>
 							{'It is managed by Yearn contributors currently. You can get involved by finding us in the'}
 							<a
-								href={'https://discord.gg/yearn'}
+								href={'https://discord.com/invite/yearnfi'}
 								target={'_blank'}
 								rel={'noreferrer'}>
 								<span className={'underline hover:text-yearn-blue'}> {'Yearn Discord'}</span>
@@ -177,27 +177,29 @@ function FAQ(): ReactElement {
 
 function Wrapper(): ReactElement {
 	return (
-		<motion.div
-			key={'shipping'}
-			initial={'initial'}
-			animate={'enter'}
-			exit={'exit'}
-			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
-			variants={variants}>
-			<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
-				<div>
-					<Link href={'/'}>
-						<p className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
-							{'Back to home'}
-						</p>
-					</Link>
-					<section className={'mt-2 w-full px-4 md:px-0'}>
-						<FAQ/>
-					</section>
+		<AnimatePresence>
+			<motion.div
+				key={'faq'}
+				initial={'initial'}
+				animate={'enter'}
+				exit={'exit'}
+				className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
+				variants={variants}>
+				<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
+					<div>
+						<Link href={'/'}>
+							<p className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
+								{'Back to home'}
+							</p>
+						</Link>
+						<section className={'mt-2 w-full px-4 md:px-0'}>
+							<FAQ/>
+						</section>
+					</div>
 				</div>
-			</div>
-			<Footer/>
-		</motion.div>
+				<Footer/>
+			</motion.div>
+		</AnimatePresence>
 	);
 }
 
