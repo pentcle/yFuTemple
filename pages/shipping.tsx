@@ -5,7 +5,7 @@ import {useRouter} from 'next/router';
 import Footer from 'components/Footer';
 import {useMint} from 'contexts/useMint';
 import axios from 'axios';
-import {AnimatePresence, motion} from 'framer-motion';
+import {motion} from 'framer-motion';
 import {useWeb3} from '@yearn-finance/web-lib/contexts/useWeb3';
 
 import type {ReactElement} from 'react';
@@ -286,29 +286,27 @@ function	Apply(): ReactElement {
 
 function Wrapper(): ReactElement {
 	return (
-		<AnimatePresence>
-			<motion.div
-				key={'shipping'}
-				initial={'initial'}
-				animate={'enter'}
-				exit={'exit'}
-				className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
-				variants={variants}>
-				<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
-					<div>
-						<Link href={'/'}>
-							<p className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
-								{'Back to home'}
-							</p>
-						</Link>
-						<section className={'mt-2 w-full px-4 md:px-0'}>
-							<Apply />
-						</section>
-					</div>
+		<motion.div
+			key={'shipping'}
+			initial={'initial'}
+			animate={'enter'}
+			exit={'exit'}
+			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
+			variants={variants}>
+			<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
+				<div>
+					<Link href={'/'}>
+						<p className={'cursor-pointer text-sm opacity-60 transition-opacity hover:opacity-100'}>
+							{'Back to home'}
+						</p>
+					</Link>
+					<section className={'mt-2 w-full px-4 md:px-0'}>
+						<Apply />
+					</section>
 				</div>
-				<Footer />
-			</motion.div>
-		</AnimatePresence>
+			</div>
+			<Footer />
+		</motion.div>
 	);
 }
 
