@@ -201,13 +201,13 @@ function	MintView(): ReactElement {
 								{`${formatEther(price)} ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
 							</p>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
-								{'Each NFT holder is eligible to receive a physical set of all four limited edition comics, at no additional cost. Mint, enter shipping info, and prepare to receive your piece of DeFi history.'}
+								{'Each NFT holder is eligible to receive a physical set of all four limited first edition comics, at no additional cost. Mint, hodl to the snapshot, and receive a redeemable coupon to enter shipping information. Then, prepare to own your piece of Yearn & DeFi history.'}
 							</p>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
-								{'As a bonus, upon reveal your NFT will get one collectible frame of original artwork from the comics.'}
+								{'As a bonus, upon revealing your NFT you will have a collectible, generative digital artwork, based on unique frames from the comics.'}
 							</p>
 							<Link href={'/faq'}>
-								<p className={'mb-4 font-scope text-base text-white underline md:text-lg'}>
+								<p className={'mb-4 font-scope text-base text-white underline md:text-xl'}>
 									{'See FAQ for all the details.'}
 								</p>
 							</Link>
@@ -220,7 +220,6 @@ function	MintView(): ReactElement {
 							<div>
 								<p>{`You have minted ${balanceOf} yFu Comic NFT${balanceOf > 1 ? 's' : ''}`}</p>
 								<p>{`You entered shipping for ${shippingDone.length} yFu Comic NFT${balanceOf > 1 ? 's' : ''}`}</p>
-								<p className={'mt-2'}>{'Please fill your shipping information before the 22th of September 2023'}</p>
 							</div>
 						</div>
 					</div>
