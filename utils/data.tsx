@@ -21,7 +21,7 @@ const	YFU_DATA: TYFUData[] = [
 		'title': 'The Comic',
 		'tributeTitle': 'The Comic',
 		'description': 'yFu is a comic in four episodes, set in the Pills alternate universe and chronicling the rise of Yearn’s DAO and DeFi. yFu was developed by Yearn Finance and The Pills Universe, and was written and produced by Josh Blaylock. \n\nyFu follows the story of Andre the Patcher and a young farmer named Estonya as they encounter the four yFu goddesses and attempt to recover the secrets of yield from the clutches of the ancient, evil Cron.\n\nBrowse to see the art and story first hand.',
-		'order': 1,
+		'order': 0,
 		'watermark': '/assetsThumbnail/comic1-mark.png',
 		'mainIllustration': '/assetsThumbnail/comic1-main.jpg',
 		'medias': [
@@ -57,7 +57,7 @@ const	YFU_DATA: TYFUData[] = [
 		'title': 'Welcome to the yFu Temple',
 		'tributeTitle': 'Temple Visions',
 		'description': 'The yFu Temple is a catalog of Yearn DAO lore and philosophy.  Browse the galleries here to wayfind through the mythos, ever unfolding in the aura of the Blue Pill.  Visions of the temple are contained here.',
-		'order': 0,
+		'order': 1,
 		'watermark': '/assetsThumbnail/temple-mark.png',
 		'mainIllustration': '/assetsThumbnail/temple-main.jpg',
 		'medias': [
