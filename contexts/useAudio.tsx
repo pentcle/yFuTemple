@@ -3,8 +3,8 @@ import React, {createContext, useContext, useState} from 'react';
 import type {ReactElement} from 'react';
 
 const AUDIO_LIST: [string, string, string][] = [
-	['YEARNING TREE', '/audio/yearning_tree.opus', '/audio-marks/yfiTree.png'],
 	['TECHNE', '/audio/techne.opus', '/audio-marks/techne.png'],
+	['YEARNING TREE', '/audio/yearning_tree.opus', '/audio-marks/yfiTree.png'],
 	['DOMINION', '/audio/dominion.opus', '/audio-marks/dominion.png'],
 	['COMMUNITY', '/audio/community.opus', '/audio-marks/community.png'],
 	['TRANSMISSION', '/audio/transmission.opus', '/audio-marks/transmission.png']
@@ -39,17 +39,7 @@ export const AudioContextApp = ({children=<div />}): ReactElement => {
 				AUDIO_LIST
 			}}>
 			{children}
-			<audio
-				controls
-				preload={'auto'}
-				style={{visibility: 'hidden', height: 0, width: 0}}>
-				{AUDIO_LIST.map((track: [string, string, string]): ReactElement => (
-					<source
-						key={`audio-preload-track-${track[0]}`}
-						src={track[1]}
-						type={'audio/opus'} />
-				))}
-			</audio>
+
 		</Audio.Provider>
 	);
 };

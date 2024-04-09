@@ -44,7 +44,7 @@ export default function Index(): ReactElement {
 				</Link>
 				<div className={'flex cursor-pointer flex-row items-center'}>
 					<a
-						href={'https://discord.gg/UyNbrABFYA'}
+						href={'https://discord.com/invite/yearnfi'}
 						target={'_blank'}
 						rel={'noreferrer'}
 						className={'font-scope text-xl text-white'}>
@@ -63,10 +63,10 @@ export default function Index(): ReactElement {
 				<button
 					onClick={(): void => {
 						if (window) {
-							window.open('https://discord.gg/UyNbrABFYA', '_blank');
+							window.open('https://discord.com/invite/yearnfi', '_blank');
 						}
 					}}
-					className={'button-glowing-small bg-white font-scope'}>
+					className={'button-glowing-small bg-white font-scope text-black'}>
 					{'SUBMIT'}
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />

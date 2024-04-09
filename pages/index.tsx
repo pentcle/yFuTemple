@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useMint} from 'contexts/useMint';
+import {formatEther} from 'ethers/lib/utils';
 import Redis from 'ioredis';
 import {mint} from 'utils/mint';
 import axios from 'axios';
@@ -11,6 +12,7 @@ import {useWeb3} from '@yearn-finance/web-lib/contexts/useWeb3';
 import {defaultTxStatus, Transaction} from '@yearn-finance/web-lib/utils/web3/transaction';
 
 import Footer from '../components/Footer';
+import SnapshotCountdown from '../components/SnapshotCountdown';
 import Title from '../components/Title';
 import YFU_DATA from '../utils/data';
 
@@ -46,7 +48,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 				<Image
 					alt={''}
 					src={characterSrc}
-					className={'object-cover w-full'}
+					className={'w-full object-cover'}
 					loading={'eager'}
 					width={600}
 					height={895} />
@@ -72,7 +74,7 @@ function	Goddess({characterSrc='', typoSrc='', id='', title='', children=<div />
 				<Image
 					alt={''}
 					src={characterSrc}
-					className={'object-cover w-full'}
+					className={'w-full object-cover'}
 					loading={'eager'}
 					width={600}
 					height={895} />
@@ -101,7 +103,7 @@ function	Tree(): ReactElement {
 
 function	MintView(): ReactElement {
 	const {isActive, provider, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
-	const {balanceOf, totalSupply, maxSupply, refresh, shippingDone} = useMint();
+	const {balanceOf, totalSupply, maxSupply, price, refresh, shippingDone} = useMint();
 	const [txStatusMint, set_txStatusMint] = useState(defaultTxStatus);
 
 	function connectWallet(): void {
@@ -196,20 +198,21 @@ function	MintView(): ReactElement {
 								{'yFu - The Comic, Episodes 1 to 4'}
 							</h4>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
-								{`0.1 ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
+								{`${formatEther(price)} ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
 							</p>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
-								{'Each NFT holder is eligible to receive a physical set of all four limited edition comics, at no additional cost. Mint, enter shipping info, and prepare to receive your piece of DeFi history.'}
+								{'Each NFT holder is eligible to receive a physical set of all four limited first edition comics, at no additional cost. Mint, hodl to the snapshot, and receive a redeemable coupon to enter shipping information. Then, prepare to own your piece of Yearn & DeFi history.'}
 							</p>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
-								{'As a bonus, upon reveal your NFT will get one collectible frame of original artwork from the comics.'}
+								{'As a bonus, upon revealing your NFT you will have a collectible, generative digital artwork, based on unique frames from the comics.'}
 							</p>
 							<Link href={'/faq'}>
-								<p className={'mb-4 font-scope text-base text-white underline md:text-lg'}>
+								<p className={'mb-4 font-scope text-base text-white underline md:text-xl'}>
 									{'See FAQ for all the details.'}
 								</p>
 							</Link>
 						</div>
+						<SnapshotCountdown className={'mb-8'} />
 						<div className={'mt-auto flex flex-row space-x-4 border-2 border-white p-6'}>
 							<div className={'pt-1'}>
 								<div className={'h-4 w-4 animate-pulse rounded-full bg-green-500'} />
@@ -217,7 +220,6 @@ function	MintView(): ReactElement {
 							<div>
 								<p>{`You have minted ${balanceOf} yFu Comic NFT${balanceOf > 1 ? 's' : ''}`}</p>
 								<p>{`You entered shipping for ${shippingDone.length} yFu Comic NFT${balanceOf > 1 ? 's' : ''}`}</p>
-								<p className={'mt-2'}>{'Please fill your shipping information before the 22th of September 2023'}</p>
 							</div>
 						</div>
 					</div>

@@ -21,22 +21,22 @@ function FAQ(): ReactElement {
 				<div className={'mt-10'}>
 					<ul className={'list-inside list-disc space-y-2'}>
 						<li className={'text-base text-white'}>
-							{'5/1/23 NFT Minting Begins!'}
+							{'NFT Minting Begins!'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'Minting is Open until 5/21/23, or supply runs out'}
+							{'NFT Reveal'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'Shipping Information Entry is open until 6/1/23'}
+							{'Snapshot of NFT holders is taken on April 1st 2024'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'NFT artwork is revealed by 6/2/23 (exact dates TBA)'}
+							{'Airdrop of shipping coupons within a day or two.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'NFTs become transferable on 6/2/23'}
+							{'Shipping information entry period: open until May 1st.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'Comics will ship (expect 6-8 weeks for delivery)'}
+							{'Comics will ship! (expect 6-8 weeks for delivery)'}
 						</li>
 					</ul>
 				</div>
@@ -47,18 +47,18 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'What is yFu the comic?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
-							{'yFu is a comic series in four books, each 24 pages, which tells the story of Yearn Finance’s origination, DAO and philosophy, with an epic narrative set within the Pills universe.'}
+							{'yFu is a comic series in four books, each 24 pages, which tells the story of Yearn Finance\'s origination, DAO and philosophy, with an epic narrative set within the Pills universe.'}
 						</li>
 						<li className={'text-base text-white'}>
 							{'The project and lore was conceived by the YFI Story team at Yearn (Zemm, Pillhead, BigBadaboom, Pentacle and Banteg).'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'yFu was written and produced by Devil’s Due Studios: Story by Josh Blaylock, Art by Travis Hymel, Colors by Greg & Fake, Letters by Shawn DePasquale.'}
+							{'yFu was written and produced by Devil\'s Due Studios: Story by Josh Blaylock, Art by Travis Hymel, Colors by Greg & Fake, Letters by Shawn DePasquale.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'Additional development, design and technical support was provided by Major, Worms, Pacific Design and yAcademy.'}
+							{'Additional development, design and technical support was provided by Major, Worms, Murderteeth, Pacific Design and yAcademy.'}
 						</li>
 					</ul>
 				</div>
@@ -67,7 +67,7 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'What is this NFT all about?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'yFu Comic NFTs are your ticket to receive physical copies of all four comics.'}
 						</li>
@@ -87,35 +87,29 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How will this work, exactly?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
-							{'Anyone can mint one or more yFu Comic NFTs via our website.'}
+							{'Anyone can mint one or more yFu Comic NFTs.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'The NFT will be non transferable until the shipping request period ends.  During that time, be sure to enter your shipping information, via our form, for each NFT you have minted.'}
+							{'At the snapshot date, all holders of yFu Comic NFTs will be airdropped a Shipping Coupon NFT, one for each NFT held.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'Once the shipping request period is over, we will no longer take shipping information for the NFTs.'}
+							{'For one month, these coupons will allow you to use the yFu Temple website to enter your address'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'At this time, the NFT will become transferable and NFT artwork will be revealed.'}
-						</li>
-						<li className={'text-base text-white'}>
-							{'You can now freely trade the NFT on OpenSea, Blur, etc.'}
-						</li>
-						<li className={'text-base text-white'}>
-							{'Your Comics will arrive by mail to the address you have entered in 6-8 weeks.'}
+							{'Devil\'s Due Comics will use the address entered to send you a set of all four comics, for each coupon you use.'}
 						</li>
 					</ul>
 				</div>
 
 				<div className={'mt-10'}>
 					<h2 className={'text-2xl font-bold text-white'}>
-						{'How will this work, exactly?'}
+						{'Physical comics? Tell me more...'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
-							{'Comics are produced and shipped by the good people at Devil’s Due Comics.  They will be sent from the U.S.A.'}
+							{'Comics are produced and shipped by the good people at Devil\'s Due Comics.  They will be sent from the U.S.A.'}
 						</li>
 						<li className={'text-base text-white'}>
 							{'Domestic shipping in the U.S.A. will be via USPS.'}
@@ -132,7 +126,7 @@ function FAQ(): ReactElement {
 						<li className={'text-base text-white'}>
 							{'If you have any issues with shipping, please post in our '}
 							<a
-								href={'https://discord.gg/yearn'}
+								href={'https://discord.com/invite/yearnfi'}
 								target={'_blank'} 
 								rel={'noreferrer'}>
 								<span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span>
@@ -143,14 +137,14 @@ function FAQ(): ReactElement {
 
 				<div className={'mt-10'}>
 					<h2 className={'text-2xl font-bold text-white'}>
-						{'But I’m anon. How am I going to get the comics?'}
+						{'But I\'m anon. How am I going to get the comics?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'Feel free to mint from a non-public wallet and / or use a P.O. box, a third party recipient, etc.'}
 						</li>
 						<li className={'text-base text-white'}>
-							{'We will not retain shipping information, Yearn doesn’t care where you live, but please use any op-sec you think is needed.'}
+							{'We will not retain shipping information, Yearn doesn\'t care where you live, but please use any op-sec you think is needed.'}
 						</li>
 					</ul>
 				</div>
@@ -159,14 +153,14 @@ function FAQ(): ReactElement {
 					<h2 className={'text-2xl font-bold text-white'}>
 						{'How is the yFu Temple affiliated with Yearn?'}
 					</h2>
-					<ul className={'mt-4 pl-4 list-outside list-disc space-y-2 max-w-2xl'}>
+					<ul className={'mt-4 max-w-2xl list-outside list-disc space-y-2 pl-4'}>
 						<li className={'text-base text-white'}>
 							{'The yFu Temple was created in the process of developing the lore and characters in the yFu comic.'}
 						</li>
 						<li className={'text-base text-white'}>
 							{'It is managed by Yearn contributors currently. You can get involved by finding us in the'}
 							<a
-								href={'https://discord.gg/yearn'}
+								href={'https://discord.com/invite/yearnfi'}
 								target={'_blank'}
 								rel={'noreferrer'}>
 								<span className={'underline hover:text-yearn-blue'}> {'Yearn Discord'}</span>
@@ -184,7 +178,7 @@ function FAQ(): ReactElement {
 function Wrapper(): ReactElement {
 	return (
 		<motion.div
-			key={'shipping'}
+			key={'faq'}
 			initial={'initial'}
 			animate={'enter'}
 			exit={'exit'}
