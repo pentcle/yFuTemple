@@ -60,7 +60,6 @@ function	Apply(): ReactElement {
 		set_shippingForTokenID((possibleShipping || [])?.[possibleShipping?.length - 1] || -1);
 	}, [possibleShipping]);
 
-
 	async function signMessage(tokenID: number): Promise<string> {
 		const	signer = provider.getSigner();
 		const	signature = await signer.signMessage('I own edition #' + tokenID);

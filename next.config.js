@@ -29,9 +29,13 @@ module.exports = (phase) => withPWA({
 		},
 		ALCHEMY_KEY: process.env.ALCHEMY_KEY,
 		INFURA_KEY: process.env.INFURA_KEY,
-		REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
-		WEBSITE_URI: 'https://yfu.yearn.farm/',
-		MINT_CONTRACT_ADDRESS: '0x0D4b8B5005611d48bc63ac5e90Bbd3b983177DdE#code'
+		REDIS_URL: process.env.REDIS_URL,
+		SNAPSHOT: process.env.SNAPSHOT,
+		WEBSITE_URI: process.env.WEBSITE_URI,
+		CHAIN_ID: process.env.CHAIN_ID,
+		MULTICALL_ADDRESS: process.env.MULTICALL_ADDRESS,
+		MINT_CONTRACT_ADDRESS: process.env.MINT_CONTRACT_ADDRESS,
+		MINT_URL: process.env.MINT_URL,
+		MINT_PRICE_WEI: process.env.MINT_PRICE_WEI,
 	}
 });
-

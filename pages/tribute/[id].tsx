@@ -1,19 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {motion} from 'framer-motion';
 
 import DraggableInfo from '../../components/DraggableInfo';
 import TributeSlider from '../../components/TributeSlider';
 import YFU_DATA from '../../utils/data';
 
 import type {ReactElement} from 'react';
-
-const variants = {
-	initial: {y: 100, scale: 0.9, opacity: 0},
-	enter: {y: 0, scale: 1, opacity: 1, transition: {duration: 0.3, ease: 'easeIn'}},
-	exit: {y: 100, scale: 0.9, opacity: 0, transition: {duration: 0.3, ease: 'easeIn'}}
-};
 
 export default function Index(): ReactElement {
 	const	router = useRouter();
@@ -28,13 +21,7 @@ export default function Index(): ReactElement {
 	}, [router.query]);
 
 	return (
-		<motion.div
-			key={currentTemple?.id || router.asPath}
-			initial={'initial'}
-			animate={'enter'}
-			exit={'exit'}
-			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
-			variants={variants}>
+		<div className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}>
 			<div className={'flex h-12 flex-row items-center justify-between border-b-2 border-b-white px-2 md:hidden'}>
 				<Link href={'/'}>
 					<div className={'flex cursor-pointer flex-row items-center'}>
@@ -84,6 +71,6 @@ export default function Index(): ReactElement {
 			<DraggableInfo
 				hasInfo={hasInfo}
 				set_hasInfo={set_hasInfo} />
-		</motion.div>
+		</div>
 	);
 }

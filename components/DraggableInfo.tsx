@@ -9,7 +9,7 @@ type TDraggableInfo = {
 }
 function	DraggableInfo({hasInfo, set_hasInfo}: TDraggableInfo): React.ReactElement {
 	return (
-		<div className={`fixed inset-0 z-50 items-center justify-center pointer-events-none ${hasInfo ? 'flex' : 'hidden'}`} style={{zIndex: 10000}}>
+		<div className={`pointer-events-none fixed inset-0 z-50 items-center justify-center ${hasInfo ? 'flex' : 'hidden'}`} style={{zIndex: 10000}}>
 			<Draggable handle={'.cursor-grab'}>
 				<div className={'pointer-events-auto relative z-50 flex w-80 flex-col border-2 border-white bg-black pb-2 md:w-96'}>
 					<div className={'flex h-7 w-full flex-row justify-between border-b-2 border-white text-left font-scope text-lg text-white'}>

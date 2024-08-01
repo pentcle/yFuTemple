@@ -42,9 +42,10 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 		if (!isActive || !provider) {
 			return;
 		}
-		const currentProvider = provider || getProvider(1);
+
+		const currentProvider = provider || getProvider(parseInt(process.env.CHAIN_ID ?? '0'));
 		const ethcallProvider = await newEthCallProvider(currentProvider);
-		ethcallProvider.multicall2 = {address: '0x054FfF7ee30953DdB739458e11EAAd51224343a1', block: 0};
+		ethcallProvider.multicall2 = {address: process.env.MULTICALL_ADDRESS ?? '0x0', block: 0};
 
 		const userAddress = address;
 		const yfuMintContract = new Contract(process.env.MINT_CONTRACT_ADDRESS as string, YFU_ABI);
@@ -66,6 +67,7 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 			set_ownedByUser(_ownedByUser.map((tokenIDBig): number => Number(tokenIDBig)));
 		});
 	}, [provider, address, isActive]);
+
 	useEffect((): void => {
 		getBalanceOf();
 	}, [getBalanceOf]);
@@ -82,7 +84,7 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 				shippingDone: shippingDone as number[],
 				set_shippingDone: set_shippingDone as Dispatch<React.SetStateAction<number[]>>,
 				maxSupply: 3000,
-				price: 44400000000000000n,
+				price: BigInt(process.env.MINT_PRICE_WEI ?? '0'),
 				refresh: async (): Promise<void> => await getBalanceOf()
 			}}>
 			{children}

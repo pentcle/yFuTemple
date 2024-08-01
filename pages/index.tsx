@@ -5,11 +5,8 @@ import {useRouter} from 'next/router';
 import {useMint} from 'contexts/useMint';
 import {formatEther} from 'ethers/lib/utils';
 import Redis from 'ioredis';
-import {mint} from 'utils/mint';
 import axios from 'axios';
-import {motion} from 'framer-motion';
 import {useWeb3} from '@yearn-finance/web-lib/contexts/useWeb3';
-import {defaultTxStatus, Transaction} from '@yearn-finance/web-lib/utils/web3/transaction';
 
 import Footer from '../components/Footer';
 import SnapshotCountdown from '../components/SnapshotCountdown';
@@ -18,12 +15,6 @@ import YFU_DATA from '../utils/data';
 
 import type {ReactElement} from 'react';
 import type {TYFUData} from '../utils/data';
-
-const variants = {
-	initial: {y: 0, opacity: 1},
-	enter: {y: 0, opacity: 1, transition: {duration: 0.2, ease: 'easeIn'}},
-	exit: {y: 20, opacity: 0, transition: {duration: 0.2, ease: 'easeIn'}}
-};
 
 const	redis = new Redis(process.env.REDIS_URL as string);
 
@@ -102,9 +93,8 @@ function	Tree(): ReactElement {
 }
 
 function	MintView(): ReactElement {
-	const {isActive, provider, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
-	const {balanceOf, totalSupply, maxSupply, price, refresh, shippingDone} = useMint();
-	const [txStatusMint, set_txStatusMint] = useState(defaultTxStatus);
+	const {isActive, address, openLoginModal, onDesactivate, onSwitchChain} = useWeb3();
+	const {price, balanceOf, totalSupply, maxSupply, shippingDone} = useMint();
 
 	function connectWallet(): void {
 		if (isActive) {
@@ -114,14 +104,6 @@ function	MintView(): ReactElement {
 		} else {
 			openLoginModal();
 		}
-	}
-
-	async function	onMint(): Promise<void> {
-		new Transaction(provider, mint, set_txStatusMint)
-			.populate()
-			.onSuccess(async (): Promise<void> => {
-				await refresh();
-			}).perform();
 	}
 
 	return (
@@ -137,56 +119,44 @@ function	MintView(): ReactElement {
 						muted
 						loop
 						poster={'/artwork.png'}
-						className={'h-full w-full object-cover md:aspect-auto md:object-contain'}>
+						className={'hfull wfull objectcover md:aspectauto md:objectcontain'}>
 						<source src={'/artwork.mp4'} type={'video/mp4'} />
 					</video>
 				</div>
 				<div className={'col-span-12 flex w-full flex-col md:col-span-8'}>
+					<h4 className={'text-2xl font-bold'}>
+						{'Mint the NFT'}
+					</h4>
+					<button
+						onClick={(): void => {
+							window.open(process.env.MINT_URL ?? '/', '_blank', 'noopener,noreferrer');
+						}}
+						className={'button-glowing my-4 bg-white text-black'}>
+						{'Mint on Zora'}
+						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+						<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+					</button>
+					<br />
+
+					<h4 className={'text-2xl font-bold'}>
+						{'Get the physical comics'}
+					</h4>
 					{isActive ? <div /> : (
 						<button
 							onClick={connectWallet}
 							className={'button-glowing my-4 bg-white text-black'}>
-							{'Connect your wallet to mint a YFU Comic NFT'}
+							{'Connect your wallet'}
 							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 						</button>
 					)}
 
-					<div className={'flex h-full flex-col'}>
+					<div className={'flex flex-col'}>
 						<div className={`mb-8 flex flex-col items-center space-x-0 md:flex-row md:space-x-6 ${!isActive ? 'pointer-events-none opacity-25' : ''}`}>
-							<button
-								onClick={onMint}
-								disabled={txStatusMint.pending}
-								className={'button-glowing mb-4 w-full bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
-								<p className={txStatusMint.pending ? 'invisible' : 'visible'}>{'Mint NFT'}</p>
-								<span className={`${txStatusMint.pending ? 'visible' : 'invisible'} absolute inset-0 flex items-center justify-center`}>
-									<svg
-										className={'h-5 w-5 animate-spin text-center text-black'}
-										xmlns={'http://www.w3.org/2000/svg'}
-										fill={'none'}
-										viewBox={'0 0 24 24'}>
-										<circle
-											className={'opacity-25'}
-											cx={'12'}
-											cy={'12'}
-											r={'10'}
-											stroke={'currentColor'}
-											strokeWidth={'4'}>
-										</circle>
-										<path
-											className={'opacity-75'}
-											fill={'currentColor'}
-											d={'M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'}>
-										</path>
-									</svg>
-								</span>
-								<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
-								<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
-							</button>
-							<Link href={balanceOf < 1 ? '' : '/shipping'} className={`w-full md:w-auto ${balanceOf < 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+							<Link href={balanceOf < 1 ? '' : '/shipping'} className={`w-full ${balanceOf < 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 								<button
 									disabled={balanceOf < 1}
-									className={'button-glowing w-full bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4 md:w-auto'}>
+									className={'w-full button-glowing bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4'}>
 									<p>{'Fill Shipping Information'}</p>
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
@@ -238,13 +208,7 @@ function	Index({visitors=[]}): ReactElement {
 	}, []);
 
 	return (
-		<motion.div
-			key={'home'}
-			initial={'initial'}
-			animate={'enter'}
-			exit={'exit'}
-			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
-			variants={variants}>
+		<div className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}>
 			<main
 				id={'app'}
 				className={'relative mx-auto w-full max-w-screen-xl'}
@@ -287,7 +251,7 @@ function	Index({visitors=[]}): ReactElement {
 				</div>
 			</main>
 			<Footer visitors={visitorsUpdated} />
-		</motion.div>
+		</div>
 	);
 }
 

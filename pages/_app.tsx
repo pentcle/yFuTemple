@@ -182,13 +182,14 @@ function	AppWrapper(props: AppProps): ReactElement {
 
 function	MyApp(props: AppProps): ReactElement {
 	const	{Component, pageProps} = props;
+	const chainId = parseInt(process.env.CHAIN_ID ?? '0');
 
 	return (
 		<WithYearn
 			options={{
 				web3: {
-					defaultChainID: 1,
-					supportedChainID: [1, 1337]
+					defaultChainID: chainId,
+					supportedChainID: [chainId]
 				}
 			}}>
 			<MintContextApp>
