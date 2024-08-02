@@ -143,6 +143,7 @@ function	MintView(): ReactElement {
 					</h4>
 					{isActive ? <div /> : (
 						<button
+							disabled={true}
 							onClick={connectWallet}
 							className={'button-glowing my-4 bg-white text-black'}>
 							{'Connect your wallet'}
@@ -152,11 +153,11 @@ function	MintView(): ReactElement {
 					)}
 
 					<div className={'flex flex-col'}>
-						<div className={`mb-8 flex flex-col items-center space-x-0 md:flex-row md:space-x-6 ${!isActive ? 'pointer-events-none opacity-25' : ''}`}>
+						<div className={`mb-8 flex flex-col items-center space-x-0 md:flex-row md:space-x-6 ${!isActive ? 'pointer-events-none' : ''}`}>
 							<Link href={balanceOf < 1 ? '' : '/shipping'} className={`w-full ${balanceOf < 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 								<button
 									disabled={balanceOf < 1}
-									className={'w-full button-glowing bg-white font-peste text-black disabled:cursor-not-allowed disabled:opacity-30 md:my-4'}>
+									className={'w-full button-glowing bg-white font-peste text-black md:my-4'}>
 									<p>{'Fill Shipping Information'}</p>
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 									<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
