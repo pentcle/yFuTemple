@@ -83,7 +83,7 @@ export const MintContextApp = ({children}: {children: ReactElement}): ReactEleme
 				ownedByUser,
 				shippingDone: shippingDone as number[],
 				set_shippingDone: set_shippingDone as Dispatch<React.SetStateAction<number[]>>,
-				maxSupply: 3000,
+				maxSupply: 888,
 				price: BigInt(process.env.MINT_PRICE_WEI ?? '0'),
 				refresh: async (): Promise<void> => await getBalanceOf()
 			}}>
