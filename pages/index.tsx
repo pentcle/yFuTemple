@@ -168,7 +168,7 @@ function	MintView(): ReactElement {
 							<h4 className={'mb-6 flex text-2xl font-bold md:hidden md:text-4xl'}>
 								{'yFu - The Comic, Episodes 1 to 4'}
 							</h4>
-							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
+							<p className={'hidden mb-4 font-scope text-base text-white md:text-lg'}>
 								{`${formatEther(price)} ETH - ${totalSupply} of ${maxSupply} NFTs Minted So Far`}
 							</p>
 							<p className={'mb-4 font-scope text-base text-white md:text-lg'}>
