@@ -1,15 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Footer from 'components/Footer';
-import {motion} from 'framer-motion';
 
 import type {ReactElement} from 'react';
-
-const variants = {
-	initial: {y: 0, opacity: 1},
-	enter: {y: 0, opacity: 1, transition: {duration: 0.2, ease: 'easeIn'}},
-	exit: {y: 20, opacity: 0, transition: {duration: 0.2, ease: 'easeIn'}}
-};
 
 function FAQ(): ReactElement {
 	return (
@@ -177,13 +170,7 @@ function FAQ(): ReactElement {
 
 function Wrapper(): ReactElement {
 	return (
-		<motion.div
-			key={'faq'}
-			initial={'initial'}
-			animate={'enter'}
-			exit={'exit'}
-			className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}
-			variants={variants}>
+		<div className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}>
 			<div className={'relative mx-auto w-full max-w-screen-xl'} style={{minHeight: '100vh'}}>
 				<div>
 					<Link href={'/'}>
@@ -197,7 +184,7 @@ function Wrapper(): ReactElement {
 				</div>
 			</div>
 			<Footer/>
-		</motion.div>
+		</div>
 	);
 }
 

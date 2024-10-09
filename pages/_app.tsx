@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import {DefaultSeo} from 'next-seo';
 import {MintContextApp} from 'contexts/useMint';
-import {AnimatePresence} from 'framer-motion';
 import {Dialog, Transition} from '@headlessui/react';
 import {WithYearn} from '@yearn-finance/web-lib/contexts/WithYearn';
 
@@ -145,24 +144,16 @@ function	AppMeta(): ReactElement {
 function	AppWrapper(props: AppProps): ReactElement {
 	const	{Component, pageProps, router} = props;
 
-	function handleExitComplete(): void {
-		if (typeof window !== 'undefined') {
-			window.scrollTo({top: 0});
-		}
-	}
-
 	return (
 		<>
 			<AppMeta />
 			<WithSplash>
 				<Header />
 				<div className={'z-10 overflow-x-hidden pt-24 md:pt-16'}>
-					<AnimatePresence mode={'wait'} onExitComplete={handleExitComplete}>
-						<Component
-							key={router.route}
-							router={props.router}
-							{...pageProps} />
-					</AnimatePresence>
+					<Component
+						key={router.route}
+						router={props.router}
+						{...pageProps} />
 				</div>
 			</WithSplash>
 			<div className={'fixed inset-0 -z-10'}>
