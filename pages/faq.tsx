@@ -119,7 +119,7 @@ function FAQ(): ReactElement {
 						<li className={'text-base text-white'}>
 							{'If you have any issues with shipping, please post in our '}
 							<a
-								href={'https://discord.com/invite/yearnfi'}
+								href={'https://discord.com/invite/yearn'}
 								target={'_blank'} 
 								rel={'noreferrer'}>
 								<span className={'underline hover:text-yearn-blue'}> {'Discord channel'}</span>
@@ -153,7 +153,7 @@ function FAQ(): ReactElement {
 						<li className={'text-base text-white'}>
 							{'It is managed by Yearn contributors currently. You can get involved by finding us in the'}
 							<a
-								href={'https://discord.com/invite/yearnfi'}
+								href={'https://discord.com/invite/yearn'}
 								target={'_blank'}
 								rel={'noreferrer'}>
 								<span className={'underline hover:text-yearn-blue'}> {'Yearn Discord'}</span>

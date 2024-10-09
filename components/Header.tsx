@@ -83,7 +83,7 @@ function	Header(): ReactElement {
 								</a>
 								{' / '}
 								<a
-									href={'https://discord.com/invite/yearnfi'}
+									href={'https://discord.com/invite/yearn'}
 									target={'_blank'}
 									rel={'noreferrer'}
 									className={'hover:underline'}>{'Discord'}

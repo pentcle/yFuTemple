@@ -17,7 +17,7 @@ function	Footer({visitors=[]}): ReactElement {
 			</div>
 			<nav className={'flex w-full flex-col items-center justify-center space-y-5 space-x-0 font-monument text-lg text-yblue md:flex-row md:space-y-0 md:space-x-8 md:text-xl'}>
 				<p className={'text-shadow transition-all duration-150'}><a href={'https://twitter.com/yearnfi'} target={'_blank'}>{'TWITTER'}</a></p>
-				<p className={'text-shadow transition-all duration-150'}><a href={'https://discord.com/invite/yearnfi'} target={'_blank'}>{'DISCORD'}</a></p>
+				<p className={'text-shadow transition-all duration-150'}><a href={'https://discord.com/invite/yearn'} target={'_blank'}>{'DISCORD'}</a></p>
 				<p className={'text-shadow transition-all duration-150'}><a href={'http://blog.yearn.finance'} target={'_blank'}>{'MEDIUM'}</a></p>
 				<p className={'text-shadow transition-all duration-150'}><a href={'https://t.me/yearnfinance'} target={'_blank'}>{'TELEGRAM'}</a></p>
 				<p className={'text-shadow transition-all duration-150'}><a href={'https://yfistory.org'} target={'_blank'}>{'THE BLUE PILL'}</a></p>
