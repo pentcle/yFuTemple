@@ -8,11 +8,11 @@ import styles from './Carousel.module.css';
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 
-export default function CarouselPage() {
-	const [activeTab, setActiveTab] = useState('techne');
-	const [imagePaths, setImagePaths] = useState<{ [key: string]: string[] }>({});
-	const [isLoading, setIsLoading] = useState(true);
-	const [showGlow, setShowGlow] = useState(false);
+export default function CarouselPage(): React.ReactElement {
+	const [activeTab, set_activeTab] = useState<string>('techne'); // Typed activeTab as string
+	const [imagePaths, set_imagePaths] = useState<{ [key: string]: string[] }>({}); // Typed imagePaths as an object with string arrays
+	const [isLoading, set_isLoading] = useState<boolean>(true); // Typed isLoading as boolean
+	const [isShowGlow, set_isShowGlow] = useState<boolean>(false); // Typed isShowGlow as boolean
 
 	const tabColors: { [key: string]: string } = {
 		techne: 'rgba(219, 241, 247, 0.8)',
@@ -22,18 +22,18 @@ export default function CarouselPage() {
 	};
 
 	useEffect(() => {
-		const fetchImagePaths = async () => {
-			setIsLoading(true);
+		const fetchImagePaths = async (): Promise<void> => {
+			set_isLoading(true);
 			const paths = await loadAllImagePaths();
-			setImagePaths(paths);
-			setIsLoading(false);
+			set_imagePaths(paths);
+			set_isLoading(false);
 		};
 		fetchImagePaths();
 	}, []);
 
 	useEffect(() => {
-		setShowGlow(true);
-		const timeout = setTimeout(() => setShowGlow(false), 1000);
+		set_isShowGlow(true);
+		const timeout = setTimeout(() => set_isShowGlow(false), 1000);
 
 		return () => clearTimeout(timeout);
 	}, [activeTab]);
@@ -47,7 +47,7 @@ export default function CarouselPage() {
 	return (
 		<article className={'relative flex h-screen flex-col overflow-hidden bg-[#222A30]'}>
 			<div
-				className={`${styles.backgroundGlow} ${showGlow ? styles.glowFadeIn : styles.glowFadeOut}`}
+				className={`${styles.backgroundGlow} ${isShowGlow ? styles.glowFadeIn : styles.glowFadeOut}`}
 				style={{
 					'--glow-color': tabColors[activeTab],
 					'--glow-fade-color': tabColors[activeTab].replace('0.8', '0.2')
@@ -57,8 +57,9 @@ export default function CarouselPage() {
 			<div className={'relative z-10 flex grow flex-col overflow-hidden p-4 py-8'}>
 				<Tabs
 					value={activeTab}
-					onValueChange={setActiveTab}
-					className={'flex h-full w-full flex-col'}>
+					onValueChange={set_activeTab}
+					className={'flex h-full w-full flex-col'}
+				>
 					<TabsList className={'mb-4 flex w-full shrink-0 justify-center'}>
 						{tabs.map((tab) => (
 							<TabsTrigger
