@@ -1,6 +1,7 @@
 'use client';
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
+
 import styles from './Carousel.module.css';
 
 export default function CarouselPage(): React.ReactElement {
@@ -77,7 +78,8 @@ export default function CarouselPage(): React.ReactElement {
 					'--glow-color': tabColors[activeTab],
 					'--glow-fade-color': tabColors[activeTab].replace('0.8', '0.2')
 				} as React.CSSProperties}
-			></div>
+			>
+			</div>
 
 			{/* Tab Navigation */}
 			<div className={'relative z-10 flex grow flex-col overflow-hidden p-4 py-8'}>
@@ -114,7 +116,7 @@ export default function CarouselPage(): React.ReactElement {
 										width={500}
 										height={761}
 										objectFit={'contain'}
-										loading="lazy"
+										loading={'lazy'}
 										className={'cursor-pointer'}
 										onClick={() => window.open(imagePath, '_blank')}
 									/>
