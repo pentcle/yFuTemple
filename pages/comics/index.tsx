@@ -13,7 +13,7 @@ export default function Index(): ReactElement {
 	const	[currentTemple, set_currentTemple] = useState(YFU_DATA.find((e): boolean => e.id === router?.query?.id));
 
 	useEffect((): void => {
-		console.log('murder');
+		console.log('comic page');
 	}, []);
 
 	useEffect((): void => {

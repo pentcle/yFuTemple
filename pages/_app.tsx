@@ -144,6 +144,8 @@ function	AppMeta(): ReactElement {
 function	AppWrapper(props: AppProps): ReactElement {
 	const	{Component, pageProps, router} = props;
 
+	console.log('Current route:', router.route);
+
 	return (
 		<>
 			<AppMeta />
