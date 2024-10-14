@@ -124,7 +124,7 @@ export default function CarouselPage(): React.ReactElement {
 				</button>
 			</div>
 			<h3 className={'mx-auto mt-4 w-fit max-w-xl whitespace-pre-wrap break-words border-b-2 border-b-white px-3 pb-3 font-peste text-2xl font-medium uppercase text-white md:mt-0 md:px-0 md:text-5xl'}>
-				comics
+				yFu comics
 			</h3>
 
 			<article
