@@ -14,7 +14,7 @@ export default function CarouselPage(): React.ReactElement {
 	const [modalImage, set_modalImage] = useState<string | null>(null);
 
 	const tabColors: { [key: string]: string } = {
-		techne: 'rgba(219, 241, 247, 0.8)',
+		techne: 'rgba(18, 201, 205, 0.8)',
 		transmission: 'rgba(230, 236, 117, 0.8)',
 		community: 'rgba(238, 166, 208, 0.8)',
 		dominion: 'rgba(227, 111, 76, 0.8)'
@@ -86,20 +86,20 @@ export default function CarouselPage(): React.ReactElement {
 	const tabs = ['techne', 'transmission', 'community', 'dominion'];
 
 	return (
-		<article className={'relative flex h-screen flex-col overflow-hidden bg-[#222A30]'}>
-			{/* Glow Effect */}
-			<div
+		<article className={'relative flex h-screen flex-col overflow-hidden'}>
+
+			<article
 				className={`${styles.backgroundGlow} ${isShowGlow ? styles.glowFadeIn : styles.glowFadeOut}`}
 				style={{
 					'--glow-color': tabColors[activeTab],
 					'--glow-fade-color': tabColors[activeTab].replace('0.8', '0.2')
 				} as React.CSSProperties}
 			>
-			</div>
+			</article>
 
-			{/* Tab Navigation */}
-			<div className={'relative z-10 flex grow flex-col overflow-hidden p-4 py-8'}>
-				<div className={'mb-4 flex w-full justify-center'}>
+			<article className={'z-10 flex flex-col justify-between items-stretch overflow-hidden p-4 py-8 space-y-4 sm:space-y-16'}>
+
+				<section className={'mb-4 flex w-full justify-center'}>
 					{tabs.map((tab) => (
 						<button
 							key={tab}
@@ -109,16 +109,13 @@ export default function CarouselPage(): React.ReactElement {
 							{tab}
 						</button>
 					))}
-				</div>
+				</section>
 
-				{/* Horizontal Image Carousel */}
-				<div
+				<section
 					id={'image-carousel'}
 					className={'horizontal-snap w-screen gap-0 scroll-smooth px-20 scrollbar-none md:px-[40vw]'}
 					onScroll={handleScroll}
 				>
-					{/* Add an empty div to the left of the first image */}
-					{/*<div className={'w-[10vw] md:w-[5vw]'}></div>*/}
 
 					{imagePaths.map((imagePath, index) => (
 						<div
@@ -146,16 +143,16 @@ export default function CarouselPage(): React.ReactElement {
 
 					{/* Add empty divs for proper spacing at the end */}
 					{imagePaths.length < 5
-						? Array(5 - imagePaths.length).fill(<div className={'w-[50vw] md:w-[20vw]'} />)
+						? Array(5 - imagePaths.length).fill(<div className={'w-[50vw] md:w-[20vw]'}/>)
 						: null}
-				</div>
-			</div>
+				</section>
+			</article>
 
 			{/* Modal for displaying full-screen image */}
 			{isModalOpen && modalImage && (
 				<div
 					className={'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80'}
-					onClick={handleModalClose} // Close modal on click
+					onClick={handleModalClose}
 				>
 					<div className={'relative p-4'}> {/* Added padding for the margin around the image */}
 						<Image
@@ -164,23 +161,15 @@ export default function CarouselPage(): React.ReactElement {
 							width={1200}
 							height={1846}
 							loading={'eager'}
-							style={{ objectFit: 'contain', maxHeight: 'calc(100vh - 80px)', maxWidth: '100%' }}
+							style={{
+								objectFit: 'contain',
+								maxHeight: 'calc(100vh - 80px)',
+								maxWidth: '100%'
+							}}
 						/>
 					</div>
 				</div>
 			)}
-
-			{/* Footer */}
-			<p className={'absolute bottom-4 right-4 z-30'}>
-				<a
-					href={'https://github.com/pentcle/playground/tree/main/src/app/carousel'}
-					target={'_blank'}
-					rel={'noopener noreferrer'}
-					className={'text-white underline'}
-				>
-					{'GitHub'}
-				</a>
-			</p>
 		</article>
 	);
 }
