@@ -1,9 +1,9 @@
 'use client';
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import styles from './Carousel.module.css';
-import Link from 'next/link';
 
 export default function CarouselPage(): React.ReactElement {
 	const [activeTab, set_activeTab] = useState<string>('techne');
@@ -98,7 +98,7 @@ export default function CarouselPage(): React.ReactElement {
 						href={'https://zora.co/collect/base:0x39adafad9fde221725b975b4adae8b8f2dfa6d4b/1'}
 						target={'_blank'}
 						rel={'noreferrer'}
-						className={'font-scope text-xl text-white uppercase'}>
+						className={'font-scope text-xl uppercase text-white'}>
 						{'mint on zora'}
 					</a>
 				</div>
@@ -119,12 +119,12 @@ export default function CarouselPage(): React.ReactElement {
 					}}
 					className={'button-glowing-small bg-white font-scope text-black'}>
 					{'MINT ON ZORA'}
-					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
-					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+					<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
+					<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
 				</button>
 			</div>
 			<h3 className={'mx-auto mt-4 w-fit max-w-xl whitespace-pre-wrap break-words border-b-2 border-b-white px-3 pb-3 font-peste text-2xl font-medium uppercase text-white md:mt-0 md:px-0 md:text-5xl'}>
-				yFu comics
+				{'yFu comics'}
 			</h3>
 
 			<article
@@ -136,7 +136,8 @@ export default function CarouselPage(): React.ReactElement {
 			>
 			</article>
 
-			<article className={'z-10 flex flex-col justify-between items-stretch overflow-hidden p-4 py-8 space-y-4 sm:space-y-16'}>
+			<article
+				className={'z-10 flex flex-col items-stretch justify-between space-y-4 overflow-hidden p-4 py-8 sm:space-y-16'}>
 
 				<section className={'mb-4 flex w-full justify-center'}>
 					{tabs.map((tab) => (
