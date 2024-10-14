@@ -73,7 +73,7 @@ function	AppMeta(): ReactElement {
 	return (
 		<>
 			<Head>
-				<title>{'YFU Temple'}</title>
+				<title>{'yFu Temple'}</title>
 				<meta httpEquiv={'X-UA-Compatible'} content={'IE=edge'} />
 				<meta name={'viewport'} content={'width=device-width, initial-scale=1'} />
 				<meta name={'description'} content={'YFU Temple'} />
@@ -113,7 +113,7 @@ function	AppMeta(): ReactElement {
 				<meta name={'googlebot'} content={'index,nofollow'} />
 			</Head>
 			<DefaultSeo
-				title={'YFU Temple'}
+				title={'yFu Temple'}
 				defaultTitle={'YFU Temple'}
 				description={'YFU Temple'}
 				openGraph={{
@@ -143,6 +143,8 @@ function	AppMeta(): ReactElement {
 
 function	AppWrapper(props: AppProps): ReactElement {
 	const	{Component, pageProps, router} = props;
+
+	console.log('Current route:', router.route);
 
 	return (
 		<>
