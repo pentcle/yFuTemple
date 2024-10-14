@@ -8,8 +8,10 @@ export default function CarouselPage(): React.ReactElement {
 	const [activeTab, set_activeTab] = useState<string>('techne');
 	const [imagePaths, set_imagePaths] = useState<string[]>([]);
 	const [isLoading, set_isLoading] = useState<boolean>(true);
-	const [currentSlide, set_currentSlide] = useState<number>(0); // Handle current slide state
+	const [currentSlide, set_currentSlide] = useState<number>(0);
 	const [isShowGlow, set_isShowGlow] = useState<boolean>(false);
+	const [isModalOpen, set_isModalOpen] = useState<boolean>(false);
+	const [modalImage, set_modalImage] = useState<string | null>(null);
 
 	const tabColors: { [key: string]: string } = {
 		techne: 'rgba(219, 241, 247, 0.8)',
@@ -63,6 +65,18 @@ export default function CarouselPage(): React.ReactElement {
 		return (): void => clearTimeout(timeout);
 	}, [activeTab]);
 
+	// Open modal with clicked image
+	function handleImageClick(imagePath: string): void {
+		set_modalImage(imagePath);
+		set_isModalOpen(true);
+	}
+
+	// Close modal on click
+	function handleModalClose(): void {
+		set_isModalOpen(false);
+		set_modalImage(null);
+	}
+
 	if (isLoading) {
 		return <div>{'Loading...'}</div>;
 	}
@@ -113,12 +127,12 @@ export default function CarouselPage(): React.ReactElement {
 									<Image
 										alt={`Image ${index + 1}`}
 										src={`/${imagePath}`}
-										width={500}
-										height={761}
-										objectFit={'contain'}
+										width={1200}
+										height={1846}
+										style={{ objectFit: 'contain' }}
 										loading={'lazy'}
 										className={'cursor-pointer'}
-										onClick={() => window.open(imagePath, '_blank')}
+										onClick={() => handleImageClick(imagePath)} // Open modal on image click
 									/>
 								</div>
 							</div>
@@ -131,6 +145,27 @@ export default function CarouselPage(): React.ReactElement {
 						: null}
 				</div>
 			</div>
+
+			{/* Modal for displaying full-screen image */}
+			{isModalOpen && modalImage && (
+				<div
+					className={'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80'}
+					onClick={handleModalClose} // Close modal on click
+				>
+					<div className={'relative p-4'}> {/* Added padding for the margin around the image */}
+						<Image
+							src={`/${modalImage}`}
+							alt={'Full screen image'}
+							layout={'intrinsic'}
+							width={1200}
+							height={1846} // Keeping aspect ratio
+							objectFit={'contain'}
+							loading={'eager'}
+							style={{ maxHeight: 'calc(100vh - 80px)', maxWidth: 'auto' }}
+						/>
+					</div>
+				</div>
+			)}
 
 			{/* Footer */}
 			<p className={'absolute bottom-4 right-4 z-30'}>
