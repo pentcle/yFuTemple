@@ -100,7 +100,12 @@ export default function CarouselPage(): React.ReactElement {
 		);
 	}
 
-	const tabs = ['techne', 'transmission', 'community', 'dominion'];
+	const tabs = [
+		'techne',
+		'transmission',
+		'community',
+		'dominion'
+	];
 
 	const styleProps: TCustomCSSProperties = {
 		'--glow-color': tabColors[activeTab],
@@ -177,13 +182,17 @@ export default function CarouselPage(): React.ReactElement {
 					{tabs.map((tab) => (
 						<button
 							key={tab}
-							onClick={(): void => set_activeTab(tab)}
-							className={`rounded-md px-2 py-1 text-sm capitalize ${activeTab === tab ? 'bg-white/30' : 'text-white'}`}
+							onClick={(): void | null => (tab === 'techne' ? set_activeTab(tab) : null)}
+							disabled={tab !== 'techne'}
+							className={`rounded-md px-2 py-1 text-sm capitalize ${
+								activeTab === tab ? 'bg-white/30' : 'text-white'
+							} ${tab !== 'techne' ? 'cursor-not-allowed opacity-30' : ''}`}
 						>
 							{tab}
 						</button>
 					))}
 				</section>
+
 
 				<section
 					id={'image-carousel'}
