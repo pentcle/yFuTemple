@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {router} from 'next/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
@@ -20,7 +19,13 @@ import type {TYFUData} from '../utils/data';
 
 const redis = new Redis(process.env.REDIS_URL as string);
 
-function Goddess({characterSrc = '', typoSrc = '', id = '', title = '', children = <div/>}): ReactElement {
+function Goddess({
+					 characterSrc = '',
+					 typoSrc = '',
+					 id = '',
+					 title = '',
+					 children = <div/>
+				 }): ReactElement {
 	const router = useRouter();
 
 	const onClickTribute = useCallback((id: string): void => {
@@ -178,7 +183,7 @@ function MintView(): ReactElement {
 							className={`mb-8 flex flex-col items-center space-x-0 md:flex-row md:space-x-6 ${!isActive ? 'pointer-events-none' : ''}`}>
 							<Link
 								href={balanceOf < 1 ? '' : '/shipping'}
-								  className={`w-full ${balanceOf < 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+								className={`w-full ${balanceOf < 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 								<button
 									disabled={balanceOf < 1}
 									className={'button-glowing w-full bg-white font-peste text-black md:my-4'}>
@@ -232,10 +237,6 @@ function Index({visitors = []}): ReactElement {
 		axios.get('/api/visitors').then((v): void => set_visitorsUpdated(v.data));
 	}, []);
 
-	const onClickTribute = (): void => {
-		router.push('/comic');
-	};
-
 	return (
 		<div className={'relative -mt-1 flex w-screen flex-col overflow-hidden p-0 md:p-6'}>
 			<main
@@ -247,11 +248,21 @@ function Index({visitors = []}): ReactElement {
 						<Title/>
 					</div>
 
+					<div className={'absolute inset-x-4 top-4 hidden flex-row items-center justify-between md:flex'}>
+						<div></div>
+						<Link
+							href={'/comic'}
+							className={'button-glowing-small bg-white font-scope text-black'}>
+							{'VIEW THE COMICS'}
+							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+						</Link>
+
+					</div>
 
 
 					<section className={'w-full px-4 md:px-0'}>
 						<MintView/>
-
 						<ComicIntro/>
 
 						{allData
