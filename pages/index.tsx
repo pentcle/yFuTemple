@@ -151,10 +151,16 @@ function MintView(): ReactElement {
 						onClick={(): void => {
 							window.open(process.env.MINT_URL ?? '/', '_blank', 'noopener,noreferrer');
 						}}
-						className={'button-glowing my-4 bg-white text-black'}>
-						{'Mint on Zora'}
-						<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
-						<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
+						className={'button-glowing relative my-4 flex w-full items-center justify-between bg-white px-6 py-3 text-black sm:w-auto'}
+						aria-label={'Mint on Zora'}>
+						<span>{'Mint on Zora'}</span>
+						<Image
+							src={'/assets/Base_Wordmark_Blue.svg'}
+							alt={'Base logo'}
+							width={80}
+							height={10}
+							className={'ml-4 inline-block'}
+						/>
 					</button>
 					<br/>
 
@@ -238,7 +244,7 @@ function Index({visitors = []}): ReactElement {
 				className={'relative mx-auto w-full max-w-screen-xl'}
 				style={{minHeight: '100vh'}}>
 				<div>
-					<div className={'pt-1 grid justify-items-end'}>
+					<div className={'grid justify-items-end pt-1'}>
 						<div></div>
 						<Link
 							href={'/comic'}

@@ -116,13 +116,21 @@ export default function CarouselPage(): React.ReactElement {
 						<p className={'mt-1 font-scope text-xl text-white'}>{'BACK'}</p>
 					</div>
 				</Link>
-				<div className={'cursor-pointer flex-row items-center'}>
+				<div className={'flex cursor-pointer flex-row items-center justify-between'}>
 					<a
 						href={'https://zora.co/collect/base:0x39adafad9fde221725b975b4adae8b8f2dfa6d4b/1'}
 						target={'_blank'}
 						rel={'noreferrer'}
-						className={'font-scope text-xl uppercase text-white md:mr-24'}>
-						{'mint on zora'}
+						className={'font-scope text-xl uppercase text-white md:mr-4 flex items-center'}
+					>
+						<span>{'mint on zora'}</span>
+						<Image
+							src={'/assets/Base_Symbol_White.svg'}
+							alt={'Base logo'}
+							width={20}
+							height={20}
+							className={'ml-4 inline-block'}
+						/>
 					</a>
 				</div>
 			</div>
@@ -140,8 +148,15 @@ export default function CarouselPage(): React.ReactElement {
 							window.open('https://zora.co/collect/base:0x39adafad9fde221725b975b4adae8b8f2dfa6d4b/1', '_blank');
 						}
 					}}
-					className={'button-glowing-small bg-white font-scope text-black'}>
-					{'MINT ON ZORA'}
+					className={'button-glowing-small flex items-center justify-items-center bg-white font-scope text-black'}>
+					<span>{'MINT ON ZORA'}</span>
+					<Image
+						src={'/assets/Base_Symbol_Blue.svg'}
+						alt={'Base logo'}
+						width={16}
+						height={16}
+						className={'ml-4 inline-block'}
+					/>
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
 				</button>
