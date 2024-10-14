@@ -121,7 +121,7 @@ export default function CarouselPage(): React.ReactElement {
 						href={'https://zora.co/collect/base:0x39adafad9fde221725b975b4adae8b8f2dfa6d4b/1'}
 						target={'_blank'}
 						rel={'noreferrer'}
-						className={'font-scope text-xl uppercase text-white md:mr-4 flex items-center'}
+						className={'flex items-center font-scope text-xl uppercase text-white md:mr-4'}
 					>
 						<span>{'mint on zora'}</span>
 						<Image
@@ -178,7 +178,7 @@ export default function CarouselPage(): React.ReactElement {
 						<button
 							key={tab}
 							onClick={(): void => set_activeTab(tab)}
-							className={`px-2 py-1 capitalize text-sm rounded-md ${activeTab === tab ? 'bg-white/30' : 'text-white'}`}
+							className={`rounded-md px-2 py-1 text-sm capitalize ${activeTab === tab ? 'bg-white/30' : 'text-white'}`}
 						>
 							{tab}
 						</button>
