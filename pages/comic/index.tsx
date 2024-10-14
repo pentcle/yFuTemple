@@ -135,7 +135,7 @@ export default function CarouselPage(): React.ReactElement {
 				</div>
 			</div>
 
-			<div className={'absolute inset-x-6 top-4 hidden flex-row items-center justify-between md:flex'}>
+			<div className={'absolute inset-x-6 top-4 hidden flex-row items-center justify-between md:flex lg:mr-4'}>
 				<Link href={'/'}>
 					<div className={'cursor-pointer flex-row items-center md:flex'}>
 						<p className={'mr-1 font-scope text-5xl text-white'}>{'<'}</p>
@@ -155,7 +155,7 @@ export default function CarouselPage(): React.ReactElement {
 						alt={'Base logo'}
 						width={16}
 						height={16}
-						className={'ml-4 inline-block'}
+						className={'ml-2 inline-block'}
 					/>
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
 					<div className={'glow absolute -inset-0 rotate-180 rounded-full'}/>
