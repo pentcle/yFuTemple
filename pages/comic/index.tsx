@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 
 import styles from './Carousel.module.css';
+import Link from 'next/link';
 
 export default function CarouselPage(): React.ReactElement {
 	const [activeTab, set_activeTab] = useState<string>('techne');
@@ -59,7 +60,6 @@ export default function CarouselPage(): React.ReactElement {
 		}
 	}
 
-	// Handle glow effect
 	useEffect((): () => void => {
 		set_isShowGlow(true);
 		const timeout = setTimeout(() => set_isShowGlow(false), 1000);
@@ -67,13 +67,11 @@ export default function CarouselPage(): React.ReactElement {
 		return (): void => clearTimeout(timeout);
 	}, [activeTab]);
 
-	// Open modal with clicked image
 	function handleImageClick(imagePath: string): void {
 		set_modalImage(imagePath);
 		set_isModalOpen(true);
 	}
 
-	// Close modal on click
 	function handleModalClose(): void {
 		set_isModalOpen(false);
 		set_modalImage(null);
@@ -86,7 +84,48 @@ export default function CarouselPage(): React.ReactElement {
 	const tabs = ['techne', 'transmission', 'community', 'dominion'];
 
 	return (
-		<article className={'relative flex h-screen flex-col overflow-hidden'}>
+		<article className={'relative flex h-screen flex-col overflow-hidden p-0 md:p-6'}>
+
+			<div className={'flex h-12 flex-row items-center justify-between border-b-2 border-b-white px-2 md:hidden'}>
+				<Link href={'/'}>
+					<div className={'flex cursor-pointer flex-row items-center'}>
+						<p className={'mr-1 font-scope text-xl text-white'}>{'<'}</p>
+						<p className={'mt-1 font-scope text-xl text-white'}>{'BACK'}</p>
+					</div>
+				</Link>
+				<div className={'flex cursor-pointer flex-row items-center'}>
+					<a
+						href={'https://zora.co/collect/base:0x39adafad9fde221725b975b4adae8b8f2dfa6d4b/1'}
+						target={'_blank'}
+						rel={'noreferrer'}
+						className={'font-scope text-xl text-white uppercase'}>
+						{'mint on zora'}
+					</a>
+				</div>
+			</div>
+
+			<div className={'absolute inset-x-4 top-4 hidden flex-row items-center justify-between md:flex'}>
+				<Link href={'/'}>
+					<div className={'cursor-pointer flex-row items-center md:flex'}>
+						<p className={'mr-1 font-scope text-5xl text-white'}>{'<'}</p>
+						<p className={'mt-3 font-scope text-2xl text-white'}>{'BACK'}</p>
+					</div>
+				</Link>
+				<button
+					onClick={(): void => {
+						if (window) {
+							window.open('https://zora.co/collect/base:0x39adafad9fde221725b975b4adae8b8f2dfa6d4b/1', '_blank');
+						}
+					}}
+					className={'button-glowing-small bg-white font-scope text-black'}>
+					{'MINT ON ZORA'}
+					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+					<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
+				</button>
+			</div>
+			<h3 className={'mx-auto mt-4 w-fit max-w-xl whitespace-pre-wrap break-words border-b-2 border-b-white px-3 pb-3 font-peste text-2xl font-medium uppercase text-white md:mt-0 md:px-0 md:text-5xl'}>
+				comics
+			</h3>
 
 			<article
 				className={`${styles.backgroundGlow} ${isShowGlow ? styles.glowFadeIn : styles.glowFadeOut}`}
@@ -141,17 +180,15 @@ export default function CarouselPage(): React.ReactElement {
 						</div>
 					))}
 
-					{/* Add empty divs for proper spacing at the end */}
 					{imagePaths.length < 5
 						? Array(5 - imagePaths.length).fill(<div className={'w-[50vw] md:w-[20vw]'}/>)
 						: null}
 				</section>
 			</article>
 
-			{/* Modal for displaying full-screen image */}
 			{isModalOpen && modalImage && (
 				<div
-					className={'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80'}
+					className={'fixed inset-0 z-50 flex items-center justify-center bg-black/80'}
 					onClick={handleModalClose}
 				>
 					<div className={'relative p-4'}> {/* Added padding for the margin around the image */}
