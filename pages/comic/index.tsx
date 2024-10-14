@@ -137,7 +137,7 @@ export default function CarouselPage(): React.ReactElement {
 
 			<div className={'absolute inset-x-6 top-4 hidden flex-row items-center justify-between md:flex'}>
 				<Link href={'/'}>
-					<div className={'cursor-pointer flex-row items-center md:flex'}>
+					<div className={'cursor-pointer flex-row items-center md:flex -mt-2'}>
 						<p className={'mr-1 font-scope text-5xl text-white'}>{'<'}</p>
 						<p className={'mt-3 font-scope text-2xl text-white'}>{'BACK'}</p>
 					</div>
