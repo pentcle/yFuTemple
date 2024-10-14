@@ -44,24 +44,27 @@ export default function CarouselPage(): React.ReactElement {
 
 
 	// Handle scroll and slide transition
-	function handleScroll(e: React.UIEvent): void {
+	function handleScroll(e: React.UIEvent<HTMLElement>): void {
 		const viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 		const vw = viewport / 100;
+		const target = e.target as HTMLElement; // Replace 'any' with HTMLElement
+
 		if (viewport > 768) {
-			const slide = Math.floor(((e.target as any).scrollLeft) / (20 * vw));
+			const slide = Math.floor(target.scrollLeft / (20 * vw));
 			if (slide !== currentSlide) {
 				set_currentSlide(slide);
 			}
 		} else {
-			const slide = Math.floor(((e.target as any).scrollLeft + 80) / (50 * vw));
+			const slide = Math.floor((target.scrollLeft + 80) / (50 * vw));
 			if (slide !== currentSlide) {
 				set_currentSlide(slide);
 			}
 		}
 	}
 
-	useEffect((): () => void => {
+	useEffect((): (() => void) => {
 		set_isShowGlow(true);
+		// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 		const timeout = setTimeout(() => set_isShowGlow(false), 1000);
 
 		return (): void => clearTimeout(timeout);
@@ -78,10 +81,23 @@ export default function CarouselPage(): React.ReactElement {
 	}
 
 	if (isLoading) {
-		return <div>{'Loading...'}</div>;
+		return (
+			<div
+				className={'fixed inset-0 z-50 flex items-center justify-center bg-black/50'}
+			>
+				<h1>{'Loading...'}</h1>
+			</div>
+		);
 	}
 
+
 	const tabs = ['techne', 'transmission', 'community', 'dominion'];
+
+	// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+	const styleProps = {
+		'--glow-color': tabColors[activeTab],
+		'--glow-fade-color': tabColors[activeTab].replace('0.8', '0.2')
+	} as React.CSSProperties; // Explicitly casting as CSS properties
 
 	return (
 		<article className={'relative flex h-screen flex-col overflow-hidden p-0 md:p-6'}>
@@ -129,10 +145,7 @@ export default function CarouselPage(): React.ReactElement {
 
 			<article
 				className={`${styles.backgroundGlow} ${isShowGlow ? styles.glowFadeIn : styles.glowFadeOut}`}
-				style={{
-					'--glow-color': tabColors[activeTab],
-					'--glow-fade-color': tabColors[activeTab].replace('0.8', '0.2')
-				} as React.CSSProperties}
+				style={styleProps}
 			>
 			</article>
 
