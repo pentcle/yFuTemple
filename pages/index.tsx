@@ -244,7 +244,7 @@ function Index({visitors = []}): ReactElement {
 				className={'relative mx-auto w-full max-w-screen-xl'}
 				style={{minHeight: '100vh'}}>
 				<div>
-					<div className={'grid justify-items-end pt-1'}>
+					<div className={'grid justify-items-end p-4'}>
 						<div></div>
 						<Link
 							href={'/comic'}
