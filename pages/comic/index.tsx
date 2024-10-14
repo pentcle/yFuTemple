@@ -28,6 +28,7 @@ export default function CarouselPage(): React.ReactElement {
 				const response = await fetch(`/api/imagePaths?folder=${encodeURIComponent(folder)}`);
 				const data = await response.json();
 				set_imagePaths(data.imagePaths || []);
+				set_currentSlide(0); // Reset the carousel to the first slide
 				set_isLoading(false);
 			} catch (error) {
 				console.error('Error fetching image paths:', error);
@@ -38,7 +39,8 @@ export default function CarouselPage(): React.ReactElement {
 
 		const folder = `assets/comics/img/${activeTab}`;
 		fetchImagePaths(folder);
-	}, [activeTab]);
+	}, [activeTab]); // Trigger effect on activeTab change
+
 
 	// Handle scroll and slide transition
 	function handleScroll(e: React.UIEvent): void {
@@ -115,11 +117,14 @@ export default function CarouselPage(): React.ReactElement {
 					className={'horizontal-snap w-screen gap-0 scroll-smooth px-20 scrollbar-none md:px-[40vw]'}
 					onScroll={handleScroll}
 				>
+					{/* Add an empty div to the left of the first image */}
+					{/*<div className={'w-[10vw] md:w-[5vw]'}></div>*/}
+
 					{imagePaths.map((imagePath, index) => (
 						<div
 							key={index}
 							className={`w-[50vw] md:w-[20vw] ${
-								currentSlide > index ? 'horizontal-snap-on-left' : currentSlide < index ? 'horizontal-snap-on-right' : 'horizontal-snap-center'
+								currentSlide === index ? 'horizontal-snap-center' : currentSlide > index ? 'horizontal-snap-on-left' : 'horizontal-snap-on-right'
 							}`}
 						>
 							<div className={'figure select-none'}>
@@ -129,7 +134,7 @@ export default function CarouselPage(): React.ReactElement {
 										src={`/${imagePath}`}
 										width={1200}
 										height={1846}
-										style={{ objectFit: 'contain' }}
+										style={{objectFit: 'contain'}}
 										loading={'lazy'}
 										className={'cursor-pointer'}
 										onClick={() => handleImageClick(imagePath)} // Open modal on image click
@@ -139,7 +144,7 @@ export default function CarouselPage(): React.ReactElement {
 						</div>
 					))}
 
-					{/* Add empty divs for proper spacing */}
+					{/* Add empty divs for proper spacing at the end */}
 					{imagePaths.length < 5
 						? Array(5 - imagePaths.length).fill(<div className={'w-[50vw] md:w-[20vw]'} />)
 						: null}
@@ -156,12 +161,10 @@ export default function CarouselPage(): React.ReactElement {
 						<Image
 							src={`/${modalImage}`}
 							alt={'Full screen image'}
-							layout={'intrinsic'}
 							width={1200}
-							height={1846} // Keeping aspect ratio
-							objectFit={'contain'}
+							height={1846}
 							loading={'eager'}
-							style={{ maxHeight: 'calc(100vh - 80px)', maxWidth: 'auto' }}
+							style={{ objectFit: 'contain', maxHeight: 'calc(100vh - 80px)', maxWidth: '100%' }}
 						/>
 					</div>
 				</div>
