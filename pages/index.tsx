@@ -19,13 +19,7 @@ import type {TYFUData} from '../utils/data';
 
 const redis = new Redis(process.env.REDIS_URL as string);
 
-function Goddess({
-					 characterSrc = '',
-					 typoSrc = '',
-					 id = '',
-					 title = '',
-					 children = <div/>
-				 }): ReactElement {
+function Goddess({characterSrc = '', typoSrc = '', id = '', title = '', children = <div/>}): ReactElement {
 	const router = useRouter();
 
 	const onClickTribute = useCallback((id: string): void => {
