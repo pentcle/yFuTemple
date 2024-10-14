@@ -109,25 +109,25 @@ export default function CarouselPage(): React.ReactElement {
 
 	return (
 		<article className={'relative flex h-screen flex-col overflow-hidden p-0 md:p-6'}>
-			<div className={'flex h-12 flex-row items-center justify-between border-b-2 border-b-white px-2 md:hidden'}>
+			<div className={'flex h-12 flex-row items-center justify-between border-b-2 border-b-white px-4 md:hidden'}>
 				<Link href={'/'}>
 					<div className={'flex cursor-pointer flex-row items-center'}>
 						<p className={'mr-1 font-scope text-xl text-white'}>{'<'}</p>
 						<p className={'mt-1 font-scope text-xl text-white'}>{'BACK'}</p>
 					</div>
 				</Link>
-				<div className={'flex cursor-pointer flex-row items-center'}>
+				<div className={'cursor-pointer flex-row items-center'}>
 					<a
 						href={'https://zora.co/collect/base:0x39adafad9fde221725b975b4adae8b8f2dfa6d4b/1'}
 						target={'_blank'}
 						rel={'noreferrer'}
-						className={'font-scope text-xl uppercase text-white'}>
+						className={'font-scope text-xl uppercase text-white md:mr-24'}>
 						{'mint on zora'}
 					</a>
 				</div>
 			</div>
 
-			<div className={'absolute inset-x-4 top-4 hidden flex-row items-center justify-between md:flex'}>
+			<div className={'absolute inset-x-6 top-4 hidden flex-row items-center justify-between md:flex'}>
 				<Link href={'/'}>
 					<div className={'cursor-pointer flex-row items-center md:flex'}>
 						<p className={'mr-1 font-scope text-5xl text-white'}>{'<'}</p>

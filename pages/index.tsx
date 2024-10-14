@@ -238,11 +238,7 @@ function Index({visitors = []}): ReactElement {
 				className={'relative mx-auto w-full max-w-screen-xl'}
 				style={{minHeight: '100vh'}}>
 				<div>
-					<div className={'flex items-center justify-center py-8'}>
-						<Title/>
-					</div>
-
-					<div className={'absolute inset-x-4 top-4 hidden flex-row items-center justify-between md:flex'}>
+					<div className={'pt-1 grid justify-items-end'}>
 						<div></div>
 						<Link
 							href={'/comic'}
@@ -251,9 +247,11 @@ function Index({visitors = []}): ReactElement {
 							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 							<div className={'glow absolute -inset-0 rotate-180 rounded-full'} />
 						</Link>
-
 					</div>
 
+					<div className={'flex items-center justify-center pt-2 pb-8 md:pt-4'}>
+						<Title/>
+					</div>
 
 					<section className={'w-full px-4 md:px-0'}>
 						<MintView/>
