@@ -1,9 +1,45 @@
 'use client';
+
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from './Carousel.module.css';
+
+// Define a custom type for our CSS variables with the correct prefix
+type TCustomCSSProperties = React.CSSProperties & {
+	'--glow-color': string;
+	'--glow-fade-color': string;
+};
+
+// Explicitly declare functions outside the component
+function handleScroll(e: React.UIEvent<HTMLElement>, currentSlide: number, set_currentSlide: React.Dispatch<React.SetStateAction<number>>): void {
+	const viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+	const vw = viewport / 100;
+	const target = e.target as HTMLElement;
+
+	if (viewport > 768) {
+		const slide = Math.floor(target.scrollLeft / (20 * vw));
+		if (slide !== currentSlide) {
+			set_currentSlide(slide);
+		}
+	} else {
+		const slide = Math.floor((target.scrollLeft + 80) / (50 * vw));
+		if (slide !== currentSlide) {
+			set_currentSlide(slide);
+		}
+	}
+}
+
+function handleImageClick(imagePath: string, set_modalImage: React.Dispatch<React.SetStateAction<string | null>>, set_isModalOpen: React.Dispatch<React.SetStateAction<boolean>>): void {
+	set_modalImage(imagePath);
+	set_isModalOpen(true);
+}
+
+function handleModalClose(set_isModalOpen: React.Dispatch<React.SetStateAction<boolean>>, set_modalImage: React.Dispatch<React.SetStateAction<string | null>>): void {
+	set_isModalOpen(false);
+	set_modalImage(null);
+}
 
 export default function CarouselPage(): React.ReactElement {
 	const [activeTab, set_activeTab] = useState<string>('techne');
@@ -39,69 +75,40 @@ export default function CarouselPage(): React.ReactElement {
 		};
 
 		const folder = `assets/comics/img/${activeTab}`;
-		fetchImagePaths(folder);
-	}, [activeTab]); // Trigger effect on activeTab change
-
-
-	// Handle scroll and slide transition
-	function handleScroll(e: React.UIEvent<HTMLElement>): void {
-		const viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		const vw = viewport / 100;
-		const target = e.target as HTMLElement; // Replace 'any' with HTMLElement
-
-		if (viewport > 768) {
-			const slide = Math.floor(target.scrollLeft / (20 * vw));
-			if (slide !== currentSlide) {
-				set_currentSlide(slide);
-			}
-		} else {
-			const slide = Math.floor((target.scrollLeft + 80) / (50 * vw));
-			if (slide !== currentSlide) {
-				set_currentSlide(slide);
-			}
-		}
-	}
-
-	useEffect((): (() => void) => {
-		set_isShowGlow(true);
-		// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-		const timeout = setTimeout(() => set_isShowGlow(false), 1000);
-
-		return (): void => clearTimeout(timeout);
+		void fetchImagePaths(folder);
 	}, [activeTab]);
 
-	function handleImageClick(imagePath: string): void {
-		set_modalImage(imagePath);
-		set_isModalOpen(true);
-	}
+	useEffect((): (() => void) => {
+		const showGlowEffect = (): () => void => {
+			set_isShowGlow(true);
+			const timeout = setTimeout((): void => {
+				set_isShowGlow(false);
+			}, 1000);
+			return (): void => {
+				clearTimeout(timeout);
+			};
+		};
 
-	function handleModalClose(): void {
-		set_isModalOpen(false);
-		set_modalImage(null);
-	}
+		return showGlowEffect();
+	}, [activeTab]);
 
 	if (isLoading) {
 		return (
-			<div
-				className={'fixed inset-0 z-50 flex items-center justify-center bg-black/50'}
-			>
+			<div className={'fixed inset-0 z-50 flex items-center justify-center bg-black/50'}>
 				<h1>{'Loading...'}</h1>
 			</div>
 		);
 	}
 
-
 	const tabs = ['techne', 'transmission', 'community', 'dominion'];
 
-	// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-	const styleProps = {
+	const styleProps: TCustomCSSProperties = {
 		'--glow-color': tabColors[activeTab],
 		'--glow-fade-color': tabColors[activeTab].replace('0.8', '0.2')
-	} as React.CSSProperties; // Explicitly casting as CSS properties
+	};
 
 	return (
 		<article className={'relative flex h-screen flex-col overflow-hidden p-0 md:p-6'}>
-
 			<div className={'flex h-12 flex-row items-center justify-between border-b-2 border-b-white px-2 md:hidden'}>
 				<Link href={'/'}>
 					<div className={'flex cursor-pointer flex-row items-center'}>
@@ -146,17 +153,15 @@ export default function CarouselPage(): React.ReactElement {
 			<article
 				className={`${styles.backgroundGlow} ${isShowGlow ? styles.glowFadeIn : styles.glowFadeOut}`}
 				style={styleProps}
-			>
-			</article>
+			/>
 
-			<article
-				className={'z-10 flex flex-col items-stretch justify-between space-y-4 overflow-hidden p-4 py-8 sm:space-y-16'}>
-
+			<article className={'z-10 flex flex-col items-stretch justify-between space-y-4 overflow-hidden p-4 py-8 sm:space-y-16'}>
 				<section className={'mb-4 flex w-full justify-center'}>
+					{/* eslint-disable-next-line @typescript-eslint/explicit-function-return-type */}
 					{tabs.map((tab) => (
 						<button
 							key={tab}
-							onClick={() => set_activeTab(tab)}
+							onClick={(): void => set_activeTab(tab)}
 							className={`px-4 py-2 capitalize ${activeTab === tab ? 'bg-white text-black' : 'text-white'}`}
 						>
 							{tab}
@@ -167,9 +172,9 @@ export default function CarouselPage(): React.ReactElement {
 				<section
 					id={'image-carousel'}
 					className={'horizontal-snap w-screen gap-0 scroll-smooth px-20 scrollbar-none md:px-[40vw]'}
-					onScroll={handleScroll}
+					onScroll={(e): void => handleScroll(e, currentSlide, set_currentSlide)}
 				>
-
+					{/* eslint-disable-next-line @typescript-eslint/explicit-function-return-type */}
 					{imagePaths.map((imagePath, index) => (
 						<div
 							key={index}
@@ -187,7 +192,7 @@ export default function CarouselPage(): React.ReactElement {
 										style={{objectFit: 'contain'}}
 										loading={'lazy'}
 										className={'cursor-pointer'}
-										onClick={() => handleImageClick(imagePath)} // Open modal on image click
+										onClick={(): void => handleImageClick(imagePath, set_modalImage, set_isModalOpen)}
 									/>
 								</div>
 							</div>
@@ -203,9 +208,9 @@ export default function CarouselPage(): React.ReactElement {
 			{isModalOpen && modalImage && (
 				<div
 					className={'fixed inset-0 z-50 flex items-center justify-center bg-black/80'}
-					onClick={handleModalClose}
+					onClick={(): void => handleModalClose(set_isModalOpen, set_modalImage)}
 				>
-					<div className={'relative p-4'}> {/* Added padding for the margin around the image */}
+					<div className={'relative p-4'}>
 						<Image
 							src={`/${modalImage}`}
 							alt={'Full screen image'}

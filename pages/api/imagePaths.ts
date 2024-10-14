@@ -14,6 +14,7 @@ const getImagePaths = (folderPath: string): string[] => {
 
 	// Read all files in the folder
 	const fileNames = fs.readdirSync(fullPath);
+	// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 	return fileNames.map((fileName) => path.join(folderPath, fileName));
 };
 
