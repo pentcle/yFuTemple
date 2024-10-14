@@ -156,13 +156,14 @@ export default function CarouselPage(): React.ReactElement {
 			/>
 
 			<article className={'z-10 flex flex-col items-stretch justify-between space-y-4 overflow-hidden p-4 py-8 sm:space-y-16'}>
-				<section className={'mb-4 flex w-full justify-center'}>
+
+				<section className={'mb-4 flex w-full justify-center gap-x-2'}>
 					{/* eslint-disable-next-line @typescript-eslint/explicit-function-return-type */}
 					{tabs.map((tab) => (
 						<button
 							key={tab}
 							onClick={(): void => set_activeTab(tab)}
-							className={`px-4 py-2 capitalize ${activeTab === tab ? 'bg-white text-black' : 'text-white'}`}
+							className={`px-2 py-1 capitalize text-sm rounded-md ${activeTab === tab ? 'bg-white/30' : 'text-white'}`}
 						>
 							{tab}
 						</button>
